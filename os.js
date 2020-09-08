@@ -7,7 +7,7 @@ export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
-      this.isReady = false;
+      this.ready = false;
       this.isReadySub = new Subject();
     }
 
@@ -21,9 +21,13 @@ export class OperatingSystem {
 
     async boot(config){
       await this.ocean.create(config);
-      this.isReady = true;
+      this.ready = true;
       this.isReadySub.next(true);
       return true;
+    }
+
+    isReady(){
+      return this.ready;
     }
 
 
