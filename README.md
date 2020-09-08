@@ -1,4 +1,4 @@
-# Quest Ocean JS
+# Quest OS JS
 >Quantum Scare: Currently Quest Network PubSub uses elliptic curve cryptopgraphy for signatures, but we are already looking at quantum safe algorithms.
 
 ## Lead Maintainer
@@ -23,17 +23,53 @@ GNU Affero GPLv3
 
 ## Installation & Usage
 
-``npm install @questnetwork/quest-ocean-js@0.9.2``
+``npm install @questnetwork/quest-os-js@0.9.2``
 
-You can `npm run test`, which will compile and run the test.js file.
 
-We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package.
+JavaScript/NodeJS
+```
+import { qOS } from '@questnetwork/quest-os-js'
+// configure with a bootstrap swarm peer, for testing you can use:
+let config = {
+  ipfs: { swarm: "/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star" },
+  dev: true
+};
+// boot the operating system
+qOS.boot().then( () => {
+  //the operating system is online, build the future
+})
+```
+
+TypeScript/Angular Service
+```
+import { Injectable } from '@angular/core';
+import { qOS }  from '@questnetwork/quest-ocean-js';
+import * as swarmJson from '../swarm.json';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class QuestOSService {
+  public os;
+  ready = false;
+  constructor() {
+    let config = {
+      ipfs: {
+        swarm: swarmJson['ipfs']['swarm']
+      },
+      dev: swarmJson['ipfs']['dev']
+    };
+    this.os = qOS;
+    this.os.boot(config).then(() => { this.ready = true; });
+  }
+}
+```
+
+We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package. It allows you to bootstrap your Quest Network apps with the same peers and settings.
+
 Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/to/quest-cli/index.js` from any folder on your system. It's much nicer!
 
 ## Features
 
 **0.9.2**
 - Basic functionality
-
-**0.9.3**
-- Uses [go-ipfs](https://github.com/ipfs/go-ipfs) from NodeJS and [js-ipfs](https://github.com/ipfs/js-ipfs) from Electron
