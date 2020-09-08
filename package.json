@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@questnetwork/quest-ocean-js": "file:../quest-ocean-js",
+    "@questnetwork/quest-bee-js": "file:../quest-bee-js",
     "rxjs": "^6.6.2",
     "uuid": "^8.2.0"
   },

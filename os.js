@@ -23,8 +23,8 @@ export class OperatingSystem {
 
     async boot(config){
       await this.ocean.create(config);
-
-      this.bee.start({ electronService: config['dependencies']['electronService'], version: config['version']);
+      config['dependencies']['dolphon'] = this.ocean.dolphin;
+      this.bee.start(config);
 
       this.ocean.dolphin.commitNowSub.subscribe( (value) => {
         this.bee.config.commitNow();
@@ -47,9 +47,6 @@ export class OperatingSystem {
     isReady(){
       return this.ready;
     }
-
-
-
 
 
    async createChannel(channelNameDirty, parentFolderId = ""){
