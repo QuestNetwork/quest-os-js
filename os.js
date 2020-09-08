@@ -5,17 +5,8 @@ import { Ocean }  from '@questnetwork/quest-ocean-js';
 
 export class OperatingSystem {
     constructor() {
-      // let uVar;
-      // this.ipfsId = uVar;
-      // this.ipfsNodeReady = false;
-      // this.ipfsNodeReadySub = new Subject();
-      // this.oceanIsReady = false;
-      // this.ipfsNode = uVar;
-      // this.dolphin = uVar;
-      // this.swarmPeersSub = new Subject();
-      //
-
-
+      let uVar;
+      this.ocean = Ocean;
     }
 
     delay(t, val = "") {
@@ -26,8 +17,9 @@ export class OperatingSystem {
        });
     }
 
-    async boot(){
-
+    async boot(config){
+      await this.ocean.create(config);
+      return true;
     }
 
 
