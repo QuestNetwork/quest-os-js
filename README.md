@@ -65,6 +65,8 @@ export class QuestOSService {
 }
 ```
 
+Unfortunately nobody is working on a detailed API documentation yet, but check out the source in (Quest Network Messenger)(https://github.com/QuestNetwork/quest-messenger-js) 0.9.2+ to see how to use the OS.
+
 We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package. It allows you to bootstrap your Quest Network apps with the same peers and settings.
 
 Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/to/quest-cli/index.js` from any folder on your system. It's much nicer!
