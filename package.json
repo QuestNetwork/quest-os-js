@@ -15,7 +15,7 @@
     "start": "npm run build && node dist/test.js"
   },
   "dependencies": {
-    "@questnetwork/quest-dolphin-js": "file:../quest-ocean-js",
+    "@questnetwork/quest-ocean-js": "file:../quest-ocean-js",
     "rxjs": "^6.6.2",
     "uuid": "^8.2.0"
   },
