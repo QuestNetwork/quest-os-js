@@ -7,6 +7,8 @@ export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
+      this.isReady = false;
+      this.isReadySub = new Subject();
     }
 
     delay(t, val = "") {
@@ -19,6 +21,8 @@ export class OperatingSystem {
 
     async boot(config){
       await this.ocean.create(config);
+      this.isReady = true;
+      this.isReadySub.next(true);
       return true;
     }
 
