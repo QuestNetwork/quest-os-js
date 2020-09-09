@@ -119,6 +119,7 @@ export class OperatingSystem {
      let chfl = this.bee.config.getChannelFolderList();
      chfl = this.bee.config.parseFolderStructureAndRemoveItem(chfl, channel);
      this.bee.config.setChannelFolderList(chfl);
+
    }
    createInvite(channel,newInviteCodeMax, importFolders = false){
      let code = uuidv4();
