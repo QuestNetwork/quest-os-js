@@ -24,7 +24,7 @@ export class OperatingSystem {
     async boot(config){
       await this.ocean.create(config);
       config['dependencies']['dolphin'] = this.ocean.dolphin;
-      this.bee.start(config);
+      await this.bee.start(config);
 
       this.ocean.dolphin.commitNowSub.subscribe( (value) => {
         this.bee.config.commitNow();
