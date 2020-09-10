@@ -11,6 +11,17 @@ export class OperatingSystem {
       this.ready = false;
       this.isReadySub = new Subject();
       this.bee = new BeeSwarmInstance();
+      this.signedInSub = new Subject();
+      this.signedIn = false;
+      var userAgent = navigator.userAgent.toLowerCase();
+      if (userAgent.indexOf(' electron/') > -1) {
+        this.isElectronFlag = true;
+      }
+      else{
+        this.isElectronFlag = false;
+      }
+      this.saveLockStatusSub = new Subject();
+
     }
 
     delay(t, val = "") {
@@ -22,13 +33,28 @@ export class OperatingSystem {
     }
 
     isSignedIn(){
-      return this.bee.config.isSignedIn();
+      return this.isSignedIn();
+    }
+    hasConfigFile(){
+      return this.bee.config.hasConfigFile();
     }
 
     async boot(config){
       await this.ocean.create(config);
       config['dependencies']['dolphin'] = this.ocean.dolphin;
       await this.bee.start(config);
+
+
+      this.bee.config.saveLockStatusSub.subscribe( (value) => {
+        if(value){
+          this.enableSaveLock();
+        }
+        else{
+          this.disableSaveLock();
+        }
+        this.saveLockStatusSub.next(value);
+
+      });
 
       this.ocean.dolphin.commitNowSub.subscribe( (value) => {
         this.bee.config.commitNow();
@@ -57,6 +83,55 @@ export class OperatingSystem {
     }
     commitNow(){
       this.bee.config.commitNow();
+    }
+    enableSaveLock(){
+      this.bee.config.setSaveLock(true);
+      this.saveLockStatusSub.next(true);
+    }
+    disableSaveLock(){
+      this.bee.config.setSaveLock(false);
+      this.saveLockStatusSub.next(false);
+    }
+    getSaveLock(){
+      return this.bee.config.getSaveLock();
+    }
+    saveLockStatus(){
+      return this.saveLockStatusSub;
+    }
+
+    signIn(config = {}){
+      this.bee.config.readConfig(config);
+      this.signedIn = true;
+      this.signedInSub.next(true);
+    }
+    signOut(){
+      try{
+        this.bee.config.deleteConfig();
+      }
+      catch(e){}
+
+      this.signedIn = false;
+      if(this.isElectron()){
+      let a = this.bee.config.electron.remote.getCurrentWindow();
+      a.close();
+      }
+      else{
+        window.location.reload();
+      }
+
+    }
+    onSignIn(){
+      return this.signedInSub;
+    }
+    isSignedIn(){
+      return this.signedIn;
+    }
+    exportConfig(){
+      this.bee.config.commitNow({ export: true });
+    }
+
+    isElectron(){
+      return this.isElectronFlag;
     }
 
 
