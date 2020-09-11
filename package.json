@@ -18,7 +18,13 @@
     "@questnetwork/quest-ocean-js": "file:../quest-ocean-js",
     "@questnetwork/quest-bee-js": "file:../quest-bee-js",
     "rxjs": "^6.6.2",
-    "uuid": "^8.2.0"
+    "uuid": "^8.2.0",
+    "@angular/platform-browser": "^10.0.10",
+    "@angular/common": "^10.0.10",
+    "@angular/core": "^10.0.10",
+    "qrcode": "^1.4.4"
+
+
   },
   "devDependencies": {
     "ava": "^3.10.1",
