@@ -14,6 +14,7 @@ export class OperatingSystem {
       this.signedInSub = new Subject();
       this.signedIn = false;
       this.ipfsBootstrapPeersFromConfig = [];
+      this.configCache = {};
       var userAgent = navigator.userAgent.toLowerCase();
       if (userAgent.indexOf(' electron/') > -1) {
         this.isElectronFlag = true;
@@ -40,7 +41,9 @@ export class OperatingSystem {
       return this.bee.config.hasConfigFile();
     }
 
+
     async boot(config){
+      this.configCache = config;
       if(typeof config['ipfs']['swarm'] != 'undefined'){
         this.ipfsBootstrapPeersFromConfig = config['ipfs']['swarm'];
       }
@@ -92,8 +95,48 @@ export class OperatingSystem {
     onReady(){
       return this.isReadySub;
     }
+    reboot(){
+      if(this.isElectron()){
+        this.configCache['dependencies']['electronService'].remote.getCurrentWindow().close();
+      }
+      else{
+        window.location.reload();
+      }
+    }
+    setIpfsBootstrapPeers(peers){
+      console.log('OS: Setting Peers',peers);
+      if(this.isElectron){
+        let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
+        let configPath =  this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
+        configPath = configPath + "/swarm.peers";
+        try{
+          fs.writeFileSync(configPath, JSON.stringify({ swarm: peers}),{encoding:'utf8',flag:'w'})
+        }catch(e){console.log(e);}
+      }
+       this.bee.config.setIpfsBootstrapPeers(peers);
+    }
     getIpfsBootstrapPeers(){
       //check swarm peer list
+      if(this.isElectron){
+        try{
+          let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
+          let configPath = this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
+          configPath = configPath + "/swarm.peers";
+          let filePeers = fs.readFileSync(configPath).toString('utf8');
+          console.log('OS:',filePeers);
+          let diskPeers;
+          if(typeof filePeers == 'string'){
+            diskPeers = JSON.parse(filePeers);
+          }
+          else{
+            diskPeers = filePeers;
+          }
+          this.bee.config.setIpfsBootstrapPeers(diskPeers['swarm']);
+          return diskPeers['swarm'];
+
+        }catch(e){console.log(e);}
+      }
+
       let peers = this.ipfsBootstrapPeersFromConfig;
       console.log(peers);
       //try to load from file
