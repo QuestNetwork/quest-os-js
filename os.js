@@ -191,13 +191,13 @@ export class OperatingSystem {
       return this.saveLockStatusSub;
     }
     enableChallenge(ch){
-      this.ocean.dolphin.setChallengeFlag(ch,true);
+      this.ocean.dolphin.setChallengeFlag(ch,1);
     }
     disableChallenge(ch){
-      this.ocean.dolphin.setChallengeFlag(ch,false);
+      this.ocean.dolphin.setChallengeFlag(ch,0);
     }
     getSelectedChannel(){
-      return this.dolphin.getSelectedChannel();
+      return this.ocean.dolphin.getSelectedChannel();
     }
 
 
