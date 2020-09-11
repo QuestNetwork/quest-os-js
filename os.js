@@ -4,11 +4,15 @@ import { Subject } from "rxjs";
 import { Ocean }  from '@questnetwork/quest-ocean-js';
 import { BeeSwarmInstance }  from '@questnetwork/quest-bee-js';
 
+import { Utilities }  from './utilities/utilities.js';
+
+
 export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
       this.ready = false;
+      this.utilities = new Utilities();
       this.isReadySub = new Subject();
       this.bee = new BeeSwarmInstance();
       this.signedInSub = new Subject();
