@@ -190,6 +190,16 @@ export class OperatingSystem {
     autoSaveStatus(){
       return this.saveLockStatusSub;
     }
+    enableChallenge(ch){
+      this.ocean.dolphin.setChallengeFlag(ch,true);
+    }
+    disableChallenge(ch){
+      this.ocean.dolphin.setChallengeFlag(ch,false);
+    }
+    getSelectedChannel(){
+      return this.dolphin.getSelectedChannel();
+    }
+
 
 
     signIn(config = {}){
