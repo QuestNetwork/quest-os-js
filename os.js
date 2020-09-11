@@ -13,6 +13,7 @@ export class OperatingSystem {
       this.bee = new BeeSwarmInstance();
       this.signedInSub = new Subject();
       this.signedIn = false;
+      this.ipfsBootstrapPeersFromConfig = [];
       var userAgent = navigator.userAgent.toLowerCase();
       if (userAgent.indexOf(' electron/') > -1) {
         this.isElectronFlag = true;
@@ -40,7 +41,18 @@ export class OperatingSystem {
     }
 
     async boot(config){
-      await this.ocean.create(config);
+      if(typeof config['ipfs']['swarm'] != 'undefined'){
+        this.ipfsBootstrapPeersFromConfig = config['ipfs']['swarm'];
+      }
+      try{
+        await this.ocean.create(config);
+      }
+      catch(e){
+        console.log(e);
+        if(e == 'Transport (WebRTCStar) could not listen on any available address'){
+          throw(e);
+        }
+      }
       config['dependencies']['dolphin'] = this.ocean.dolphin;
       await this.bee.start(config);
 
@@ -77,6 +89,22 @@ export class OperatingSystem {
     isReady(){
       return this.ready;
     }
+    onReady(){
+      return this.isReadySub;
+    }
+    getIpfsBootstrapPeers(){
+      //check swarm peer list
+      let peers = this.ipfsBootstrapPeersFromConfig;
+      console.log(peers);
+      //try to load from file
+      let peersAfterStart = this.bee.config.getIpfsBootstrapPeers();
+      console.log(peersAfterStart);
+      if(typeof peersAfterStart != 'undefined' && peersAfterStart.length > 0){
+        peers = peersAfterStart;
+      }
+      //check additional peers added from loaded config data
+      return peers;
+    }
 
     commit(){
       this.bee.config.commit();
@@ -86,11 +114,11 @@ export class OperatingSystem {
     }
     enableSaveLock(){
       this.bee.config.setSaveLock(true);
-      this.saveLockStatusSub.next(true);
+      // this.saveLockStatusSub.next(true);
     }
     disableSaveLock(){
       this.bee.config.setSaveLock(false);
-      this.saveLockStatusSub.next(false);
+      // this.saveLockStatusSub.next(false);
     }
     getSaveLock(){
       return this.bee.config.getSaveLock();
@@ -98,6 +126,28 @@ export class OperatingSystem {
     saveLockStatus(){
       return this.saveLockStatusSub;
     }
+
+    enableAutoSave(){
+      this.bee.config.setAutoSave(true);
+      // this.saveLockStatusSub.next(true);
+    }
+    disableAutoSave(){
+      this.bee.config.setAutoSave(false);
+      // this.saveLockStatusSub.next(false);
+    }
+    getAutoSave(){
+      return this.bee.config.getAutoSave();
+    }
+    getAutoSaveInterval(){
+      return this.bee.config.getAutoSaveInterval();
+    }
+    setAutoSaveInterval(v){
+       this.bee.config.setAutoSaveInterval(v);
+    }
+    autoSaveStatus(){
+      return this.saveLockStatusSub;
+    }
+
 
     signIn(config = {}){
       this.bee.config.readConfig(config);
