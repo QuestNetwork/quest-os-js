@@ -51,6 +51,12 @@ export class OperatingSystem {
       if(typeof config['ipfs']['swarm'] != 'undefined'){
         this.ipfsBootstrapPeersFromConfig = config['ipfs']['swarm'];
       }
+      
+      try{
+        config['ipfs']['swarm'] = this.getIpfsBootstrapPeers();
+      }
+      catch(e){console.log(e);}
+
       try{
         await this.ocean.create(config);
       }
