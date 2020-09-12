@@ -9,14 +9,6 @@
 
 Unified API for the QuestNetwork dStack.
 
-## Support Us
-This project is a lot of work and unfortunately we need to eat food (ツ)
-
-| Ethereum| Bitcoin |
-|---|---|
-| `0xBC2A050E7B87610Bc29657e7e7901DdBA6f2D34E` | `bc1qujrqa3s34r5h0exgmmcuf8ejhyydm8wwja4fmq`   |
-|  <img src="doc/images/eth-qr.png" >   | <img src="doc/images/btc-qr.png" > |
-
 ## Installation & Usage
 
 ``npm install @questnetwork/quest-os-js@0.9.2``
@@ -71,6 +63,16 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 
 **0.9.2**
 - Basic functionality
+
+
+## Support Us
+This project is a lot of work and unfortunately we need to eat food (ツ)
+
+| Ethereum| Bitcoin |
+|---|---|
+| `0xBC2A050E7B87610Bc29657e7e7901DdBA6f2D34E` | `bc1qujrqa3s34r5h0exgmmcuf8ejhyydm8wwja4fmq`   |
+|  <img src="doc/images/eth-qr.png" >   | <img src="doc/images/btc-qr.png" > |
+
 
 ## License
 GNU Affero GPLv3
