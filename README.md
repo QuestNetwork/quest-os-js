@@ -5,21 +5,17 @@
 
 [StationedInTheField](https://github.com/StationedInTheField)
 
-## Please Donate
-The QuestNetwork is a lot of work and unfortunately we have to eat food, so we'd be thrilled if you sent your donations to:
-
-Bitcoin:
-`bc1qujrqa3s34r5h0exgmmcuf8ejhyydm8wwja4fmq`
-
-Ethereum:
-`0xBC2A050E7B87610Bc29657e7e7901DdBA6f2D34E`
-
 ## Description
 
 Unified API for the QuestNetwork dStack.
 
-## License
-GNU Affero GPLv3
+## Support Us
+This project is a lot of work and unfortunately we need to eat food (ツ)
+
+| Ethereum| Bitcoin |
+|---|---|
+| `0xBC2A050E7B87610Bc29657e7e7901DdBA6f2D34E` | `bc1qujrqa3s34r5h0exgmmcuf8ejhyydm8wwja4fmq`   |
+|  <img src="doc/images/eth-qr.png" >   | <img src="doc/images/btc-qr.png" > |
 
 ## Installation & Usage
 
@@ -75,3 +71,6 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 
 **0.9.2**
 - Basic functionality
+
+## License
+GNU Affero GPLv3

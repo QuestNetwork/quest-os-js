@@ -11,12 +11,11 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "rm -rf dist && babel . --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "npm run build && node dist/test.js"
-  },
+    "build": "rm -rf dist && babel . --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
+    },
   "dependencies": {
-    "@questnetwork/quest-ocean-js": "file:../quest-ocean-js",
-    "@questnetwork/quest-bee-js": "file:../quest-bee-js",
+    "@questnetwork/quest-ocean-js": "0.9.2",
+    "@questnetwork/quest-bee-js": "0.9.2",
     "rxjs": "^6.6.2",
     "uuid": "^8.2.0",
     "@angular/platform-browser": "^10.0.10",
