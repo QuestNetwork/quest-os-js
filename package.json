@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && babel . --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "npm run build && node dist/test.js"
+    "test": "npm run build && node dist/test.js"
   },
   "dependencies": {
     "@questnetwork/quest-ocean-js": "file:../quest-ocean-js",
