@@ -1,5 +1,3 @@
-![Scale Free Network](https://mathinsight.org/media/image/image/small_network_hub.png)
-
 # Quest OS JS
 >Quantum Scare: Currently Quest Network PubSub uses elliptic curve cryptopgraphy for signatures, but we are already looking at post quantum algorithms.
 
@@ -10,6 +8,8 @@
 ## Description
 
 Unified API for the QuestNetwork dStack.
+
+Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-js) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
 
 ## Installation & Usage
 
