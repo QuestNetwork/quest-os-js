@@ -9,7 +9,7 @@
 
 Unified API for the QuestNetwork dStack.
 
-Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-js) and [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
+Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-js) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
 
 ## Installation & Usage
 
