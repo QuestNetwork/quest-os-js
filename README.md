@@ -65,7 +65,7 @@ import { saveAs } from 'file-saver';
 
 config = {
       ipfs: {
-        swarm: [<swarm peer ip>,<swarm peer ip>]
+        swarm: [<swarm star peer ip>,<swarm star peer ip>]
       },
       version: version,
       dependencies: {
@@ -79,7 +79,7 @@ The GitHub repositories master/0.9.2/0.9.3+ boot with:
 ```
   this.config = {
       ipfs: {
-        swarm: [<swarm peer ip>,<swarm peer ip>]
+        swarm: [<swarm star peer ip>,<swarm star peer ip>]
       },
       version: version
     };
