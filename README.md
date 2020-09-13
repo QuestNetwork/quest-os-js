@@ -77,7 +77,8 @@ config = {
     ipfs: {
       swarm: [<swarm star peer ip>,<swarm star peer ip>]
     },
-    dev: <version>
+    dev: <true/false>,
+    version: <version>
 };
 ```
 
@@ -91,6 +92,7 @@ config = {
       ipfs: {
         swarm: [<swarm star peer ip>,<swarm star peer ip>]
       },
+      dev: <true/false>,
       version: <version>,
       dependencies: {
         electronService: ElectronService,
@@ -104,7 +106,7 @@ Unfortunately nobody is working on a detailed API documentation yet, until then 
 
 We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package. It allows you to bootstrap your Quest Network apps with the same peers and settings.
 
-Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/to/quest-cli/index.js` from any folder on your system. It's much nicer!
+Pro Tip: Put a file in your `/bin` that runs the quest-cli lke so `node /path/to/quest-cli/index.js` from any folder on your system. It's much nicer!
 
 ## Features
 
