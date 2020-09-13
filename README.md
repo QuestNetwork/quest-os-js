@@ -60,12 +60,12 @@ export class QuestOSService {
 
 The GitHub repositories master/0.9.2/0.9.3+ boot with:
 ```
-  this.config = {
-      ipfs: {
-        swarm: [<swarm star peer ip>,<swarm star peer ip>]
-      },
-      version: version
-    };
+this.config = {
+    ipfs: {
+      swarm: [<swarm star peer ip>,<swarm star peer ip>]
+    },
+    version: version
+};
 ```
 
 Boots the operating system. The NPM package of 0.9.2 currently unfortunately expects: 
