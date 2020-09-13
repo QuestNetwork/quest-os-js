@@ -40,7 +40,6 @@ const version = packageJson.version;
   providedIn: 'root'
 })
 export class QuestOSService {
-  //
   public os;
   ready = false;
   config;
