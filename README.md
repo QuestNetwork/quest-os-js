@@ -73,7 +73,7 @@ export class QuestOSService {
 
 Boots the operating system. The GitHub repositories master/0.9.2/0.9.3+ boot with:
 ```
-this.config = {
+config = {
     ipfs: {
       swarm: [<swarm star peer ip>,<swarm star peer ip>]
     },
