@@ -71,7 +71,7 @@ export class QuestOSService {
 
 ### async boot(config)
 
-Boots the operating system. The GitHub repositories master/0.9.2/0.9.3+ boot with:
+Boots the operating system. The GitHub branches master/0.9.2/0.9.3+ boot with:
 ```
 config = {
     ipfs: {
