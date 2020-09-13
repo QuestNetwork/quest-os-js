@@ -7,7 +7,7 @@
 
 ## Description
 
-Unified API for the QuestNetwork dStack.
+Unified API for the QuestNetwork dStack. Use with our window platform: [qDesk](https://github.com/QuestNetwork/qDesk)
 
 Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-js) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
 
