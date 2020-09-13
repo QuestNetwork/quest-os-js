@@ -3,6 +3,8 @@ const { v4: uuidv4 } = require('uuid');
 import { Subject } from "rxjs";
 import { Ocean }  from '@questnetwork/quest-ocean-js';
 import { BeeSwarmInstance }  from '@questnetwork/quest-bee-js';
+import { ElectronService } from 'ngx-electron';
+import { saveAs } from  'file-saver';
 
 import { Utilities }  from './utilities/utilities.js';
 
@@ -47,52 +49,61 @@ export class OperatingSystem {
 
 
     async boot(config){
+      if(typeof config['dependencies'] == 'undefined'){
+        config['dependencies'] = {};
+      }
+      config['dependencies']['electronService'] = new ElectronService();
+      config['dependencies']['saveAs'] = saveAs;
+
       this.configCache = config;
       if(typeof config['ipfs']['swarm'] != 'undefined'){
         this.ipfsBootstrapPeersFromConfig = config['ipfs']['swarm'];
       }
-      
+
       try{
         config['ipfs']['swarm'] = this.getIpfsBootstrapPeers();
       }
       catch(e){console.log(e);}
 
-      try{
-        await this.ocean.create(config);
+      if(typeof config['modules'] == 'undefined' || (typeof config['modules'] != 'undefined' && config['modules'].indexOf('ocean') > -1)){
+        try{
+          await this.ocean.create(config);
+        }
+        catch(e){
+          console.log(e);
+          if(e == 'Transport (WebRTCStar) could not listen on any available address'){
+            throw(e);
+          }
+        }
+        config['dependencies']['dolphin'] = this.ocean.dolphin;
+        this.ocean.dolphin.commitNowSub.subscribe( (value) => {
+          this.bee.config.commitNow();
+        });
+
+        this.ocean.dolphin.commitSub.subscribe( (value) => {
+          this.bee.config.commit();
+        });
+
+
+        this.ocean.dolphin.selectedChannelSub.subscribe( (value) => {
+          this.bee.config.selectChannel(value);
+        });
       }
-      catch(e){
-        console.log(e);
-        if(e == 'Transport (WebRTCStar) could not listen on any available address'){
-          throw(e);
-        }
+
+      if(typeof config['modules'] == 'undefined' || (typeof config['modules'] != 'undefined' && config['modules'].indexOf('bee') > -1)){
+        await this.bee.start(config);
+        this.bee.config.saveLockStatusSub.subscribe( (value) => {
+          if(value){
+            this.enableSaveLock();
+          }
+          else{
+            this.disableSaveLock();
+          }
+          this.saveLockStatusSub.next(value);
+
+        });
       }
-      config['dependencies']['dolphin'] = this.ocean.dolphin;
-      await this.bee.start(config);
 
-
-      this.bee.config.saveLockStatusSub.subscribe( (value) => {
-        if(value){
-          this.enableSaveLock();
-        }
-        else{
-          this.disableSaveLock();
-        }
-        this.saveLockStatusSub.next(value);
-
-      });
-
-      this.ocean.dolphin.commitNowSub.subscribe( (value) => {
-        this.bee.config.commitNow();
-      });
-
-      this.ocean.dolphin.commitSub.subscribe( (value) => {
-        this.bee.config.commit();
-      });
-
-
-      this.ocean.dolphin.selectedChannelSub.subscribe( (value) => {
-        this.bee.config.selectChannel(value);
-      });
 
       this.ready = true;
       this.isReadySub.next(true);
