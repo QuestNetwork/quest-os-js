@@ -77,7 +77,8 @@ config = {
     ipfs: {
       swarm: [<swarm star peer ip>,<swarm star peer ip>]
     },
-    dev: <version>
+    dev: <true/false>,
+    version: <version>
 };
 ```
 
@@ -91,6 +92,7 @@ config = {
       ipfs: {
         swarm: [<swarm star peer ip>,<swarm star peer ip>]
       },
+      dev: <true/false>,
       version: <version>,
       dependencies: {
         electronService: ElectronService,
