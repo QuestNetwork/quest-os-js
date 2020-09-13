@@ -56,9 +56,9 @@ export class QuestOSService {
 ## API
 
 
-### boot(config)
+### async boot(config)
 
-The GitHub repositories master/0.9.2/0.9.3+ boot with:
+Boots the operating system. The GitHub repositories master/0.9.2/0.9.3+ boot with:
 ```
 this.config = {
     ipfs: {
@@ -68,7 +68,7 @@ this.config = {
 };
 ```
 
-Boots the operating system. The NPM package of 0.9.2 currently unfortunately expects: 
+The NPM package of 0.9.2 currently unfortunately expects: 
 
 ```
 import { ElectronService } from 'ngx-electron';
