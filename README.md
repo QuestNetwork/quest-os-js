@@ -55,10 +55,10 @@ export class QuestOSService {
 
 ## API
 
-```
+
 ### boot(config)
-```
-Boots the operating system. Will use a dynamic bootloader in 0.9.3 in the future but currently unfortunately expects: 
+
+Boots the operating system. Will use a dynamic bootloader in 0.9.3 but currently unfortunately expects: 
 ```
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from 'file-saver';
