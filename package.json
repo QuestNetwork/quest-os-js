@@ -21,9 +21,9 @@
     "@angular/platform-browser": "^10.0.10",
     "@angular/common": "^10.0.10",
     "@angular/core": "^10.0.10",
-    "qrcode": "^1.4.4"
-
-
+    "qrcode": "^1.4.4",
+    "ngx-electron": "^2.2.0",
+    "file-saver": "^2.0.2"
   },
   "devDependencies": {
     "ava": "^3.10.1",
