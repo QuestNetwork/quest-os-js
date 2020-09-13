@@ -75,7 +75,7 @@ config = {
     };
 ```
 
-But 0.9.3+ boots with:
+The GitHub repositories master/0.9.2/0.9.3+ boot with:
 ```
   this.config = {
       ipfs: {
