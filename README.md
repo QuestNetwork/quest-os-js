@@ -107,7 +107,7 @@ Deactivates Accounts And Restarts The Interface On The Web, Closes The Current W
 ### onSignIn()
 Returns a subscribable Subject that fires when the account is signed in.
 ```
-<os>.onSignedIn().subscribe( () => {
+<os>.onSignIn().subscribe( () => {
   console.log("Hello Universe");
 });
 ```
