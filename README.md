@@ -31,8 +31,10 @@ qOS.boot().then( () => {
 TypeScript/Angular Service
 ```
 import { Injectable } from '@angular/core';
-import { qOS } from '@questnetwork/quest-os-js'
+import { qOS }  from '@questnetwork/quest-os-js';
 import * as swarmJson from '../swarm.json';
+import  packageJson from '../../../package.json';
+const version = packageJson.version;
 
 @Injectable({
   providedIn: 'root'
@@ -40,25 +42,47 @@ import * as swarmJson from '../swarm.json';
 export class QuestOSService {
   public os;
   ready = false;
+  config;
   constructor() {
-    let config = {
+    this.config = {
       ipfs: {
         swarm: swarmJson['ipfs']['swarm']
       },
-      dev: swarmJson['ipfs']['dev']
+      version: version,
+      dev: swarmJson['dev']
     };
     this.os = qOS;
-    this.os.boot(config).then(() => { this.ready = true; });
+  }
+  async boot(){
+      try{
+        await this.os.boot(this.config);
+        this.ready = true;
+      }
+      catch(e){
+        throw(e);
+      }
   }
 }
+  
 ```
 
 ## API
 
 
-### boot(config)
+### async boot(config)
 
-Boots the operating system. The NPM package of 0.9.2 currently unfortunately expects: 
+Boots the operating system. The GitHub repositories master/0.9.2/0.9.3+ boot with:
+```
+this.config = {
+    ipfs: {
+      swarm: [<swarm star peer ip>,<swarm star peer ip>]
+    },
+    dev: <version>
+};
+```
+
+The NPM package of 0.9.2 currently unfortunately expects: 
+
 ```
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from 'file-saver';
@@ -67,7 +91,7 @@ config = {
       ipfs: {
         swarm: [<swarm star peer ip>,<swarm star peer ip>]
       },
-      version: version,
+      version: <version>,
       dependencies: {
         electronService: ElectronService,
         saveAs: saveAs
@@ -75,15 +99,6 @@ config = {
     };
 ```
 
-The GitHub repositories master/0.9.2/0.9.3+ boot with:
-```
-  this.config = {
-      ipfs: {
-        swarm: [<swarm star peer ip>,<swarm star peer ip>]
-      },
-      version: version
-    };
-```
 
 Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [Quest Network Messenger](https://github.com/QuestNetwork/quest-messenger-js) 0.9.2+ to see how to use the OS.
 
