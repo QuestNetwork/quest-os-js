@@ -46,11 +46,33 @@ export class QuestOSService {
         swarm: swarmJson['ipfs']['swarm']
       },
       dev: swarmJson['ipfs']['dev']
-    };
+    };o
     this.os = qOS;
     this.os.boot(config).then(() => { this.ready = true; });
   }
 }
+```
+
+## API
+
+```
+### boot(config)
+```
+Boots the operating system. Will use a dynamic bootloader in 0.9.3 in the future but currently unfortunately expects: 
+```
+import { ElectronService } from 'ngx-electron';
+import { saveAs } from 'file-saver';
+
+config = {
+      ipfs: {
+        swarm: []
+      },
+      version: version,
+      dependencies: {
+        electronService: ElectronService,
+        saveAs: saveAs
+      }
+    };
 ```
 
 Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [Quest Network Messenger](https://github.com/QuestNetwork/quest-messenger-js) 0.9.2+ to see how to use the OS.
