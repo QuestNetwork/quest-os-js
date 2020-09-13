@@ -104,6 +104,13 @@ Deactivates Accounts And Restarts The Interface On The Web, Closes The Current W
 <os>.signOut();
 ```
 
+### onSignIn()
+Returns a subscribable Subject that fires when the account is signed in.
+```
+<os>.onSignIn().subscribe( () => {
+  console.log("Hello Universe");
+});
+```
 
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [Quest Network Messenger](https://github.com/QuestNetwork/quest-messenger-js) 0.9.2+ to see how to use the OS.**
 
