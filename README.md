@@ -13,14 +13,21 @@ Unified API for the QuestNetwork dStack.
 
 ``npm install @questnetwork/quest-os-js@0.9.2``
 
+## API
+
+
+### async boot(config)
+
+Boots the operating system. The GitHub branches master/0.9.2/0.9.3+ boot with:
 
 JavaScript/NodeJS
 ```
 import { qOS } from '@questnetwork/quest-os-js'
 // configure with a bootstrap swarm peer, for testing you can use:
 let config = {
-  ipfs: { swarm: "/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star" },
-  dev: true
+  ipfs: { swarm: [<swarm star peer ip>,<swarm star peer ip>] },
+  version: <version>
+  dev: <true/false>
 };
 // boot the operating system
 qOS.boot().then( () => {
@@ -66,28 +73,13 @@ export class QuestOSService {
   
 ```
 
-## API
 
-
-### async boot(config)
-
-Boots the operating system. The GitHub branches master/0.9.2/0.9.3+ boot with:
-```
-config = {
-    ipfs: {
-      swarm: [<swarm star peer ip>,<swarm star peer ip>]
-    },
-    dev: <true/false>,
-    version: <version>
-};
-```
 
 The NPM package of 0.9.2 currently unfortunately expects: 
 
 ```
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from 'file-saver';
-
 config = {
       ipfs: {
         swarm: [<swarm star peer ip>,<swarm star peer ip>]
@@ -101,12 +93,17 @@ config = {
     };
 ```
 
+### signIn(config = {})
+Activates Accounts. Empty config creates a new account
+```
+<os>.signIn({});
+```
 
 Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [Quest Network Messenger](https://github.com/QuestNetwork/quest-messenger-js) 0.9.2+ to see how to use the OS.
 
 We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package. It allows you to bootstrap your Quest Network apps with the same peers and settings.
 
-Pro Tip: Put a file in your `/bin` that runs the quest-cli lke so `node /path/to/quest-cli/index.js` from any folder on your system. It's much nicer!
+Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/to/quest-cli/index.js` from any folder on your system. It's much nicer!
 
 ## Features
 
