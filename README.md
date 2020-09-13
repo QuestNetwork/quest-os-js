@@ -31,26 +31,40 @@ qOS.boot().then( () => {
 TypeScript/Angular Service
 ```
 import { Injectable } from '@angular/core';
-import { qOS } from '@questnetwork/quest-os-js'
+import { qOS }  from '@questnetwork/quest-os-js';
 import * as swarmJson from '../swarm.json';
+import  packageJson from '../../../package.json';
+const version = packageJson.version;
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestOSService {
+  //
   public os;
   ready = false;
+  config;
   constructor() {
-    let config = {
+    this.config = {
       ipfs: {
         swarm: swarmJson['ipfs']['swarm']
       },
-      dev: swarmJson['ipfs']['dev']
+      version: version,
+      dev: swarmJson['dev']
     };
     this.os = qOS;
-    this.os.boot(config).then(() => { this.ready = true; });
+  }
+  async boot(){
+      try{
+        await this.os.boot(this.config);
+        this.ready = true;
+      }
+      catch(e){
+        throw(e);
+      }
   }
 }
+  
 ```
 
 ## API
@@ -64,7 +78,7 @@ this.config = {
     ipfs: {
       swarm: [<swarm star peer ip>,<swarm star peer ip>]
     },
-    version: version
+    dev: <version>
 };
 ```
 
@@ -78,7 +92,7 @@ config = {
       ipfs: {
         swarm: [<swarm star peer ip>,<swarm star peer ip>]
       },
-      version: version,
+      version: <version>,
       dependencies: {
         electronService: ElectronService,
         saveAs: saveAs
