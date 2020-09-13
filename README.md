@@ -5,6 +5,10 @@
 
 [StationedInTheField](https://github.com/StationedInTheField)
 
+## Example Applications
+
+[Awesome Quest Network](https://github.com/QuestNetwork/awesome)
+
 ## Description
 
 Unified API for the QuestNetwork dStack.
