@@ -31,7 +31,7 @@ qOS.boot().then( () => {
 TypeScript/Angular Service
 ```
 import { Injectable } from '@angular/core';
-import { qOS }  from '@questnetwork/quest-ocean-js';
+import { qOS } from '@questnetwork/quest-os-js'
 import * as swarmJson from '../swarm.json';
 
 @Injectable({
