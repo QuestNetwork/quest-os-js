@@ -1,3 +1,5 @@
+![Scale Free Network](https://mathinsight.org/media/image/image/small_network_hub.png)
+
 # Quest OS JS
 >Quantum Scare: Currently Quest Network PubSub uses elliptic curve cryptopgraphy for signatures, but we are already looking at post quantum algorithms.
 
