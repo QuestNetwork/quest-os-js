@@ -46,7 +46,7 @@ export class QuestOSService {
         swarm: swarmJson['ipfs']['swarm']
       },
       dev: swarmJson['ipfs']['dev']
-    };o
+    };
     this.os = qOS;
     this.os.boot(config).then(() => { this.ready = true; });
   }
@@ -58,20 +58,30 @@ export class QuestOSService {
 
 ### boot(config)
 
-Boots the operating system. Will use a dynamic bootloader in 0.9.3 but currently unfortunately expects: 
+Boots the operating system. The NPM package of 0.9.2 currently unfortunately expects: 
 ```
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from 'file-saver';
 
 config = {
       ipfs: {
-        swarm: []
+        swarm: [<swarm peer ip>,<swarm peer ip>]
       },
       version: version,
       dependencies: {
         electronService: ElectronService,
         saveAs: saveAs
       }
+    };
+```
+
+But 0.9.3+ boots with:
+```
+  this.config = {
+      ipfs: {
+        swarm: [<swarm peer ip>,<swarm peer ip>]
+      },
+      version: version
     };
 ```
 
