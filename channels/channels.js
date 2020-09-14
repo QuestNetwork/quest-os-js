@@ -12,7 +12,7 @@ export class Channels {
     if(typeof v == 'undefined'){
       return false;
     }
-    
+
     this.dolphin.selectChannel(v);
     this.bee.config.setSelectedChannel(v);
     this.selectedChannelSub.next(v);
@@ -21,10 +21,11 @@ export class Channels {
 
   getSelectedChannel(v){
     let channel = "NoChannelSelected";
-    if(this.bee.config.getSelectedChannel() != "NoChannelSelected" && typeof this.bee.config.getSelectedChannel()  != 'undefined' ){
+    console.log( this.bee.config.getSelectedChannel() );
+    if( typeof this.bee.config.getSelectedChannel()  != 'undefined'  && this.bee.config.getSelectedChannel() != "NoChannelSelected" ){
       channel = this.bee.config.getSelectedChannel();
     }
-    else if(this.dolphin.getSelectedChannel() != "NoChannelSelected" && typeof this.dolphin.getSelectedChannel()  != 'undefined' ){
+    else if(typeof this.dolphin.getSelectedChannel()  != 'undefined'  && this.dolphin.getSelectedChannel() != "NoChannelSelected" ){
       channel = this.dolphin.getSelectedChannel();
     }
     return channel;
