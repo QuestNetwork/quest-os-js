@@ -7,14 +7,14 @@ import { ElectronService } from 'ngx-electron';
 import { saveAs } from  'file-saver';
 
 import { Utilities }  from './utilities/utilities.js';
-import { Channels }  from './channels/channels.js';
+import { ChannelManager }  from './channel/channelManager.js';
 
 
 export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
-      this.channels = uVar;
+      this.channel = uVar;
       this.ready = false;
       this.utilities = new Utilities();
       this.isReadySub = new Subject();
@@ -102,7 +102,7 @@ export class OperatingSystem {
         });
       }
 
-      this.channels = new Channels(this.bee, this.ocean.dolphin);
+      this.channel = new ChannelManager(this.bee, this.ocean.dolphin);
 
       this.ready = true;
       this.isReadySub.next(true);
@@ -259,79 +259,7 @@ export class OperatingSystem {
     }
 
 
-    async importChannel(channelName,folders,parentFolderId,inviteToken,importFolderStructure){
-      if(typeof parentFolderId == 'undefined'){parentFolderId = ""}
-      if(importFolderStructure == 1 && folders.length > 0){
-          //see if folders exist starting at parentFolderId
-          console.log(parentFolderId);
-          let chfl = this.bee.config.getChannelFolderList();
-          for(let i=0; i<folders.length;i++){
-            let newFolder = { id: uuidv4(), data: { name: folders[i], kind:"dir", items: 0 }, expanded: true, children: [] };
-            chfl = this.bee.config.parseFolderStructureAndPushItem(chfl, parentFolderId, newFolder, true);
-            parentFolderId = this.bee.config.getParseAndImportParentIdCache();
-          }
-
-          this.bee.config.setChannelFolderList(chfl);
-          await this.addChannel(channelName, parentFolderId);
-          this.ocean.dolphin.addInviteToken(channelName,inviteToken);
-      }
-      else{
-        console.log(parentFolderId);
-        await this.addChannel(channelName, parentFolderId);
-        this.ocean.dolphin.addInviteToken(channelName,inviteToken);
-      }
-
-      return true;
-    }
-   async createChannel(channelNameDirty, parentFolderId = ""){
-     let channelNameClean = await this.ocean.dolphin.createChannel(channelNameDirty);
-     this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);
-     this.commitNow();
-     return channelNameClean;
-   }
-   async addChannel(channelNameClean, parentFolderId = ""){
-     try{
-       await this.ocean.dolphin.addChannel(channelNameClean);
-     }catch(e){}
-     this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);
-     this.commitNow();
-     return channelNameClean;
-   }
-   removeChannel(channel){
-     //remove from channelNameList
-     let channelNameList = this.ocean.dolphin.getChannelNameList().filter(e => e != channel);
-     this.ocean.dolphin.setChannelNameList(channelNameList);
-     //remove from channelFolderList
-     let chfl = this.bee.config.getChannelFolderList();
-     chfl = this.bee.config.parseFolderStructureAndRemoveItem(chfl, channel);
-     this.bee.config.setChannelFolderList(chfl);
-     this.commitNow();
-   }
-   createInvite(channel,newInviteCodeMax, importFolders = false){
-     let code = uuidv4();
-     let link = ""
-     if(importFolders){
-       //traverse folders and find this channel in the tree
-       let pathArray = this.bee.config.parseFolderStructureAndGetPath(this.bee.config.getChannelFolderList(), channel);
-       if(pathArray.length > 0){
-         link = pathArray.join("/////") + "/////" + channel + ":" + code;
-       }
-       else{
-         link = channel + ":" + code;
-       }
-       console.log(pathArray);
-     }
-     else{
-         link = channel + ":" + code;
-     }
-
-     link = Buffer.from(link,'utf8').toString('hex');
-     this.ocean.dolphin.addInviteCode(channel,link,code,newInviteCodeMax);
-     this.commitNow();
-     return link;
-   }
-
-
+  
 
 
 
