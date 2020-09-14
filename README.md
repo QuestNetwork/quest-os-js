@@ -97,7 +97,7 @@ config = {
     };
 ```
 
-### signIn(config = {})
+### signIn(config = {})  ![Version 0.9.3](https://img.shields.io/badge/process-Bee-yellow)
 Activates Accounts. Empty config creates a new account
 ```
 <os>.signIn({});
