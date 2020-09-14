@@ -129,6 +129,13 @@ Returns the clean channel name
 let claenChannelName = await <os>.channel.create('propaganda');
 ```
 
+### channel.remove(cleanChannelName)
+Removes a channel
+```
+<os>.channel.remove('propaganda----1234');
+```
+
+
 ### channel.listen(cleanChannelName)
 Returns a Subject that forwards non-system channel messages.
 ```
@@ -137,11 +144,13 @@ Returns a Subject that forwards non-system channel messages.
 }
 ```
 
-### channel.remove(cleanChannelName)
-Removes a channel
+
+### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE')
+Returns a Subject that forwards non-system channel messages.
 ```
-<os>.channel.remove('propaganda----1234');
+await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
+
 
 ### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)
 Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
