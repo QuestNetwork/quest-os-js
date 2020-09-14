@@ -19,7 +19,7 @@ Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-
 
 **OR**  
 
-``git clone https://github.com/QuestNetwork/quest-os-js && cd quest-os-js && git checkout 0.9.3`` 
+``git clone https://github.com/QuestNetwork/quest-os-js && cd quest-os-js && git checkout 0.9.3 && cd ..`` 
 
 ## API
 
