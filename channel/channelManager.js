@@ -89,6 +89,9 @@ export class ChannelManager {
    this.bee.config.commitNow();
  }
 
+ async publish(channel, message, type = 'CHANNEL_MESSAGE'){
+  await this.dolphin.publishChannelMessage(channel, message, type = 'CHANNEL_MESSAGE');
+}
 
 
 
