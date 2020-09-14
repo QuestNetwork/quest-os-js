@@ -138,7 +138,7 @@ Returns a Subject that forwards non-system channel messages.
 ```
 
 ### channel.remove(cleanChannelName)
-Returns a Subject that forwards non-system channel messages.
+Removes a channel
 ```
 <os>.channel.remove('propaganda----1234');
 ```
