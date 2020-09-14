@@ -114,6 +114,36 @@ Returns a subscribable Subject that fires when the account is signed in.
 });
 ```
 
+
+### isSignedIn()
+Returns a boolean true or false
+```
+if(<os>.isSignedIn()){
+  console.log("Hello Universe");
+};
+```
+
+### async channel.create(dirtyChannelName)
+Returns the clean channel name
+```
+let claenChannelName = await <os>.channel.create('propaganda');
+```
+
+### channel.listen(cleanChannelName)
+Returns a Subject that forwards non-system channel messages.
+```
+<os>.channel.listen('propaganda----1234').subscribe( msg ){
+  console.log(msg);
+}
+```
+
+### channel.remove(cleanChannelName)
+Returns a Subject that forwards non-system channel messages.
+```
+<os>.channel.remove('propaganda----1234');
+```
+
+
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [Quest Network Messenger](https://github.com/QuestNetwork/quest-messenger-js) 0.9.2+ to see how to use the OS.**
 
 We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package. It allows you to bootstrap your Quest Network apps with the same peers and settings.
