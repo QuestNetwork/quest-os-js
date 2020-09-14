@@ -150,7 +150,7 @@ Creates a new channel invite, specify max uses of this invite code and whether o
 ```
 
 
-**Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [Quest Network Messenger](https://github.com/QuestNetwork/quest-messenger-js) 0.9.2+ to see how to use the OS.**
+**Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
 
 We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package. It allows you to bootstrap your Quest Network apps with the same peers and settings.
 
