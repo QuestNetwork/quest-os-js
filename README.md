@@ -15,9 +15,11 @@ Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-
 
 ## Installation & Usage
 
-``npm install @questnetwork/quest-os-js@0.9.2`` or  ``git clone https://github.com/QuestNetwork/quest-os-js``
+``npm install @questnetwork/quest-os-js@0.9.3`` 
+OR  
+``git clone https://github.com/QuestNetwork/quest-os-js && cd quest-os-js && git checkout 0.9.3 && npm run inst`` 
 
-## API
+##  
 
 
 ### async boot(config)
