@@ -102,13 +102,13 @@ Activates Accounts. Empty config creates a new account
 ```
 <os>.signIn({});
 ```
-### signOut()
+### signOut() ![Version 0.9.3](https://img.shields.io/badge/process-Bee-yellow)
 Deactivates Accounts And Restarts The Interface On The Web, Closes The Current Window In Electron
 ```
 <os>.signOut();
 ```
 
-### onSignIn()
+### onSignIn() ![Version 0.9.3](https://img.shields.io/badge/process-Bee-yellow)
 Returns a subscribable Subject that fires when the account is signed in.
 ```
 <os>.onSignIn().subscribe( () => {
