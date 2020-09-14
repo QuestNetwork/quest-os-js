@@ -123,7 +123,7 @@ if(<os>.isSignedIn()){
 };
 ```
 
-### async channel.create(dirtyChannelName)
+### async channel.create(dirtyChannelName, parentFolderId = "")
 Returns the clean channel name
 ```
 let claenChannelName = await <os>.channel.create('propaganda');
@@ -141,6 +141,12 @@ Returns a Subject that forwards non-system channel messages.
 Removes a channel
 ```
 <os>.channel.remove('propaganda----1234');
+```
+
+### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)
+Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
+```
+<os>.channel.invite.create('propaganda----1234',5,true);
 ```
 
 
