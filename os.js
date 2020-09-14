@@ -7,12 +7,14 @@ import { ElectronService } from 'ngx-electron';
 import { saveAs } from  'file-saver';
 
 import { Utilities }  from './utilities/utilities.js';
+import { Channels }  from './channels/channels.js';
 
 
 export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
+      this.channels = uVar;
       this.ready = false;
       this.utilities = new Utilities();
       this.isReadySub = new Subject();
@@ -84,10 +86,6 @@ export class OperatingSystem {
           this.bee.config.commit();
         });
 
-
-        this.ocean.dolphin.selectedChannelSub.subscribe( (value) => {
-          this.bee.config.selectChannel(value);
-        });
       }
 
       if(typeof config['modules'] == 'undefined' || (typeof config['modules'] != 'undefined' && config['modules'].indexOf('bee') > -1)){
@@ -104,6 +102,7 @@ export class OperatingSystem {
         });
       }
 
+      this.channels = new Channels(this.bee, this.ocean.dolphin);
 
       this.ready = true;
       this.isReadySub.next(true);
@@ -124,6 +123,7 @@ export class OperatingSystem {
         window.location.reload();
       }
     }
+
     setIpfsBootstrapPeers(peers){
       console.log('OS: Setting Peers',peers);
       if(this.isElectron){
