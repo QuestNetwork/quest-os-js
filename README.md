@@ -101,18 +101,21 @@ config = {
     };
 ```
 
-### signIn(config = {}) ![Bee](https://img.shields.io/badge/process-Bee-yellow)
+### signIn(config = {}) 
+![Bee](https://img.shields.io/badge/process-Bee-yellow)
 Activates Accounts. Empty config creates a new account
 ```
 <os>.signIn({});
 ```
-### signOut() ![Bee](https://img.shields.io/badge/process-Bee-yellow)
+### signOut() 
+![Bee](https://img.shields.io/badge/process-Bee-yellow)
 Deactivates Accounts And Restarts The Interface On The Web, Closes The Current Window In Electron
 ```
 <os>.signOut();
 ```
 
-### onSignIn() ![Bee](https://img.shields.io/badge/process-Bee-yellow)
+### onSignIn() 
+![Bee](https://img.shields.io/badge/process-Bee-yellow)
 Returns a subscribable Subject that fires when the account is signed in.
 ```
 <os>.onSignIn().subscribe( () => {
@@ -120,7 +123,8 @@ Returns a subscribable Subject that fires when the account is signed in.
 });
 ```
 
-### isSignedIn() ![Bee](https://img.shields.io/badge/process-Bee-yellow)
+### isSignedIn() 
+![Bee](https://img.shields.io/badge/process-Bee-yellow)
 Returns a boolean true or false
 ```
 if(<os>.isSignedIn()){
@@ -128,20 +132,23 @@ if(<os>.isSignedIn()){
 };
 ```
 
-### async channel.create(dirtyChannelName, parentFolderId = "") ![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+### async channel.create(dirtyChannelName, parentFolderId = "") 
+![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
 Returns the clean channel name
 ```
 let claenChannelName = await <os>.channel.create('propaganda');
 ```
 
-### channel.remove(cleanChannelName)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+### channel.remove(cleanChannelName)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) 
+![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
 Removes a channel
 ```
 <os>.channel.remove('propaganda----1234');
 ```
 
 
-### channel.listen(cleanChannelName) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+### channel.listen(cleanChannelName) 
+![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
 Returns a Subject that forwards non-system channel messages.
 ```
 <os>.channel.listen('propaganda----1234').subscribe( msg ){
@@ -150,14 +157,16 @@ Returns a Subject that forwards non-system channel messages.
 ```
 
 
-### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE') ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE') 
+![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
 Returns a Subject that forwards non-system channel messages.
 ```
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
 
-### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
+![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
 Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
 ```
 <os>.channel.invite.create('propaganda----1234',5,true);
