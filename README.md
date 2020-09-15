@@ -137,7 +137,7 @@ if(<os>.isSignedIn()){
 ```
 
 ### async channel.create(dirtyChannelName, parentFolderId = "") 
-![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Ocean-blue)
+![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Ocean](https://img.shields.io/badge/process-Ocean-blue)
 
 Returns the clean channel name
 ```
@@ -146,7 +146,7 @@ let claenChannelName = await <os>.channel.create('propaganda');
 
 ### channel.remove(cleanChannelName)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) 
 
-![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Ocean-blue)
+![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Ocean](https://img.shields.io/badge/process-Ocean-blue)
 
 Removes a channel
 ```
@@ -155,7 +155,7 @@ Removes a channel
 
 
 ### channel.listen(cleanChannelName) 
-![Ocean](https://img.shields.io/badge/process-Dolphin-blue)
+![Ocean](https://img.shields.io/badge/process-Ocean-blue)
 
 Returns a Subject that forwards non-system channel messages.
 ```
