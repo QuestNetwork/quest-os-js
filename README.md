@@ -101,6 +101,51 @@ config = {
     };
 ```
 
+### isReady()
+
+Returns true once boot is complete, otherwise returns false.
+
+```
+if(<os>.isReady()){
+  console.log("Ready To Sign In");
+};
+```
+
+
+### onReady()
+
+Returns a Subject that pushes next when boot is complete
+
+```
+if(<os>.onReady().subsribe( () => {
+  console.log("Ready To Sign In");
+});
+```
+
+
+### reboot()
+
+Reboots the entire system
+
+```
+<os>.reboot();
+```
+
+### enableSaveLock() 
+
+Locks the system from saving any changes
+```
+<os>.enableSaveLock();
+```
+
+### disableSaveLock() 
+
+Unlocks the system from saving changes and saves changes normally
+```
+<os>.disableSaveLock();
+```
+
+
 ### setStorageLocation(location)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
