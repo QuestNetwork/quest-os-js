@@ -48,6 +48,15 @@ export class OperatingSystem {
     hasConfigFile(){
       return this.bee.config.hasConfigFile();
     }
+    hasLocalStorage(){
+      try{
+        let config = JSON.parse(window.localStorage.getItem('user-qcprofile'));
+        if(typeof config == 'object' && typeof config['version'] != 'undefined'){
+          return true;
+        }
+      }catch(e){console.log(e)}
+      return false;
+    }
 
 
     async boot(config){
@@ -218,7 +227,7 @@ export class OperatingSystem {
     autoSaveStatus(){
       return this.saveLockStatusSub;
     }
-  
+
 
 
     signIn(config = {}){

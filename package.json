@@ -14,7 +14,7 @@
     "build": "rm -rf dist && babel . --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
     },
   "dependencies": {
-    "@questnetwork/quest-ocean-js": "0.9.2",
+    "@questnetwork/quest-ocean-js": "../quest-ocean-js",
     "@questnetwork/quest-bee-js": "../quest-bee-js",
     "rxjs": "^6.6.2",
     "uuid": "^8.2.0",
