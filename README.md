@@ -208,6 +208,12 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 **0.9.2**
 - Basic functionality
 
+**0.9.3**
+- Documentation Extended
+- Easier Access
+- Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
+
+
 
 ## Support Us
 This project is a lot of work and unfortunately we need to eat food (ツ)
