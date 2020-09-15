@@ -3,37 +3,37 @@ import { InviteManager }  from './inviteManager.js';
 
 export class ChannelManager {
 
-  constructor(bee,dolphin){
-    this.invite = new InviteManager(bee,dolphin);
-    this.bee = bee;
-    this.dolphin = dolphin;
+  constructor(){
+    let uVar;
+    this.bee = uVar;
+    this.dolphin = uVar;
+
+  }
+
+  load(config){
+    this.invite = new InviteManager(config['dependencies']['bee'],config['dependencies']['dolphin']);
+    this.bee = config['dependencies']['bee'];
+    this.dolphin = config['dependencies']['dolphin'];
     this.selectedChannelSub = new Subject();
   }
 
-  selectChannel(v){
-    if(typeof v == 'undefined'){
+  select(v){
+    if(typeof v == 'undefined' || v == "NoChannelSelected"){
       return false;
     }
-
-    this.dolphin.selectChannel(v);
     this.bee.config.setSelectedChannel(v);
     this.selectedChannelSub.next(v);
     this.bee.config.commit();
   }
-
-  getSelectedChannel(v){
-    let channel = "NoChannelSelected";
-    console.log( this.bee.config.getSelectedChannel() );
+  getSelected(v){
+    let defaultCh = "NoChannelSelected";
     if( typeof this.bee.config.getSelectedChannel()  != 'undefined'  && this.bee.config.getSelectedChannel() != "NoChannelSelected" ){
-      channel = this.bee.config.getSelectedChannel();
+      return this.bee.config.getSelectedChannel();
     }
-    else if(typeof this.dolphin.getSelectedChannel()  != 'undefined'  && this.dolphin.getSelectedChannel() != "NoChannelSelected" ){
-      channel = this.dolphin.getSelectedChannel();
-    }
-    return channel;
+    return defaultCh;
   }
 
-  onSelectChannel(){
+  onSelect(){
     return this.selectedChannelSub;
   }
   listen(ch){
@@ -63,7 +63,7 @@ export class ChannelManager {
     }
 
     return true;
-  }
+ }
  async create(channelNameDirty, parentFolderId = ""){
    let channelNameClean = await this.dolphin.createChannel(channelNameDirty);
    this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);

@@ -14,7 +14,7 @@ export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
-      this.channel = uVar;
+      this.channel = new ChannelManager();
       this.ready = false;
       this.utilities = new Utilities();
       this.isReadySub = new Subject();
@@ -67,9 +67,17 @@ export class OperatingSystem {
       }
       catch(e){console.log(e);}
 
-      if(typeof config['modules'] == 'undefined' || (typeof config['modules'] != 'undefined' && config['modules'].indexOf('ocean') > -1)){
+      if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1)){
         try{
           await this.ocean.create(config);
+          config['dependencies']['dolphin'] = this.ocean.dolphin;
+          this.ocean.dolphin.commitNowSub.subscribe( (value) => {
+            this.bee.config.commitNow();
+          });
+
+          this.ocean.dolphin.commitSub.subscribe( (value) => {
+            this.bee.config.commit();
+          });
         }
         catch(e){
           console.log(e);
@@ -77,32 +85,31 @@ export class OperatingSystem {
             throw(e);
           }
         }
-        config['dependencies']['dolphin'] = this.ocean.dolphin;
-        this.ocean.dolphin.commitNowSub.subscribe( (value) => {
-          this.bee.config.commitNow();
-        });
-
-        this.ocean.dolphin.commitSub.subscribe( (value) => {
-          this.bee.config.commit();
-        });
-
       }
 
-      if(typeof config['modules'] == 'undefined' || (typeof config['modules'] != 'undefined' && config['modules'].indexOf('bee') > -1)){
-        await this.bee.start(config);
-        this.bee.config.saveLockStatusSub.subscribe( (value) => {
-          if(value){
-            this.enableSaveLock();
-          }
-          else{
-            this.disableSaveLock();
-          }
-          this.saveLockStatusSub.next(value);
+      if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('bee') > -1)){
+          try{
+            await this.bee.start(config);
+            config['dependencies']['bee'] = this.bee;
+            this.bee.config.saveLockStatusSub.subscribe( (value) => {
+              if(value){
+                this.enableSaveLock();
+              }
+              else{
+                this.disableSaveLock();
+              }
+              this.saveLockStatusSub.next(value);
 
-        });
+            });
+          }catch(e){
+            throw(e);
+          }
       }
 
-      this.channel = new ChannelManager(this.bee, this.ocean.dolphin);
+      if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1 && config['boot']['processes'].indexOf('bee') > -1)){
+        this.channel.load(config);
+      }
+
 
       this.ready = true;
       this.isReadySub.next(true);
@@ -259,7 +266,7 @@ export class OperatingSystem {
     }
 
 
-  
+
 
 
 
