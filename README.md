@@ -132,6 +132,7 @@ Reboots the entire system
 ```
 
 ### enableSaveLock() 
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Locks the system from saving any changes
 ```
@@ -139,6 +140,7 @@ Locks the system from saving any changes
 ```
 
 ### disableSaveLock() 
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Unlocks the system from saving changes and saves changes normally
 ```
