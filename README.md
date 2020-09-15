@@ -116,6 +116,7 @@ Deactivates Accounts And Restarts The Interface On The Web, Closes The Current W
 
 ### onSignIn() 
 ![Bee](https://img.shields.io/badge/process-Bee-yellow)
+
 Returns a subscribable Subject that fires when the account is signed in.
 ```
 <os>.onSignIn().subscribe( () => {
@@ -125,6 +126,7 @@ Returns a subscribable Subject that fires when the account is signed in.
 
 ### isSignedIn() 
 ![Bee](https://img.shields.io/badge/process-Bee-yellow)
+
 Returns a boolean true or false
 ```
 if(<os>.isSignedIn()){
@@ -134,12 +136,14 @@ if(<os>.isSignedIn()){
 
 ### async channel.create(dirtyChannelName, parentFolderId = "") 
 ![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+
 Returns the clean channel name
 ```
 let claenChannelName = await <os>.channel.create('propaganda');
 ```
 
 ### channel.remove(cleanChannelName)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) 
+
 ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
 Removes a channel
 ```
@@ -149,6 +153,7 @@ Removes a channel
 
 ### channel.listen(cleanChannelName) 
 ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+
 Returns a Subject that forwards non-system channel messages.
 ```
 <os>.channel.listen('propaganda----1234').subscribe( msg ){
@@ -159,6 +164,7 @@ Returns a Subject that forwards non-system channel messages.
 
 ### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE') 
 ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+
 Returns a Subject that forwards non-system channel messages.
 ```
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
@@ -167,6 +173,7 @@ await <os>.channel.publish('propaganda----1234',"Hello Universe");
 
 ### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
 ![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+
 Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
 ```
 <os>.channel.invite.create('propaganda----1234',5,true);
