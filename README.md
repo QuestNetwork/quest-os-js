@@ -252,6 +252,15 @@ Closes the channel to invite only participation
 <os>.channel.challenge.disable('propaganda----1234');
 ```
 
+### channel.challenge.isEnabled(cleanChannelName)  
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+```
+if(<os>.isEnabled()){
+  console.log("Hello Universe");
+};
+```
+
 ### channel.invite.create(cleanChannelName,newInviteCodeMax, exportFolders = false)  
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
