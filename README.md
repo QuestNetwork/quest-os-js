@@ -170,7 +170,7 @@ Returns a Subject that forwards non-system channel messages.
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
-### channel.challenge.enable(channel)  
+### channel.challenge.enable(cleanChannelName)  
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Opens the channel to everyone who can solve the Captcha provided by [Quest Image Captcha JS](https://github.com/QuestNetwork/quest-image-captcha-js)
@@ -178,7 +178,7 @@ Opens the channel to everyone who can solve the Captcha provided by [Quest Image
 <os>.channel.challenge.enable('propaganda----1234');
 ```
 
-### channel.challenge.disable(channel)
+### channel.challenge.disable(cleanChannelName)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Closes the channel to invite only participation
@@ -186,15 +186,15 @@ Closes the channel to invite only participation
 <os>.channel.challenge.disable('propaganda----1234');
 ```
 
-### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
+### channel.invite.create(cleanChannelName,newInviteCodeMax, exportFolders = false)  
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
-Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
+Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure.
 ```
 <os>.channel.invite.create('propaganda----1234',5,true);
 ```
 
-### channel.invite.remove(channel,link)
+### channel.invite.remove(cleanChannelName,link)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Removes a channel invite
