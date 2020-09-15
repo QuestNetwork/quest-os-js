@@ -101,6 +101,25 @@ config = {
     };
 ```
 
+### setStorageLocation(location)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Sets the storage location for the app. Normally Quest OS does this automatically and you do not need to call this function.
+Possible locations are: `"Download"`,`"LocalStorage"` or `"ConfigFile"`
+
+```
+<os>.setStorageLocation("LocalStorage");
+```
+
+### getStorageLocation(location)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Returns a string with the current storage location
+
+```
+<os>.getStorageLocation();
+```
+
 ### signIn(config = {})
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
