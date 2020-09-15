@@ -152,15 +152,6 @@ Removes a channel
 <os>.channel.remove('propaganda----1234');
 ```
 
-
-### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
-```
-<os>.channel.invite.create('propaganda----1234',5,true);
-```
-
 ### channel.listen(cleanChannelName) 
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
@@ -179,6 +170,17 @@ Returns a Subject that forwards non-system channel messages.
 ```
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
+
+
+
+### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
+```
+<os>.channel.invite.create('propaganda----1234',5,true);
+```
+
 
 
 
