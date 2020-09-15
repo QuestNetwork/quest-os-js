@@ -8,8 +8,9 @@
 [StationedInTheField](https://github.com/StationedInTheField)
 
 ## Description
+Unified API for the QuestNetwork dStack. Use with our window platform: [qDesk](https://github.com/QuestNetwork/qDesk).
 
-Unified API for the QuestNetwork dStack. Use with our window platform: [qDesk](https://github.com/QuestNetwork/qDesk)
+Main strategy is to create a Quest Network / IPFS / Ethereum interface that even kids can easily understand.
 
 Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-js) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
 
@@ -237,7 +238,7 @@ await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
 ### channel.challenge.enable(cleanChannelName)  
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Opens the channel to everyone who can solve the Captcha provided by [Quest Image Captcha JS](https://github.com/QuestNetwork/quest-image-captcha-js)
 ```
@@ -245,7 +246,7 @@ Opens the channel to everyone who can solve the Captcha provided by [Quest Image
 ```
 
 ### channel.challenge.disable(cleanChannelName)
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Closes the channel to invite only participation
 ```
@@ -253,7 +254,7 @@ Closes the channel to invite only participation
 ```
 
 ### channel.challenge.isEnabled(cleanChannelName)  
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 ```
 if(<os>.isEnabled()){
