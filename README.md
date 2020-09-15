@@ -155,7 +155,7 @@ Removes a channel
 
 
 ### channel.listen(cleanChannelName) 
-![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+![Ocean](https://img.shields.io/badge/process-Dolphin-blue)
 
 Returns a Subject that forwards non-system channel messages.
 ```
@@ -166,7 +166,7 @@ Returns a Subject that forwards non-system channel messages.
 
 
 ### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE') 
-![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+![Ocean](https://img.shields.io/badge/process-Dolphin-blue)
 
 Returns a Subject that forwards non-system channel messages.
 ```
@@ -175,7 +175,7 @@ await <os>.channel.publish('propaganda----1234',"Hello Universe");
 
 
 ### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
-![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Ocean](https://img.shields.io/badge/process-Dolphin-blue)
 
 Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
 ```
