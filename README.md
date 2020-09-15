@@ -102,14 +102,14 @@ config = {
 ```
 
 ### signIn(config = {}) 
-![Bee](https://img.shields.io/badge/process-Bee-yellow)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Activates Accounts. Empty config creates a new account
 ```
 <os>.signIn({});
 ```
 ### signOut() 
-![Bee](https://img.shields.io/badge/process-Bee-yellow)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Deactivates Accounts And Restarts The Interface On The Web, Closes The Current Window In Electron
 ```
@@ -117,7 +117,7 @@ Deactivates Accounts And Restarts The Interface On The Web, Closes The Current W
 ```
 
 ### onSignIn() 
-![Bee](https://img.shields.io/badge/process-Bee-yellow)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Returns a subscribable Subject that fires when the account is signed in.
 ```
@@ -127,7 +127,7 @@ Returns a subscribable Subject that fires when the account is signed in.
 ```
 
 ### isSignedIn() 
-![Bee](https://img.shields.io/badge/process-Bee-yellow)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Returns a boolean true or false
 ```
@@ -137,7 +137,7 @@ if(<os>.isSignedIn()){
 ```
 
 ### async channel.create(dirtyChannelName, parentFolderId = "") 
-![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Ocean](https://img.shields.io/badge/process-Ocean-blue)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns the clean channel name
 ```
@@ -146,7 +146,7 @@ let claenChannelName = await <os>.channel.create('propaganda');
 
 ### channel.remove(cleanChannelName)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) 
 
-![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Ocean](https://img.shields.io/badge/process-Ocean-blue)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Removes a channel
 ```
@@ -155,7 +155,7 @@ Removes a channel
 
 
 ### channel.listen(cleanChannelName) 
-![Ocean](https://img.shields.io/badge/process-Ocean-blue)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns a Subject that forwards non-system channel messages.
 ```
@@ -166,7 +166,7 @@ Returns a Subject that forwards non-system channel messages.
 
 
 ### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE') 
-![Ocean](https://img.shields.io/badge/process-Ocean-blue)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns a Subject that forwards non-system channel messages.
 ```
@@ -175,7 +175,7 @@ await <os>.channel.publish('propaganda----1234',"Hello Universe");
 
 
 ### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
-![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Ocean](https://img.shields.io/badge/process-Ocean-blue)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
 ```
