@@ -8,8 +8,9 @@
 [StationedInTheField](https://github.com/StationedInTheField)
 
 ## Description
+Unified API for the QuestNetwork dStack. Use with our window platform: [qDesk](https://github.com/QuestNetwork/qDesk).
 
-Unified API for the QuestNetwork dStack. Use with our window platform: [qDesk](https://github.com/QuestNetwork/qDesk)
+Main strategy is to create a Quest Network / IPFS / Ethereum interface that even kids can use safely.
 
 Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-js) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
 
