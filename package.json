@@ -16,6 +16,7 @@
   "dependencies": {
     "@questnetwork/quest-ocean-js": "../quest-ocean-js",
     "@questnetwork/quest-bee-js": "../quest-bee-js",
+    "@questnetwork/qd-ui-js": "../qd-ui-js",
     "rxjs": "^6.6.2",
     "uuid": "^8.2.0",
     "@angular/platform-browser": "^10.0.10",

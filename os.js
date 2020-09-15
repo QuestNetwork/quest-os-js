@@ -3,6 +3,8 @@ const { v4: uuidv4 } = require('uuid');
 import { Subject } from "rxjs";
 import { Ocean }  from '@questnetwork/quest-ocean-js';
 import { BeeSwarmInstance }  from '@questnetwork/quest-bee-js';
+import { UiService }  from '@questnetwork/qd-ui-js';
+
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from  'file-saver';
 
@@ -19,6 +21,7 @@ export class OperatingSystem {
       this.utilities = new Utilities();
       this.isReadySub = new Subject();
       this.bee = new BeeSwarmInstance();
+      this.ui = new UiService();
       this.signedInSub = new Subject();
       this.signedIn = false;
       this.ipfsBootstrapPeersFromConfig = [];
@@ -119,6 +122,13 @@ export class OperatingSystem {
         this.channel.load(config);
       }
 
+      if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('qd-ui') > -1)){
+          try{
+            await this.ui.start(config);
+          }catch(e){
+            throw(e);
+          }
+      }
 
       this.ready = true;
       this.isReadySub.next(true);
