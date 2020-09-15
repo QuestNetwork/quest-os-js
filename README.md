@@ -144,8 +144,7 @@ Returns the clean channel name
 let claenChannelName = await <os>.channel.create('propaganda');
 ```
 
-### channel.remove(cleanChannelName)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) 
-
+### channel.remove(cleanChannelName) 
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Removes a channel
@@ -153,6 +152,14 @@ Removes a channel
 <os>.channel.remove('propaganda----1234');
 ```
 
+
+### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
+```
+<os>.channel.invite.create('propaganda----1234',5,true);
+```
 
 ### channel.listen(cleanChannelName) 
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
@@ -173,14 +180,6 @@ Returns a Subject that forwards non-system channel messages.
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
-
-### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
-```
-<os>.channel.invite.create('propaganda----1234',5,true);
-```
 
 
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
