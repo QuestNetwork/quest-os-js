@@ -238,7 +238,7 @@ await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
 ### channel.challenge.enable(cleanChannelName)  
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Opens the channel to everyone who can solve the Captcha provided by [Quest Image Captcha JS](https://github.com/QuestNetwork/quest-image-captcha-js)
 ```
@@ -246,7 +246,7 @@ Opens the channel to everyone who can solve the Captcha provided by [Quest Image
 ```
 
 ### channel.challenge.disable(cleanChannelName)
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Closes the channel to invite only participation
 ```
@@ -254,7 +254,7 @@ Closes the channel to invite only participation
 ```
 
 ### channel.challenge.isEnabled(cleanChannelName)  
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 ```
 if(<os>.isEnabled()){
