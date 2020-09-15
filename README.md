@@ -103,12 +103,14 @@ config = {
 
 ### signIn(config = {}) 
 ![Bee](https://img.shields.io/badge/process-Bee-yellow)
+
 Activates Accounts. Empty config creates a new account
 ```
 <os>.signIn({});
 ```
 ### signOut() 
 ![Bee](https://img.shields.io/badge/process-Bee-yellow)
+
 Deactivates Accounts And Restarts The Interface On The Web, Closes The Current Window In Electron
 ```
 <os>.signOut();
@@ -145,6 +147,7 @@ let claenChannelName = await <os>.channel.create('propaganda');
 ### channel.remove(cleanChannelName)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) 
 
 ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+
 Removes a channel
 ```
 <os>.channel.remove('propaganda----1234');
