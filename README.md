@@ -101,6 +101,72 @@ config = {
     };
 ```
 
+### isReady()
+
+Returns true once boot is complete, otherwise returns false.
+
+```
+if(<os>.isReady()){
+  console.log("Ready To Sign In");
+};
+```
+
+
+### onReady()
+
+Returns a Subject that pushes next when boot is complete
+
+```
+if(<os>.onReady().subsribe( () => {
+  console.log("Ready To Sign In");
+});
+```
+
+
+### reboot()
+
+Reboots the entire system
+
+```
+<os>.reboot();
+```
+
+### enableSaveLock() 
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Locks the system from saving any changes
+```
+<os>.enableSaveLock();
+```
+
+### disableSaveLock() 
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Unlocks the system from saving changes and saves changes normally
+```
+<os>.disableSaveLock();
+```
+
+
+### setStorageLocation(location)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Sets the storage location for the app. Normally Quest OS does this automatically and you do not need to call this function.
+Possible locations are: `"Download"`,`"LocalStorage"` or `"ConfigFile"`
+
+```
+<os>.setStorageLocation("LocalStorage");
+```
+
+### getStorageLocation(location)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Returns a string with the current storage location
+
+```
+<os>.getStorageLocation();
+```
+
 ### signIn(config = {})
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
@@ -170,22 +236,46 @@ Returns a Subject that forwards non-system channel messages.
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
-### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
+### channel.challenge.enable(cleanChannelName)  
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
-Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure
+Opens the channel to everyone who can solve the Captcha provided by [Quest Image Captcha JS](https://github.com/QuestNetwork/quest-image-captcha-js)
+```
+<os>.channel.challenge.enable('propaganda----1234');
+```
+
+### channel.challenge.disable(cleanChannelName)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+Closes the channel to invite only participation
+```
+<os>.channel.challenge.disable('propaganda----1234');
+```
+
+### channel.challenge.isEnabled(cleanChannelName)  
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+```
+if(<os>.isEnabled()){
+  console.log("Hello Universe");
+};
+```
+
+### channel.invite.create(cleanChannelName,newInviteCodeMax, exportFolders = false)  
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure.
 ```
 <os>.channel.invite.create('propaganda----1234',5,true);
 ```
 
-### channel.invite.remove(channel,link)
+### channel.invite.remove(cleanChannelName,link)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Removes a channel invite
 ```
 <os>.channel.invite.remove('propaganda----1234',"5448495320495320414e2045585452454d454c59204c4f4e4720414e4420494e56414c494420494e5649544520434f4445");
 ```
-
 
 ### channel.invite.get(channel)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
