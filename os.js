@@ -218,16 +218,7 @@ export class OperatingSystem {
     autoSaveStatus(){
       return this.saveLockStatusSub;
     }
-    enableChallenge(ch){
-      this.ocean.dolphin.setChallengeFlag(ch,1);
-    }
-    disableChallenge(ch){
-      this.ocean.dolphin.setChallengeFlag(ch,0);
-    }
-    getSelectedChannel(){
-      return this.ocean.dolphin.getSelectedChannel();
-    }
-
+  
 
 
     signIn(config = {}){
@@ -247,7 +238,10 @@ export class OperatingSystem {
       a.close();
       }
       else{
-        window.location.reload();
+        let locArr = window.location.href.split('/');
+        locArr.pop();
+        locArr.push('signin');
+        window.location.href = locArr.join('/');
       }
 
     }
@@ -267,6 +261,7 @@ export class OperatingSystem {
 
 
     setStorageLocation(v){
+      console.log(v);
       this.bee.config.setStorageLocation(v);
     }
     getStorageLocation(){

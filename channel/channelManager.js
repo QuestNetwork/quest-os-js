@@ -1,5 +1,6 @@
 import { Subject } from "rxjs";
 import { InviteManager }  from './inviteManager.js';
+import { ChallengeManager }  from './challengeManager.js';
 
 export class ChannelManager {
 
@@ -12,6 +13,7 @@ export class ChannelManager {
 
   load(config){
     this.invite = new InviteManager(config['dependencies']['bee'],config['dependencies']['dolphin']);
+    this.challenge = new ChallengeManager(config['dependencies']['dolphin']);
     this.bee = config['dependencies']['bee'];
     this.dolphin = config['dependencies']['dolphin'];
     this.selectedChannelSub = new Subject();
