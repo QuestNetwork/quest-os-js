@@ -170,6 +170,22 @@ Returns a Subject that forwards non-system channel messages.
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
+### channel.challenge.enable(channel)  
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+Opens the channel to everyone who can solve the Captcha provided by [Quest Image Captcha JS](https://github.com/QuestNetwork/quest-image-captcha-js)
+```
+<os>.channel.challenge.enable('propaganda----1234');
+```
+
+### channel.challenge.disable(channel)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+Closes the channel to invite only participation
+```
+<os>.channel.challenge.disable('propaganda----1234');
+```
+
 ### channel.invite.create(channel,newInviteCodeMax, exportFolders = false)  
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
@@ -185,7 +201,6 @@ Removes a channel invite
 ```
 <os>.channel.invite.remove('propaganda----1234',"5448495320495320414e2045585452454d454c59204c4f4e4720414e4420494e56414c494420494e5649544520434f4445");
 ```
-
 
 ### channel.invite.get(channel)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
