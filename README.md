@@ -146,7 +146,7 @@ let claenChannelName = await <os>.channel.create('propaganda');
 
 ### channel.remove(cleanChannelName)  ![Bee](https://img.shields.io/badge/process-Bee-yellow) 
 
-![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
+![Bee](https://img.shields.io/badge/process-Bee-yellow) ![Dolphin](https://img.shields.io/badge/process-Dolphin-blue)
 
 Removes a channel
 ```
