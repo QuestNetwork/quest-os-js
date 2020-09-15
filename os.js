@@ -266,7 +266,12 @@ export class OperatingSystem {
     }
 
 
-
+    setStorageLocation(v){
+      this.bee.config.setStorageLocation(v);
+    }
+    getStorageLocation(){
+      return this.bee.config.getStorageLocation();
+    }
 
 
 
