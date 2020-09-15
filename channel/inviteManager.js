@@ -32,5 +32,14 @@ export class InviteManager {
         return link;
       }
 
+      remove(channel,link){
+        this.dolphin.removeInviteCode(channel,link);
+        this.bee.config.commitNow();
+      }
+
+      get(channel){
+        this.q.os.ocean.dolphin.getInviteCodes(this.selectedChannel)['items'];
+      }
+
 
 }
