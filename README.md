@@ -311,6 +311,15 @@ In private mode you have to manually share your profile with everyone you want t
 <os>.social.togglePrivacy();
 ```
 
+### social.isPublic(profilePubKey = 'NoProfileSelected')
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-ocean-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+
+Checks if a profile has public visibility, not giving a pubKey will automatically select your first profile. 
+
+```
+<os>.social.isPublic();
+```
+
 
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
 
