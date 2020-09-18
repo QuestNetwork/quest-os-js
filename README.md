@@ -293,6 +293,24 @@ let invites = <os>.channel.invite.get('propaganda----1234');
 ```
 
 
+### channel.invite.get(channel)
+[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
+
+Gets all invites for a channel
+```
+let invites = <os>.channel.invite.get('propaganda----1234');
+```
+
+### social.togglePrivacy(profilePubKey = 'NoProfileSelected')
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-ocean-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+
+Toggles your profile's visibility between private and public, not giving a pubKey will automatically select your first profile. 
+In private mode you have to manually share your profile with everyone you want to see your details. In Public mode all the members of the channels you're in can see your profile.
+
+```
+<os>.social.togglePrivacy();
+```
+
 
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
 
