@@ -273,7 +273,6 @@ export class OperatingSystem {
       else{
         let locArr = window.location.href.split('/');
         locArr.pop();
-        locArr.push('signin');
         window.location.href = locArr.join('/');
       }
 
