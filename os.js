@@ -4,12 +4,15 @@ import { Subject } from "rxjs";
 import { Ocean }  from '@questnetwork/quest-ocean-js';
 import { BeeSwarmInstance }  from '@questnetwork/quest-bee-js';
 import { UiService }  from '@questnetwork/qd-ui-js';
+import { QuestSocial }  from '@questnetwork/quest-social-js';
+
 
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from  'file-saver';
 
 import { Utilities }  from './utilities/utilities.js';
 import { ChannelManager }  from './channel/channelManager.js';
+import { NativeCrypto }  from '../quest-crypto-js';
 
 
 export class OperatingSystem {
@@ -21,8 +24,10 @@ export class OperatingSystem {
       this.utilities = new Utilities();
       this.isReadySub = new Subject();
       this.bee = new BeeSwarmInstance();
+      this.crypto = new NativeCrypto();
       this.ui = new UiService();
       this.signedInSub = new Subject();
+      this.social = new QuestSocial()
       this.signedIn = false;
       this.ipfsBootstrapPeersFromConfig = [];
       this.configCache = {};
@@ -57,7 +62,7 @@ export class OperatingSystem {
         if(typeof config == 'object' && typeof config['version'] != 'undefined'){
           return true;
         }
-      }catch(e){console.log(e)}
+      }catch(e){console.log(e); return false;}
       return false;
     }
 
@@ -130,6 +135,16 @@ export class OperatingSystem {
           }
       }
 
+
+      if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('social') > -1)){
+          try{
+            await this.social.start(config);
+          }catch(e){
+            throw(e);
+          }
+      }
+
+
       this.ready = true;
       this.isReadySub.next(true);
       return true;
@@ -152,7 +167,7 @@ export class OperatingSystem {
 
     setIpfsBootstrapPeers(peers){
       console.log('OS: Setting Peers',peers);
-      if(this.isElectron){
+      if(this.isElectron()){
         let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
         let configPath =  this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
         configPath = configPath + "/swarm.peers";
@@ -164,7 +179,7 @@ export class OperatingSystem {
     }
     getIpfsBootstrapPeers(){
       //check swarm peer list
-      if(this.isElectron){
+      if(this.isElectron()){
         try{
           let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
           let configPath = this.configCache['dependencies']['electronService'].remote.app.getPath('userData');

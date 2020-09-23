@@ -1,6 +1,7 @@
 import { Subject } from "rxjs";
 import { InviteManager }  from './inviteManager.js';
 import { ChallengeManager }  from './challengeManager.js';
+const { v4: uuidv4 } = require('uuid');
 
 export class ChannelManager {
 
@@ -20,8 +21,13 @@ export class ChannelManager {
   }
 
   select(v){
-    if(typeof v == 'undefined' || v == "NoChannelSelected"){
+    if(typeof v == 'undefined'){
       return false;
+    }
+    if(v == "NoChannelSelected"){
+      this.bee.config.setSelectedChannel(v);
+      this.selectedChannelSub.next(v);
+      this.bee.config.commit();
     }
     this.bee.config.setSelectedChannel(v);
     this.selectedChannelSub.next(v);
@@ -47,14 +53,28 @@ export class ChannelManager {
     if(importFolderStructure == 1 && folders.length > 0){
         //see if folders exist starting at parentFolderId
         console.log(parentFolderId);
-        let chfl = this.bee.config.getChannelFolderList();
+        let chfl;
+
+        console.log('QUEST OS: Adding Channel...',channelName);
+        if(channelName.indexOf('qprivatedch') > -1){
+           chfl = this.bee.config.getFavoriteFolderList();
+        }else{
+           chfl = this.bee.config.getChannelFolderList();
+        }
+
         for(let i=0; i<folders.length;i++){
           let newFolder = { id: uuidv4(), data: { name: folders[i], kind:"dir", items: 0 }, expanded: true, children: [] };
           chfl = this.bee.config.parseFolderStructureAndPushItem(chfl, parentFolderId, newFolder, true);
           parentFolderId = this.bee.config.getParseAndImportParentIdCache();
         }
 
-        this.bee.config.setChannelFolderList(chfl);
+
+        if(channelName.indexOf('qprivatedch') > -1){
+          this.bee.config.setFavoriteFolderList(chfl);
+        }else{
+          this.bee.config.setChannelFolderList(chfl);
+        }
+
         await this.add(channelName, parentFolderId);
         this.dolphin.addInviteToken(channelName,inviteToken);
     }
@@ -66,9 +86,14 @@ export class ChannelManager {
 
     return true;
  }
- async create(channelNameDirty, parentFolderId = ""){
+ async create(channelNameDirty, parentFolderId = "",isFavorite = false){
    let channelNameClean = await this.dolphin.createChannel(channelNameDirty);
-   this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);
+   if(isFavorite){
+     this.bee.config.addToFavoriteFolderList(channelNameClean, parentFolderId);
+   }
+   else{
+      this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);
+    }
    this.bee.config.commitNow();
    return channelNameClean;
  }
@@ -76,24 +101,83 @@ export class ChannelManager {
    try{
      await this.dolphin.addChannel(channelNameClean);
    }catch(e){}
-   this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);
+
+
+   if(channelNameClean.indexOf('qprivatedch') > -1){
+     this.bee.config.addToFavoriteFolderList(channelNameClean, parentFolderId);
+   }else{
+     this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);
+   }
+
    this.bee.config.commitNow();
    return channelNameClean;
  }
+ removeFromNameList(channelName){
+  this.dolphin.setChannelNameList(this.dolphin.getChannelNameList().filter(e => e != channelName));
+ }
  remove(channel){
    //remove from channelNameList
+
+
+
+
    let channelNameList = this.dolphin.getChannelNameList().filter(e => e != channel);
    this.dolphin.setChannelNameList(channelNameList);
    //remove from channelFolderList
-   let chfl = this.bee.config.getChannelFolderList();
-   chfl = this.bee.config.parseFolderStructureAndRemoveItem(chfl, channel);
-   this.bee.config.setChannelFolderList(chfl);
+
+    if(channel.indexOf('qprivatedch') > -1){
+       try{
+       let chfl = this.bee.config.getFavoriteFolderList();
+       chfl = this.bee.config.parseFolderStructureAndRemoveItem(chfl, channel);
+       this.bee.config.setFavoriteFolderList(chfl);
+      }catch(e){console.log(e)}
+   }
+   else{
+     try{
+     let chfl = this.bee.config.getChannelFolderList();
+     chfl = this.bee.config.parseFolderStructureAndRemoveItem(chfl, channel);
+     this.bee.config.setChannelFolderList(chfl);
+      }catch(e){console.log(e)}
+   }
+
+ //
+ // try{
+ //  let chfl = this.bee.config.getFavoriteFolderList();
+ //   chfl = this.bee.config.parseFolderStructureAndRemoveItem(chfl, channel);
+ //   this.bee.config.setFavoriteFolderList(chfl);
+ // }catch(e){console.log(e)}
+
+
    this.bee.config.commitNow();
  }
 
- async publish(channel, message, type = 'CHANNEL_MESSAGE'){
-  await this.dolphin.publishChannelMessage(channel, message, type = 'CHANNEL_MESSAGE');
+ async publish(channel, messageOrpubObj, type = 'CHANNEL_MESSAGE'){
+
+   if(typeof messageOrpubObj == 'object' && messageOrpubObj['channel'] == 'undefined'){
+     messageOrpubObj['channel'] = channel;
+   }
+
+   if(typeof messageOrpubObj == 'object' && messageOrpubObj['type'] == 'undefined'){
+     messageOrpubObj['type'] = type;
+   }
+
+  await this.dolphin.publish(channel, messageOrpubObj, type);
 }
+
+  getParticipantFolders(channel){
+    return this.bee.comb.get('/messages/channel/'+channel+'/folders');
+  }
+  setParticipantFolders(channel,folders){
+     this.bee.comb.set('/messages/channel/'+channel+'/folders', folders);
+    return true;
+  }
+
+
+  find(pubKey){
+    let chNameList = this.dolphin.getChannelNameList().filter(e => e.indexOf(pubKey) > -1);
+    return chNameList[0];
+  }
+
 
 
 
