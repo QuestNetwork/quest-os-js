@@ -1,4 +1,3 @@
-import * as Ipfs from 'ipfs';
 const { v4: uuidv4 } = require('uuid');
 import { Subject } from "rxjs";
 import { Ocean }  from '@questnetwork/quest-ocean-js';
