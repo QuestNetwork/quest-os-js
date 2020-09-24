@@ -85,27 +85,6 @@ export class QuestOSService {
       }
   }
 }
-
-```
-
-
-
-The NPM package of 0.9.2 currently unfortunately expects:
-
-```
-import { ElectronService } from 'ngx-electron';
-import { saveAs } from 'file-saver';
-config = {
-      ipfs: {
-        swarm: [<swarm star peer ip>,<swarm star peer ip>]
-      },
-      dev: <true/false>,
-      version: <version>,
-      dependencies: {
-        electronService: ElectronService,
-        saveAs: saveAs
-      }
-    };
 ```
 
 ### isReady()
