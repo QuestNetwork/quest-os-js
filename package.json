@@ -1,6 +1,6 @@
 {
   "name": "@questnetwork/quest-os-js",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "license": "AGPL-3.0",
   "author": "StationedInTheField",
   "repository": {
@@ -14,10 +14,10 @@
     "build": "rm -rf dist && babel . --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
     },
   "dependencies": {
-    "@questnetwork/quest-ocean-js": "../quest-ocean-js",
-    "@questnetwork/quest-bee-js": "../quest-bee-js",
-    "@questnetwork/qd-ui-js": "../qd-ui-js",
-    "@questnetwork/quest-social-js": "../quest-social-js",
+    "@questnetwork/quest-ocean-js": "0.9.3-rc1",
+    "@questnetwork/quest-bee-js": "0.9.3",
+    "@questnetwork/qd-ui-js": "0.9.3",
+    "@questnetwork/quest-social-js": "0.9.3",
     "rxjs": "^6.6.2",
     "uuid": "^8.2.0",
     "@angular/platform-browser": "^10.0.10",
