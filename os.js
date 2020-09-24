@@ -1,23 +1,32 @@
-import * as Ipfs from 'ipfs';
 const { v4: uuidv4 } = require('uuid');
 import { Subject } from "rxjs";
 import { Ocean }  from '@questnetwork/quest-ocean-js';
 import { BeeSwarmInstance }  from '@questnetwork/quest-bee-js';
+import { UiService }  from '@questnetwork/qd-ui-js';
+import { QuestSocial }  from '@questnetwork/quest-social-js';
+
+
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from  'file-saver';
 
 import { Utilities }  from './utilities/utilities.js';
+import { ChannelManager }  from './channel/channelManager.js';
+import { NativeCrypto }  from '../quest-crypto-js';
 
 
 export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
+      this.channel = new ChannelManager();
       this.ready = false;
       this.utilities = new Utilities();
       this.isReadySub = new Subject();
       this.bee = new BeeSwarmInstance();
+      this.crypto = new NativeCrypto();
+      this.ui = new UiService();
       this.signedInSub = new Subject();
+      this.social = new QuestSocial()
       this.signedIn = false;
       this.ipfsBootstrapPeersFromConfig = [];
       this.configCache = {};
@@ -46,6 +55,15 @@ export class OperatingSystem {
     hasConfigFile(){
       return this.bee.config.hasConfigFile();
     }
+    hasLocalStorage(){
+      try{
+        let config = JSON.parse(window.localStorage.getItem('user-qcprofile'));
+        if(typeof config == 'object' && typeof config['version'] != 'undefined'){
+          return true;
+        }
+      }catch(e){console.log(e); return false;}
+      return false;
+    }
 
 
     async boot(config){
@@ -65,9 +83,17 @@ export class OperatingSystem {
       }
       catch(e){console.log(e);}
 
-      if(typeof config['modules'] == 'undefined' || (typeof config['modules'] != 'undefined' && config['modules'].indexOf('ocean') > -1)){
+      if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1)){
         try{
           await this.ocean.create(config);
+          config['dependencies']['dolphin'] = this.ocean.dolphin;
+          this.ocean.dolphin.commitNowSub.subscribe( (value) => {
+            this.bee.config.commitNow();
+          });
+
+          this.ocean.dolphin.commitSub.subscribe( (value) => {
+            this.bee.config.commit();
+          });
         }
         catch(e){
           console.log(e);
@@ -75,33 +101,46 @@ export class OperatingSystem {
             throw(e);
           }
         }
-        config['dependencies']['dolphin'] = this.ocean.dolphin;
-        this.ocean.dolphin.commitNowSub.subscribe( (value) => {
-          this.bee.config.commitNow();
-        });
-
-        this.ocean.dolphin.commitSub.subscribe( (value) => {
-          this.bee.config.commit();
-        });
-
-
-        this.ocean.dolphin.selectedChannelSub.subscribe( (value) => {
-          this.bee.config.selectChannel(value);
-        });
       }
 
-      if(typeof config['modules'] == 'undefined' || (typeof config['modules'] != 'undefined' && config['modules'].indexOf('bee') > -1)){
-        await this.bee.start(config);
-        this.bee.config.saveLockStatusSub.subscribe( (value) => {
-          if(value){
-            this.enableSaveLock();
-          }
-          else{
-            this.disableSaveLock();
-          }
-          this.saveLockStatusSub.next(value);
+      if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('bee') > -1)){
+          try{
+            await this.bee.start(config);
+            config['dependencies']['bee'] = this.bee;
+            this.bee.config.saveLockStatusSub.subscribe( (value) => {
+              if(value){
+                this.enableSaveLock();
+              }
+              else{
+                this.disableSaveLock();
+              }
+              this.saveLockStatusSub.next(value);
 
-        });
+            });
+          }catch(e){
+            throw(e);
+          }
+      }
+
+      if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1 && config['boot']['processes'].indexOf('bee') > -1)){
+        this.channel.load(config);
+      }
+
+      if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('qd-ui') > -1)){
+          try{
+            await this.ui.start(config);
+          }catch(e){
+            throw(e);
+          }
+      }
+
+
+      if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('social') > -1)){
+          try{
+            await this.social.start(config);
+          }catch(e){
+            throw(e);
+          }
       }
 
 
@@ -124,9 +163,10 @@ export class OperatingSystem {
         window.location.reload();
       }
     }
+
     setIpfsBootstrapPeers(peers){
       console.log('OS: Setting Peers',peers);
-      if(this.isElectron){
+      if(this.isElectron()){
         let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
         let configPath =  this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
         configPath = configPath + "/swarm.peers";
@@ -138,7 +178,7 @@ export class OperatingSystem {
     }
     getIpfsBootstrapPeers(){
       //check swarm peer list
-      if(this.isElectron){
+      if(this.isElectron()){
         try{
           let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
           let configPath = this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
@@ -211,15 +251,6 @@ export class OperatingSystem {
     autoSaveStatus(){
       return this.saveLockStatusSub;
     }
-    enableChallenge(ch){
-      this.ocean.dolphin.setChallengeFlag(ch,1);
-    }
-    disableChallenge(ch){
-      this.ocean.dolphin.setChallengeFlag(ch,0);
-    }
-    getSelectedChannel(){
-      return this.ocean.dolphin.getSelectedChannel();
-    }
 
 
 
@@ -240,7 +271,9 @@ export class OperatingSystem {
       a.close();
       }
       else{
-        window.location.reload();
+        let locArr = window.location.href.split('/');
+        locArr.pop();
+        window.location.href = locArr.join('/');
       }
 
     }
@@ -259,79 +292,13 @@ export class OperatingSystem {
     }
 
 
-    async importChannel(channelName,folders,parentFolderId,inviteToken,importFolderStructure){
-      if(typeof parentFolderId == 'undefined'){parentFolderId = ""}
-      if(importFolderStructure == 1 && folders.length > 0){
-          //see if folders exist starting at parentFolderId
-          console.log(parentFolderId);
-          let chfl = this.bee.config.getChannelFolderList();
-          for(let i=0; i<folders.length;i++){
-            let newFolder = { id: uuidv4(), data: { name: folders[i], kind:"dir", items: 0 }, expanded: true, children: [] };
-            chfl = this.bee.config.parseFolderStructureAndPushItem(chfl, parentFolderId, newFolder, true);
-            parentFolderId = this.bee.config.getParseAndImportParentIdCache();
-          }
-
-          this.bee.config.setChannelFolderList(chfl);
-          await this.addChannel(channelName, parentFolderId);
-          this.ocean.dolphin.addInviteToken(channelName,inviteToken);
-      }
-      else{
-        console.log(parentFolderId);
-        await this.addChannel(channelName, parentFolderId);
-        this.ocean.dolphin.addInviteToken(channelName,inviteToken);
-      }
-
-      return true;
+    setStorageLocation(v){
+      console.log(v);
+      this.bee.config.setStorageLocation(v);
     }
-   async createChannel(channelNameDirty, parentFolderId = ""){
-     let channelNameClean = await this.ocean.dolphin.createChannel(channelNameDirty);
-     this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);
-     this.commitNow();
-     return channelNameClean;
-   }
-   async addChannel(channelNameClean, parentFolderId = ""){
-     try{
-       await this.ocean.dolphin.addChannel(channelNameClean);
-     }catch(e){}
-     this.bee.config.addToChannelFolderList(channelNameClean, parentFolderId);
-     this.commitNow();
-     return channelNameClean;
-   }
-   removeChannel(channel){
-     //remove from channelNameList
-     let channelNameList = this.ocean.dolphin.getChannelNameList().filter(e => e != channel);
-     this.ocean.dolphin.setChannelNameList(channelNameList);
-     //remove from channelFolderList
-     let chfl = this.bee.config.getChannelFolderList();
-     chfl = this.bee.config.parseFolderStructureAndRemoveItem(chfl, channel);
-     this.bee.config.setChannelFolderList(chfl);
-     this.commitNow();
-   }
-   createInvite(channel,newInviteCodeMax, importFolders = false){
-     let code = uuidv4();
-     let link = ""
-     if(importFolders){
-       //traverse folders and find this channel in the tree
-       let pathArray = this.bee.config.parseFolderStructureAndGetPath(this.bee.config.getChannelFolderList(), channel);
-       if(pathArray.length > 0){
-         link = pathArray.join("/////") + "/////" + channel + ":" + code;
-       }
-       else{
-         link = channel + ":" + code;
-       }
-       console.log(pathArray);
-     }
-     else{
-         link = channel + ":" + code;
-     }
-
-     link = Buffer.from(link,'utf8').toString('hex');
-     this.ocean.dolphin.addInviteCode(channel,link,code,newInviteCodeMax);
-     this.commitNow();
-     return link;
-   }
-
-
+    getStorageLocation(){
+      return this.bee.config.getStorageLocation();
+    }
 
 
 
