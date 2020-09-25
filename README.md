@@ -296,7 +296,7 @@ In private mode you have to manually share your profile with everyone you want t
 Checks if a profile has public visibility, not giving a pubKey will automatically select your first profile. 
 
 ```
-if(<os>.social.isPublic()){
+if(<os>.social.isPublic(socialPubKey)){
   console.log("Hello Universe");
 };
 ```
@@ -307,7 +307,7 @@ if(<os>.social.isPublic()){
 Checks if a profile is in our favorites, returns boolean true or false.
 
 ```
-if(<os>.social.isFavoite()){
+if(<os>.social.isFavoite(socialPubKey)){
   console.log("Hello Universe");
 };
 ```
@@ -318,7 +318,7 @@ if(<os>.social.isFavoite()){
 Checks if a profile is a requested favorite, returns boolean true or false.
 
 ```
-if(<os>.social.isRequestedFavoite()){
+if(<os>.social.isRequestedFavoite(socialPubKey)){
   console.log("Hello Universe");
 };
 ```
