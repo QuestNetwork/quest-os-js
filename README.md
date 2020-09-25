@@ -290,13 +290,37 @@ In private mode you have to manually share your profile with everyone you want t
 <os>.social.togglePrivacy();
 ```
 
-### social.isPublic(profilePubKey = 'NoProfileSelected')
+### social.isPublic(socialPubKey = 'NoProfileSelected')
 [![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-ocean-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
 
 Checks if a profile has public visibility, not giving a pubKey will automatically select your first profile. 
 
 ```
-<os>.social.isPublic();
+if(<os>.social.isPublic()){
+  console.log("Hello Universe");
+};
+```
+
+### social.isFavoite(socialPubKey)
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-ocean-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+
+Checks if a profile is in our favorites, returns boolean true or false.
+
+```
+if(<os>.social.isFavoite()){
+  console.log("Hello Universe");
+};
+```
+
+### social.isRequestedFavoite(socialPubKey)
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-ocean-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+
+Checks if a profile is a requested favorite, returns boolean true or false.
+
+```
+if(<os>.social.isRequestedFavoite()){
+  console.log("Hello Universe");
+};
 ```
 
 
