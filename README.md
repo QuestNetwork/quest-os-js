@@ -341,6 +341,10 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 - Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
 
 
+**0.9.4**
+- Democratically block or mute peers
+- Faux requests. Send request in channel, wait for response, deliver response as if it was an http request. 
+
 
 ## Support Us
 This project is a lot of work and unfortunately we need to eat food (ツ)
