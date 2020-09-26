@@ -7,11 +7,11 @@
 [StationedInTheField](https://github.com/StationedInTheField)
 
 ## Description
-Unified API for the QuestNetwork dStack. Use with our window platform: [qDesk](https://github.com/QuestNetwork/qDesk).
+Unified API for the QuestNetwork dStack. Use with our example app: [qDesk](https://github.com/QuestNetwork/qDesk).
 
 Main strategy is to create a Quest Network / IPFS / Ethereum interface that even kids can easily understand.
 
-Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-js) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
+Check out our [QD Messages Module](https://github.com/QuestNetwork/qd-messages-ts) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
 
 ## Security 
 
@@ -281,7 +281,7 @@ let invites = <os>.channel.invite.get('propaganda----1234');
 ```
 
 ### social.togglePrivacy(profilePubKey = 'NoProfileSelected')
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-ocean-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
 
 Toggles your profile's visibility between private and public, not giving a pubKey will automatically select your first profile. 
 In private mode you have to manually share your profile with everyone you want to see your details. In Public mode all the members of the channels you're in can see your profile.
@@ -290,13 +290,37 @@ In private mode you have to manually share your profile with everyone you want t
 <os>.social.togglePrivacy();
 ```
 
-### social.isPublic(profilePubKey = 'NoProfileSelected')
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-ocean-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+### social.isPublic(socialPubKey = 'NoProfileSelected')
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
 
 Checks if a profile has public visibility, not giving a pubKey will automatically select your first profile. 
 
 ```
-<os>.social.isPublic();
+if(<os>.social.isPublic(socialPubKey)){
+  console.log("Hello Universe");
+};
+```
+
+### social.isFavoite(socialPubKey)
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+
+Checks if a profile is in our favorites, returns boolean true or false.
+
+```
+if(<os>.social.isFavoite(socialPubKey)){
+  console.log("Hello Universe");
+};
+```
+
+### social.isRequestedFavoite(socialPubKey)
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+
+Checks if a profile is a requested favorite, returns boolean true or false.
+
+```
+if(<os>.social.isRequestedFavoite(socialPubKey)){
+  console.log("Hello Universe");
+};
 ```
 
 
@@ -309,14 +333,24 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 ## Features
 
 **0.9.2**
-- Basic functionality
+- Encrypted P2P Channels
+- API for high level IPFS functionality
+- Saves Config
+- [Quest Ocean JS](https://github.com/QuestNetwork/quest-ocean-js)
+- [Quest Bee JS](https://github.com/QuestNetwork/quest-bee-js)
+
 
 **0.9.3**
+- [Quest Social JS](https://github.com/QuestNetwork/quest-social-js)
 - Documentation Extended
 - Easier Access
 - Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
 
+## Roadmap
 
+**0.9.4**
+- Democratically block or mute peers
+- Faux requests. Send request in channel, wait for response, deliver response as if it was an http request. 
 
 ## Support Us
 This project is a lot of work and unfortunately we need to eat food (ツ)
