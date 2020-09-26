@@ -333,9 +333,14 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 ## Features
 
 **0.9.2**
-- Basic functionality
+- Encrypted P2P Channels
+- API for high level IPFS functionality
+- Saves Config
+- [Quest Ocean JS](https://github.com/QuestNetwork/quest-ocean-js)
+- [Quest Bee JS](https://github.com/QuestNetwork/quest-bee-js)
 
 **0.9.3**
+- [Quest Social JS](https://github.com/QuestNetwork/quest-social-js)
 - Documentation Extended
 - Easier Access
 - Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
