@@ -11,7 +11,7 @@ Unified API for the QuestNetwork dStack. Use with our example app: [qDesk](https
 
 Main strategy is to create a Quest Network / IPFS / Ethereum interface that even kids can easily understand.
 
-Check out our [Quest Messenger](https://github.com/QuestNetwork/quest-messenger-js) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
+Check out our [QD Messages Module](https://github.com/QuestNetwork/qd-messages-ts) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
 
 ## Security 
 
@@ -346,11 +346,11 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 - Easier Access
 - Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
 
+## Roadmap
 
 **0.9.4**
 - Democratically block or mute peers
 - Faux requests. Send request in channel, wait for response, deliver response as if it was an http request. 
-
 
 ## Support Us
 This project is a lot of work and unfortunately we need to eat food (ツ)
