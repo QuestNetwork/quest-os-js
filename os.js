@@ -41,7 +41,7 @@ export class OperatingSystem {
           this.isElectronFlag = false;
         }
       }
-      else{
+      else if(typeof window == 'undefined'){
         this.isNodeJS = true;
       }
       this.saveLockStatusSub = new Subject();
