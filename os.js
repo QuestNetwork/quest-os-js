@@ -177,7 +177,7 @@ export class OperatingSystem {
     }
 
     setIpfsConfig(ipfsConfig){
-      console.log('OS: Setting Peers',ipfsConfig);
+      console.log('OS: Setting ipfs config',ipfsConfig);
       if(this.isElectron()){
         let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
         let configPath =  this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
