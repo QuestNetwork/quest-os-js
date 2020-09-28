@@ -28,12 +28,9 @@ export class OperatingSystem {
       this.signedInSub = new Subject();
       this.social = new QuestSocial()
       this.signedIn = false;
-      this.ipfsSwarmPeersFromConfig = [];
+      this.ipfsConfig = [];
       this.configCache = {};
 
-      this.ipfsAPIFromConfig = uVar;
-      this.ipfsGatewayFromConfig = uVar;
-      this.ipfsRepoFromConfig = uVar;
 
       if(typeof navigator != 'undefined'){
         var userAgent = navigator.userAgent.toLowerCase();
