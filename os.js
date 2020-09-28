@@ -28,14 +28,24 @@ export class OperatingSystem {
       this.signedInSub = new Subject();
       this.social = new QuestSocial()
       this.signedIn = false;
-      this.ipfsBootstrapPeersFromConfig = [];
+      this.ipfsSwarmPeersFromConfig = [];
       this.configCache = {};
-      var userAgent = navigator.userAgent.toLowerCase();
-      if (userAgent.indexOf(' electron/') > -1) {
-        this.isElectronFlag = true;
+
+      this.ipfsAPIFromConfig = uVar;
+      this.ipfsGatewayFromConfig = uVar;
+      this.ipfsRepoFromConfig = uVar;
+
+      if(typeof navigator != 'undefined'){
+        var userAgent = navigator.userAgent.toLowerCase();
+        if (userAgent.indexOf(' electron/') > -1) {
+          this.isElectronFlag = true;
+        }
+        else{
+          this.isElectronFlag = false;
+        }
       }
       else{
-        this.isElectronFlag = false;
+        this.isNodeJS = true;
       }
       this.saveLockStatusSub = new Subject();
 
@@ -74,14 +84,15 @@ export class OperatingSystem {
       config['dependencies']['saveAs'] = saveAs;
 
       this.configCache = config;
-      if(typeof config['ipfs']['swarm'] != 'undefined'){
-        this.ipfsBootstrapPeersFromConfig = config['ipfs']['swarm'];
+      if(typeof config['ipfs'] != 'undefined'){
+        this.ipfsConfig = config['ipfs'];
       }
 
       try{
-        config['ipfs']['swarm'] = this.getIpfsBootstrapPeers();
+        config['ipfs'] = this.getIpfsConfig();
       }
       catch(e){console.log(e);}
+
 
       if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1)){
         try{
@@ -164,50 +175,80 @@ export class OperatingSystem {
       }
     }
 
-    setIpfsBootstrapPeers(peers){
-      console.log('OS: Setting Peers',peers);
+    isNodeJS(){
+      return this.isNodeJS;
+    }
+
+    setIpfsConfig(ipfsConfig){
+      console.log('OS: Setting Peers',ipfsConfig);
       if(this.isElectron()){
         let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
         let configPath =  this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
-        configPath = configPath + "/swarm.peers";
+        configPath = configPath + "/ipfs.config";
         try{
-          fs.writeFileSync(configPath, JSON.stringify({ swarm: peers}),{encoding:'utf8',flag:'w'})
+          fs.writeFileSync(configPath, JSON.stringify({ipfsConfig),{encoding:'utf8',flag:'w'})
         }catch(e){console.log(e);}
       }
-       this.bee.config.setIpfsBootstrapPeers(peers);
+      else if(this.isNodeJS()){
+        let fs =  require('fs');
+        let configPath = 'config';
+        configPath = configPath + "/ipfs.config";
+        try{
+          fs.writeFileSync(configPath, JSON.stringify(ipfsConfig),{encoding:'utf8',flag:'w'})
+        }catch(e){console.log(e);}
+      }
+       this.bee.config.setIpfsConfig(ipfsConfig);
     }
-    getIpfsBootstrapPeers(){
+    getIpfsConfig(){
       //check swarm peer list
       if(this.isElectron()){
         try{
           let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
           let configPath = this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
-          configPath = configPath + "/swarm.peers";
-          let filePeers = fs.readFileSync(configPath).toString('utf8');
-          console.log('OS:',filePeers);
-          let diskPeers;
-          if(typeof filePeers == 'string'){
-            diskPeers = JSON.parse(filePeers);
+          configPath = configPath + "/ipfs.config";
+          let fileIpfsConfig = fs.readFileSync(configPath).toString('utf8');
+          console.log('OS:',fileIpfsConfig);
+          let diskIpfsConfig;
+          if(typeof fileIpfsConfig == 'string'){
+            diskIpfsConfig = JSON.parse(fileIpfsConfig);
           }
           else{
-            diskPeers = filePeers;
+            diskIpfsConfig = fileIpfsConfig;
           }
-          this.bee.config.setIpfsBootstrapPeers(diskPeers['swarm']);
-          return diskPeers['swarm'];
+          this.bee.config.setIpfsConfig(diskIpfsConfig);
+          return diskIpfsConfig;
+
+        }catch(e){console.log(e);}
+      }
+      else if(this.isNodeJS()){
+        try{
+          let fs =  require('fs');
+          let configPath = 'config'
+          configPath = configPath + "/ipfs.config";
+          let fileIpfsConfig = fs.readFileSync(configPath).toString('utf8');
+          console.log('OS:',fileIpfsConfig);
+          let diskIpfsConfig;
+          if(typeof fileIpfsConfig == 'string'){
+            diskIpfsConfig = JSON.parse(fileIpfsConfig);
+          }
+          else{
+            diskIpfsConfig = fileIpfsConfig;
+          }
+          this.bee.config.setIpfsConfig(diskIpfsConfig]);
+          return diskIpfsConfig;
 
         }catch(e){console.log(e);}
       }
 
-      let peers = this.ipfsBootstrapPeersFromConfig;
-      console.log(peers);
+      let ipfsConfig = this.ipfsConfig;
       //try to load from file
-      let peersAfterStart = this.bee.config.getIpfsBootstrapPeers();
-      console.log(peersAfterStart);
-      if(typeof peersAfterStart != 'undefined' && peersAfterStart.length > 0){
-        peers = peersAfterStart;
+      let ipfsConfigAfterStart = this.bee.config.getIpfsConfig();
+      console.log(ipfsConfigAfterStart);
+      if(typeof ipfsConfigAfterStart != 'undefined' && ipfsConfigAfterStart.length > 0){
+        ipfsConfig = ipfsConfigAfterStart;
       }
       //check additional peers added from loaded config data
-      return peers;
+      return ipfsConfig;
     }
 
     commit(){
