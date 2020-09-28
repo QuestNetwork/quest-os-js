@@ -183,7 +183,7 @@ export class OperatingSystem {
         let configPath =  this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
         configPath = configPath + "/ipfs.config";
         try{
-          fs.writeFileSync(configPath, JSON.stringify({ipfsConfig),{encoding:'utf8',flag:'w'})
+          fs.writeFileSync(configPath, JSON.stringify(ipfsConfig),{encoding:'utf8',flag:'w'})
         }catch(e){console.log(e);}
       }
       else if(this.isNodeJS()){
@@ -231,7 +231,7 @@ export class OperatingSystem {
           else{
             diskIpfsConfig = fileIpfsConfig;
           }
-          this.bee.config.setIpfsConfig(diskIpfsConfig]);
+          this.bee.config.setIpfsConfig(diskIpfsConfig);
           return diskIpfsConfig;
 
         }catch(e){console.log(e);}
