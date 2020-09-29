@@ -42,7 +42,11 @@ JavaScript/NodeJS
 import { qOS } from '@questnetwork/quest-os-js'
 // configure with a bootstrap swarm peer, for testing you can use:
 let config = {
-  ipfs: { swarm: [<swarm star peer ip>,<swarm star peer ip>] },
+  ipfs: {
+        Swarm: [<swarm star peer ip>,<swarm star peer ip>],
+        API: '',
+        Gateway: ''
+  },
   version: <version>
   dev: <true/false>
 };
