@@ -30,7 +30,7 @@ export class OperatingSystem {
       this.ipfsConfig = [];
       this.configCache = {};
       this.isNodeJSFlag = false;
-      this.utilties = new UtilitiesInstance();
+      this.utilities = new UtilitiesInstance();
       this.isElectronFlag = false;
       this.isNodeJSFlag = false;
 
