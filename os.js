@@ -30,7 +30,7 @@ export class OperatingSystem {
       this.signedIn = false;
       this.ipfsConfig = [];
       this.configCache = {};
-
+      this.isNodeJSFlag = false;
 
       if(typeof navigator != 'undefined'){
         var userAgent = navigator.userAgent.toLowerCase();
@@ -42,7 +42,7 @@ export class OperatingSystem {
         }
       }
       else if(typeof window == 'undefined'){
-        this.isNodeJS = true;
+        this.isNodeJSFlag = true;
       }
       this.saveLockStatusSub = new Subject();
 
@@ -173,7 +173,7 @@ export class OperatingSystem {
     }
 
     isNodeJS(){
-      return this.isNodeJS;
+      return this.isNodeJSFlag;
     }
 
     setIpfsConfig(ipfsConfig){
