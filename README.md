@@ -68,7 +68,9 @@ export class QuestOSService {
   constructor() {
     this.config = {
       ipfs: {
-        swarm: swarmJson['ipfs']['swarm']
+        Swarm: swarmJson['ipfs']['Swarm'],
+        API: '',
+        Gateway: ''
       },
       version: version,
       dev: swarmJson['dev']
@@ -323,6 +325,15 @@ if(<os>.social.isRequestedFavoite(socialPubKey)){
 };
 ```
 
+
+### utilities.engine.detect()
+Returns a string 'node', 'electron' or 'browser'
+
+```
+if(<os>.utilities.engine.detect() == 'node'){
+  console.log("Hello Universe");
+};
+```
 
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
 
