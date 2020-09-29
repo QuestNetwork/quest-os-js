@@ -369,7 +369,7 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 - Faux requests. Send request in channel, wait for response, deliver response as if it was an http request. 
 
 ## Support Us
-This project is a lot of work, help us to build a non-profit for it (ツ)
+Please consider supporting us, so that we can build a non-profit for this project (ツ)
 
 | Ethereum| Bitcoin |
 |---|---|
