@@ -165,7 +165,9 @@ export class OperatingSystem {
         this.configCache['dependencies']['electronService'].remote.getCurrentWindow().close();
       }
       else{
-        window.location.reload();
+        let locArr = window.location.href.split('/');
+        locArr.pop();
+        window.location.href = locArr.join('/');
       }
     }
 
@@ -301,15 +303,7 @@ export class OperatingSystem {
       catch(e){}
 
       this.signedIn = false;
-      if(this.isElectron()){
-      let a = this.bee.config.electron.remote.getCurrentWindow();
-      a.close();
-      }
-      else{
-        let locArr = window.location.href.split('/');
-        locArr.pop();
-        window.location.href = locArr.join('/');
-      }
+      this.reboot();
 
     }
     onSignIn(){
