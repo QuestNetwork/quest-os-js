@@ -11,7 +11,8 @@ import { saveAs } from  'file-saver';
 
 import { Utilities }  from './utilities/utilities.js';
 import { ChannelManager }  from './channel/channelManager.js';
-import { NativeCrypto }  from '../quest-crypto-js';
+import { NativeCrypto }  from '@questnetwork/quest-crypto-js';
+import { UtilitiesInstance} from '@questnetwork/quest-utilities-js';
 
 
 export class OperatingSystem {
@@ -31,19 +32,17 @@ export class OperatingSystem {
       this.ipfsConfig = [];
       this.configCache = {};
       this.isNodeJSFlag = false;
+      this.utilties = new UtilitiesInstance();
+      this.isElectronFlag = false;
+      this.isNodeJSFlag = false;
 
-      if(typeof navigator != 'undefined'){
-        var userAgent = navigator.userAgent.toLowerCase();
-        if (userAgent.indexOf(' electron/') > -1) {
-          this.isElectronFlag = true;
-        }
-        else{
-          this.isElectronFlag = false;
-        }
+      if(this.utilities.engine.detect() == 'electron'){
+        this.isElectronFlag = true;
       }
-      else if(typeof window == 'undefined'){
+      else if(this.utilities.engine.detect() == 'node'){
         this.isNodeJSFlag = true;
       }
+
       this.saveLockStatusSub = new Subject();
 
     }
