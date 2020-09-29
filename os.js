@@ -9,7 +9,6 @@ import { QuestSocial }  from '@questnetwork/quest-social-js';
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from  'file-saver';
 
-import { Utilities }  from './utilities/utilities.js';
 import { ChannelManager }  from './channel/channelManager.js';
 import { NativeCrypto }  from '@questnetwork/quest-crypto-js';
 import { UtilitiesInstance} from '@questnetwork/quest-utilities-js';
@@ -21,7 +20,6 @@ export class OperatingSystem {
       this.ocean = Ocean;
       this.channel = new ChannelManager();
       this.ready = false;
-      this.utilities = new Utilities();
       this.isReadySub = new Subject();
       this.bee = new BeeSwarmInstance();
       this.crypto = new NativeCrypto();
