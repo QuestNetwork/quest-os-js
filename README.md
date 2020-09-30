@@ -340,6 +340,23 @@ if(<os>.social.isRequestedFavoite(socialPubKey)){
 };
 ```
 
+
+### social.search(searchPhrase)
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+
+Will automatically search for all social profiles in the peers network where alias, full name or about text match the phrase.
+This version of the methos is case sensitive by default, future versions will allow a config object.
+
+Returns an array with the search results and adds the following fields:
+```
+isFavorite: boolean
+isRequestedFavorite: boolean
+```
+
+```
+let results = <os>.social.search('Bob');
+```
+
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
 
 We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package. It allows you to bootstrap your Quest Network apps with the same peers and settings.
