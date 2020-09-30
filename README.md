@@ -342,7 +342,7 @@ if(<os>.social.isRequestedFavoite(socialPubKey)){
 
 
 ### social.search(searchPhrase)
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
+[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)  
 
 Will automatically search for all social profiles in the peers network where alias, full name or about text match the phrase.
 This version of the methos is case sensitive by default, future versions will allow a config object.
