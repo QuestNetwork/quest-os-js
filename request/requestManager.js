@@ -11,31 +11,35 @@ export class RequestManager {
     this.identity = config['dependencies']['identity'];
   }
 
-  async post(postObj){
-    //post to all channels we have with this person
-    postObj['type'] = "REQUEST";
-    let channelPubKeyList = await this.identity.getChannelPubKeyListForSocialPubKey(signedObj['pubKey']);
+   post(postObj){
+    return new Promise( () => {
+      //post to all channels we have with this person
+      postObj['type'] = "REQUEST";
+      let channelPubKeyList = await this.identity.getChannelPubKeyListForSocialPubKey(signedObj['pubKey']);
 
-    // for(let pK of pubKeys){
-    // TO DO qOS Faux Requestst
+      for(let object of channelPubKeyList){
+      //listen for response on all channels we have with this person
+      this.channel.listen(object['channel']).subscribe( () => {
+        //if this is the response to out request , do action.....
 
-    //listen for response on all channels we have with this person
 
 
-    // return res;
+        //unsubscribe....
+      });
 
-    //wait 30 sec
-    //if mo response time out
+      //publish our request object
+      // this.channel.publish();
 
-    
-    //time out
-    //unsubscribe
-    return false;
+      //close connection after timeeout
+      timeout_ms = 30000;
+      setTimeout( () => {
+        resolve(false);
+      },timeout_ms)
+    });
   }
 
   listen(path){
     //forward pubsub subject with valid requests for path
-    return this.dolphin.reqListen(path);
   }
 
   res(respondObj){
