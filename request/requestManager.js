@@ -1,4 +1,4 @@
-// import { Subject } from "rxjs";
+import { Subject } from "rxjs";
 // import { InviteManager }  from './inviteManager.js';
 // import { ChallengeManager }  from './challengeManager.js';
 const { v4: uuidv4 } = require('uuid');
@@ -53,17 +53,18 @@ export class RequestManager {
     this.channel.listen(channel).subscribe((request) => {
       if(request['type'] == "REQUEST" && request['path'] == path){
         //unsubscribe and resolve
-        listenSub.next(request)
+        this.listenSub[request['path']].next(request)
       }
     });
   }
 
    listen(path){
     let channelNameList =  this.dolphin.getChannelNameList();
+    this.listenSub[path] = new Subject();
     for(let channel of channelNameList){
-      listenSub[path] = this.listenWorker(channel);
+      this.listenWorker(channel);
     }
-    return listenSub[path];
+    return this.listenSub[path];
   }
 
    res(respondObj){
