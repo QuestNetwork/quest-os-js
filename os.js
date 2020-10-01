@@ -10,6 +10,9 @@ import { ElectronService } from 'ngx-electron';
 import { saveAs } from  'file-saver';
 
 import { ChannelManager }  from './channel/channelManager.js';
+import { RequestManager }  from './request/requestManager.js';
+import { IdentityManager }  from './identity/identityManager.js';
+
 import { NativeCrypto }  from '@questnetwork/quest-crypto-js';
 import { UtilitiesInstance} from '@questnetwork/quest-utilities-js';
 
@@ -19,6 +22,9 @@ export class OperatingSystem {
       let uVar;
       this.ocean = Ocean;
       this.channel = new ChannelManager();
+      this.request = new RequestManager();
+      this.identity = new IdentityManager();
+
       this.ready = false;
       this.isReadySub = new Subject();
       this.bee = new BeeSwarmInstance();
@@ -129,6 +135,10 @@ export class OperatingSystem {
 
       if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1 && config['boot']['processes'].indexOf('bee') > -1)){
         this.channel.load(config);
+        config['dependencies']['channel'] = this.channel;
+
+        this.identity.load(config);
+        config['dependencies']['identity'] = this.identity;
       }
 
       if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('qd-ui') > -1)){
@@ -140,6 +150,11 @@ export class OperatingSystem {
       }
 
 
+      if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1 && config['boot']['processes'].indexOf('bee') > -1)){
+        this.request.load(config);
+        config['dependencies']['request'] = this.request;
+      }
+
       if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('social') > -1)){
           try{
             await this.social.start(config);
@@ -147,6 +162,8 @@ export class OperatingSystem {
             throw(e);
           }
       }
+
+
 
 
       this.ready = true;
