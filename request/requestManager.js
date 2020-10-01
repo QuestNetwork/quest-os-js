@@ -22,13 +22,14 @@ export class RequestManager {
       this.channel.listen(object['channel']).subscribe( () => {
         //if this is the response to out request , do action.....
 
-
+        //TO DO
 
         //unsubscribe....
       });
 
       //publish our request object
       // this.channel.publish();
+        //TO DO
 
       //close connection after timeeout
       timeout_ms = 30000;
@@ -40,10 +41,12 @@ export class RequestManager {
 
   listen(path){
     //forward pubsub subject with valid requests for path
+      //TO DO
   }
 
   res(respondObj){
     //post response object to channel
+      //TO DO 
     return true;
   }
 
