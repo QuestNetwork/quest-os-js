@@ -11,4 +11,23 @@ export class IdentityManager {
   }
 
 
+  getChannelPubKeyListForSocialPubKey(socialPubKey){
+    //search social links
+    results = [];
+
+    let links = this.bee.comb.get('/social/links');
+    console.log('Social: Links Found',links);
+    let linkChPubKeys = Object.keys(links)
+    let channelNameList = this.dolphin.getChannelNameList();
+    for(let chPubKey of linkChPubKeys){
+      for(let channel of channelNameList){
+        if(links[chPubKey] == socialPubKey){
+          results.push({channel: channel, channelPubKey: chPubKey});
+        }
+      }
+    }
+    return results;
+  }
+
+
 }

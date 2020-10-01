@@ -11,11 +11,13 @@ export class RequestManager {
     this.identity = config['dependencies']['identity'];
   }
 
-  post(postObj){
+  async post(postObj){
     //post to all channels we have with this person
-    // let pubKeys = await this.identity.getChannelPubKeyForSocialPubKey(signedObj['pubKey']);
+    postObj['type'] = "REQUEST";
+    let channelPubKeyList = await this.identity.getChannelPubKeyListForSocialPubKey(signedObj['pubKey']);
+
     // for(let pK of pubKeys){
-    // TO DO qOS Faux Requests
+    // TO DO qOS Faux Requestst
 
     //listen for response on all channels we have with this person
 
@@ -25,6 +27,7 @@ export class RequestManager {
     //wait 30 sec
     //if mo response time out
 
+    
     //time out
     //unsubscribe
     return false;
