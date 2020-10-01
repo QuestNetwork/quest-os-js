@@ -12,32 +12,33 @@ export class RequestManager {
   }
 
    post(postObj){
-    return new Promise( () => {
+    return new Promise( async () => {
       //post to all channels we have with this person
       postObj['type'] = "REQUEST";
       let channelPubKeyList = await this.identity.getChannelPubKeyListForSocialPubKey(signedObj['pubKey']);
 
       for(let object of channelPubKeyList){
-      //listen for response on all channels we have with this person
-      let postSub = this.channel.listen(object['channel']);
-      postSub.subscribe( () => {
-        //if this is the response to out request , do action.....
+        //listen for response on all channels we have with this person
+        let postSub = this.channel.listen(object['channel']);
+        postSub.subscribe( () => {
+          //if this is the response to out request , do action.....
 
-        //TO DO
+          //TO DO
 
-        //unsubscribe....
-      });
+          //unsubscribe....
+        });
 
-      //publish our request object
-      // this.channel.publish();
-        //TO DO
+        //publish our request object
+        // this.channel.publish();
+          //TO DO
 
-      //close connection after timeeout
-      timeout_ms = 30000;
-      setTimeout( () => {
-        postSub.unsubscribe();
-        resolve(false);
-      },timeout_ms)
+          //close connection after timeeout
+        timeout_ms = 30000;
+        setTimeout( () => {
+          postSub.unsubscribe();
+          resolve(false);
+        },timeout_ms);
+      }
     });
   }
 
