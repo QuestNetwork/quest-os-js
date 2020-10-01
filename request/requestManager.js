@@ -19,7 +19,7 @@ export class RequestManager {
     return new Promise( async () => {
       //post to all channels we have with this person
       postObj['type'] = "REQUEST";
-      let channelPubKeyList = await this.identity.getChannelPubKeyListForSocialPubKey(signedObj['pubKey']);
+      let channelPubKeyList = await this.identity.getChannelPubKeyListForSocialPubKey(signedObj['toSocialPubKey']);
 
       for(let object of channelPubKeyList){
         //listen for response on all channels we have with this person
