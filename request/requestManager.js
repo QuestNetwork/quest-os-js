@@ -19,7 +19,8 @@ export class RequestManager {
 
       for(let object of channelPubKeyList){
       //listen for response on all channels we have with this person
-      this.channel.listen(object['channel']).subscribe( () => {
+      let postSub = this.channel.listen(object['channel']);
+      postSub.subscribe( () => {
         //if this is the response to out request , do action.....
 
         //TO DO
@@ -34,6 +35,7 @@ export class RequestManager {
       //close connection after timeeout
       timeout_ms = 30000;
       setTimeout( () => {
+        postSub.unsubscribe();
         resolve(false);
       },timeout_ms)
     });
@@ -46,7 +48,7 @@ export class RequestManager {
 
   res(respondObj){
     //post response object to channel
-      //TO DO 
+      //TO DO
     return true;
   }
 
