@@ -58,17 +58,17 @@ export class RequestManager {
     });
   }
 
-  listen(path){
-    let channelNameList = await this.dolphin.getChannelNameList();
+   listen(path){
+    let channelNameList =  this.dolphin.getChannelNameList();
     for(let channel of channelNameList){
       listenSub[path] = this.listenWorker(channel);
     }
     return listenSub[path];
   }
 
-  async res(respondObj){
+   res(respondObj){
     respondObj['type'] = "RESPONSE";
-    let channelNameList = await this.dolphin.getChannelNameList();
+    let channelNameList = this.dolphin.getChannelNameList();
     for(let channel of channelNameList){
       respondObj['channel'] = channel;
       this.channel.publish(respondObj);
