@@ -11,7 +11,7 @@ export class RequestManager {
     this.identity = config['dependencies']['identity'];
   }
 
-   post(postObj){
+  post(postObj){
     return new Promise( async () => {
       //post to all channels we have with this person
       postObj['type'] = "REQUEST";
@@ -20,25 +20,25 @@ export class RequestManager {
       for(let object of channelPubKeyList){
         //listen for response on all channels we have with this person
         let postSub = this.channel.listen(object['channel']);
-        postSub.subscribe( () => {
+        postSub.subscribe( (responseObject) => {
           //if this is the response to out request , do action.....
-
-          //TO DO
-
-          //unsubscribe....
+          if(responseObject['tyoe'] == "RESPONSE" && responseObject['path'] == postObj['path']){
+            //unsubscribe and resolve
+            postSub.unsubscribe();
+            resolve(responseObject);
+          }
         });
 
         //publish our request object
-        // this.channel.publish();
-          //TO DO
-
-          //close connection after timeeout
-        timeout_ms = 30000;
-        setTimeout( () => {
-          postSub.unsubscribe();
-          resolve(false);
-        },timeout_ms);
+        postObj['type'] = "REQUEST";
+        this.channel.publish(postObj);
       }
+      //close connection after timeeout
+      timeout_ms = 30000;
+      setTimeout( () => {
+        postSub.unsubscribe();
+        resolve(false);
+      },timeout_ms);
     });
   }
 
