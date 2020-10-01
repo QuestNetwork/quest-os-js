@@ -55,7 +55,7 @@ export class RequestManager {
         //unsubscribe and resolve
         listenSub.next(request)
       }
-    }
+    });
   }
 
   listen(path){
