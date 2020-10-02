@@ -42,7 +42,7 @@ See our automated documentation for more information: https://questnetwork.githu
 Boots the operating system. The GitHub branches master/0.9.2/0.9.3+ boot with:
 
 JavaScript/NodeJS
-```
+```javascript
 import { qOS } from '@questnetwork/quest-os-js'
 // configure with a bootstrap swarm peer, for testing you can use:
 let config = {
