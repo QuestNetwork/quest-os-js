@@ -288,50 +288,6 @@ Gets all invites for a channel
 let invites = <os>.channel.invite.get('propaganda----1234');
 ```
 
-### social
-
-#### social.togglePrivacy(profilePubKey = 'NoProfileSelected')
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
-
-Toggles your profile's visibility between private and public, not giving a pubKey will automatically select your first profile. 
-In private mode you have to manually share your profile with everyone you want to see your details. In Public mode all the members of the channels you're in can see your profile.
-
-```javascript
-<os>.social.togglePrivacy();
-```
-
-#### social.isPublic(socialPubKey = 'NoProfileSelected')
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
-
-Checks if a profile has public visibility, not giving a pubKey will automatically select your first profile. 
-
-```javascript
-if(<os>.social.isPublic(socialPubKey)){
-  console.log("Hello Universe");
-};
-```
-
-#### social.isFavoite(socialPubKey)
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
-
-Checks if a profile is in our favorites, returns boolean true or false.
-
-```javascript
-if(<os>.social.isFavoite(socialPubKey)){
-  console.log("Hello Universe");
-};
-```
-
-#### social.isRequestedFavoite(socialPubKey)
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
-
-Checks if a profile is a requested favorite, returns boolean true or false.
-
-```javascript
-if(<os>.social.isRequestedFavoite(socialPubKey)){
-  console.log("Hello Universe");
-};
-```
 
 
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
