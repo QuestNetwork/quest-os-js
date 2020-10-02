@@ -30,8 +30,9 @@ Check out our [QD Messages Module](https://github.com/QuestNetwork/qd-messages-t
 
 ## API
 
+### System
 
-### async boot(config)
+#### async boot(config)
 
 Boots the operating system. The GitHub branches master/0.9.2/0.9.3+ boot with:
 
@@ -87,7 +88,7 @@ export class QuestOSService {
 }
 ```
 
-### isReady()
+#### isReady()
 
 Returns true once boot is complete, otherwise returns false.
 
@@ -98,7 +99,7 @@ if(<os>.isReady()){
 ```
 
 
-### onReady()
+#### onReady()
 
 Returns a Subject that pushes next when boot is complete
 
@@ -109,7 +110,7 @@ if(<os>.onReady().subsribe( () => {
 ```
 
 
-### reboot()
+#### reboot()
 
 Reboots the entire system
 
@@ -117,7 +118,7 @@ Reboots the entire system
 <os>.reboot();
 ```
 
-### enableSaveLock() 
+#### enableSaveLock() 
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Locks the system from saving any changes
@@ -125,7 +126,7 @@ Locks the system from saving any changes
 <os>.enableSaveLock();
 ```
 
-### disableSaveLock() 
+#### disableSaveLock() 
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Unlocks the system from saving changes and saves changes normally
@@ -134,7 +135,7 @@ Unlocks the system from saving changes and saves changes normally
 ```
 
 
-### setStorageLocation(location)
+#### setStorageLocation(location)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Sets the storage location for the app. Normally Quest OS does this automatically and you do not need to call this function.
@@ -144,7 +145,7 @@ Possible locations are: `"Download"`,`"LocalStorage"` or `"ConfigFile"`
 <os>.setStorageLocation("LocalStorage");
 ```
 
-### getStorageLocation(location)
+#### getStorageLocation(location)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Returns a string with the current storage location
@@ -153,14 +154,14 @@ Returns a string with the current storage location
 <os>.getStorageLocation();
 ```
 
-### signIn(config = {})
+#### signIn(config = {})
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Activates Accounts. Empty config creates a new account
 ```
 <os>.signIn({});
 ```
-### signOut()
+#### signOut()
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Deactivates Accounts And Restarts The Interface On The Web, Closes The Current Window In Electron
@@ -168,7 +169,7 @@ Deactivates Accounts And Restarts The Interface On The Web, Closes The Current W
 <os>.signOut();
 ```
 
-### onSignIn()
+#### onSignIn()
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Returns a subscribable Subject that fires when the account is signed in.
@@ -178,7 +179,7 @@ Returns a subscribable Subject that fires when the account is signed in.
 });
 ```
 
-### isSignedIn()
+#### isSignedIn()
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Returns a boolean true or false
@@ -188,7 +189,9 @@ if(<os>.isSignedIn()){
 };
 ```
 
-### async channel.create(dirtyChannelName, parentFolderId = "")
+### channel
+
+#### async channel.create(dirtyChannelName, parentFolderId = "")
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns the clean channel name
@@ -196,7 +199,7 @@ Returns the clean channel name
 let claenChannelName = await <os>.channel.create('propaganda');
 ```
 
-### channel.remove(cleanChannelName)
+#### channel.remove(cleanChannelName)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Removes a channel
@@ -204,7 +207,7 @@ Removes a channel
 <os>.channel.remove('propaganda----1234');
 ```
 
-### channel.listen(cleanChannelName)
+#### channel.listen(cleanChannelName)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns a Subject that forwards non-system channel messages.
@@ -214,7 +217,7 @@ Returns a Subject that forwards non-system channel messages.
 }
 ```
 
-### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE')
+#### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE')
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns a Subject that forwards non-system channel messages.
@@ -222,7 +225,7 @@ Returns a Subject that forwards non-system channel messages.
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
-### channel.challenge.enable(cleanChannelName)  
+#### channel.challenge.enable(cleanChannelName)  
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Opens the channel to everyone who can solve the Captcha provided by [Quest Image Captcha JS](https://github.com/QuestNetwork/quest-image-captcha-js)
@@ -230,7 +233,7 @@ Opens the channel to everyone who can solve the Captcha provided by [Quest Image
 <os>.channel.challenge.enable('propaganda----1234');
 ```
 
-### channel.challenge.disable(cleanChannelName)
+#### channel.challenge.disable(cleanChannelName)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Closes the channel to invite only participation
@@ -238,7 +241,7 @@ Closes the channel to invite only participation
 <os>.channel.challenge.disable('propaganda----1234');
 ```
 
-### channel.challenge.isEnabled(cleanChannelName)  
+#### channel.challenge.isEnabled(cleanChannelName)  
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 ```
@@ -247,7 +250,7 @@ if(<os>.isEnabled()){
 };
 ```
 
-### channel.invite.create(cleanChannelName,newInviteCodeMax, exportFolders = false)  
+#### channel.invite.create(cleanChannelName,newInviteCodeMax, exportFolders = false)  
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure.
@@ -255,7 +258,7 @@ Creates a new channel invite, specify max uses of this invite code and whether o
 <os>.channel.invite.create('propaganda----1234',5,true);
 ```
 
-### channel.invite.remove(cleanChannelName,link)
+#### channel.invite.remove(cleanChannelName,link)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Removes a channel invite
@@ -263,7 +266,7 @@ Removes a channel invite
 <os>.channel.invite.remove('propaganda----1234',"5448495320495320414e2045585452454d454c59204c4f4e4720414e4420494e56414c494420494e5649544520434f4445");
 ```
 
-### channel.invite.get(channel)
+#### channel.invite.get(channel)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Gets all invites for a channel
@@ -272,7 +275,7 @@ let invites = <os>.channel.invite.get('propaganda----1234');
 ```
 
 
-### channel.invite.get(channel)
+#### channel.invite.get(channel)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Gets all invites for a channel
@@ -280,7 +283,9 @@ Gets all invites for a channel
 let invites = <os>.channel.invite.get('propaganda----1234');
 ```
 
-### social.togglePrivacy(profilePubKey = 'NoProfileSelected')
+### social
+
+#### social.togglePrivacy(profilePubKey = 'NoProfileSelected')
 [![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
 
 Toggles your profile's visibility between private and public, not giving a pubKey will automatically select your first profile. 
@@ -290,7 +295,7 @@ In private mode you have to manually share your profile with everyone you want t
 <os>.social.togglePrivacy();
 ```
 
-### social.isPublic(socialPubKey = 'NoProfileSelected')
+#### social.isPublic(socialPubKey = 'NoProfileSelected')
 [![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
 
 Checks if a profile has public visibility, not giving a pubKey will automatically select your first profile. 
@@ -301,7 +306,7 @@ if(<os>.social.isPublic(socialPubKey)){
 };
 ```
 
-### social.isFavoite(socialPubKey)
+#### social.isFavoite(socialPubKey)
 [![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
 
 Checks if a profile is in our favorites, returns boolean true or false.
@@ -312,7 +317,7 @@ if(<os>.social.isFavoite(socialPubKey)){
 };
 ```
 
-### social.isRequestedFavoite(socialPubKey)
+#### social.isRequestedFavoite(socialPubKey)
 [![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
 
 Checks if a profile is a requested favorite, returns boolean true or false.
