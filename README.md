@@ -28,6 +28,11 @@ Check out our [QD Messages Module](https://github.com/QuestNetwork/qd-messages-t
 
 ``git clone https://github.com/QuestNetwork/quest-os-js && cd quest-os-js && git checkout 0.9.3 && cd ..``
 
+## Manual & Documentation
+
+See our automated documentation for more information: https://questnetwork.github.io/docs
+
+
 ## API
 
 ### system
