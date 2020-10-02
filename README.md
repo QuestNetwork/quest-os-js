@@ -30,7 +30,7 @@ Check out our [QD Messages Module](https://github.com/QuestNetwork/qd-messages-t
 
 ## API
 
-### System
+### system
 
 #### async boot(config)
 
