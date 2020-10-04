@@ -19,23 +19,31 @@ export class RequestManager {
     return new Promise( async () => {
       //post to all channels we have with this person
       postObj['type'] = "REQUEST";
-      let channelPubKeyList = await this.identity.getChannelPubKeyListForSocialPubKey(signedObj['toSocialPubKey']);
 
+      let channelPubKeyList = [];
+      if(typeof signedObj['toSocialPubKey'] != 'undefined'){
+         channelPubKeyList = await this.identity.getChannelPubKeyListForSocialPubKey(signedObj['toSocialPubKey']);
+      }
+
+      postSub = {}
       for(let object of channelPubKeyList){
         //listen for response on all channels we have with this person
-        let postSub = this.channel.listen(object['channel']);
+        let reqId = uuidv4();
+        this.postSub[object['channel']][reqId] = this.channel.listen(object['channel']);
         postSub.subscribe( (responseObject) => {
           //if this is the response to out request , do action.....
-          if(responseObject['type'] == "RESPONSE" && responseObject['path'] == postObj['path']){
+          if(responseObject['type'] == "RESPONSE" && responseObject['reqId'] == reqId && responseObject['channelPubKey'] == object['channelPubKey'] && responseObject['path'] == postObj['path']){
             //unsubscribe and resolve
-            postSub.unsubscribe();
+            postSub[object['channel']][reqId].unsubscribe();
             resolve(responseObject);
           }
         });
 
         //publish our request object
         postObj['type'] = "REQUEST";
+        postObj['reqId'] = reqId;
         postObj['channel'] = object['channel'];
+        postObj['channelPubKey'] = object['channelPubKey'];
 
         this.channel.publish(postObj);
       }
