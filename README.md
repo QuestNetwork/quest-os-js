@@ -312,6 +312,9 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 - Easier Access
 - Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
 
+**0.9.4**
+Change Peer Configuration in browser, Electron and on NodeJS
+
 ## Roadmap
 
 **0.9.4**
