@@ -210,7 +210,11 @@ export class OperatingSystem {
           fs.writeFileSync(configPath, JSON.stringify(ipfsConfig),{encoding:'utf8',flag:'w'})
         }catch(e){console.log(e);}
       }
-       this.bee.config.setIpfsConfig(ipfsConfig);
+      else if(this.utilities.engine.detect() == "browser"){
+        window.localStorage.setItem('ipfs',JSON.stringify(ipfsConfig));
+      }
+
+      this.bee.config.setIpfsConfig(ipfsConfig);
     }
     getIpfsConfig(){
       //check swarm peer list
@@ -252,7 +256,20 @@ export class OperatingSystem {
 
         }catch(e){console.log(e);}
       }
-
+      else if(this.utilities.engine.detect() == "browser"){
+            try{
+                if(JSON.parse(window.localStorage.getItem('ipfs')) == null ||  window.localStorage.getItem('ipfs') == null ||  window.localStorage.getItem('ipfs') == '[object Object]'){
+                  let ipfs = { Swarm: [], API: "", Gateway: ""};
+                  this.bee.config.setIpfsConfig(ipfs);
+                  return ipfs;
+                }
+                else{
+                  this.bee.config.setIpfsConfig(JSON.parse(window.localStorage.getItem('ipfs')));
+                  return JSON.parse(window.localStorage.getItem('ipfs'));
+                }
+          }catch(e){console.log(e)}
+      }
+console.log(this.utilities.engine.detect());
       let ipfsConfig = this.ipfsConfig;
       //try to load from file
       let ipfsConfigAfterStart = this.bee.config.getIpfsConfig();
