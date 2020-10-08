@@ -107,7 +107,6 @@ export class OperatingSystem {
             this.bee.config.commit();
           });
 
-          config['dependencies']['coral'] = this.ocean.coral;
         }
         catch(e){
           console.log(e);
@@ -121,6 +120,8 @@ export class OperatingSystem {
           try{
             await this.bee.start(config);
             config['dependencies']['bee'] = this.bee;
+            this.ocean.coral.start(config);
+            config['dependencies']['coral'] = this.ocean.coral;
             this.bee.config.saveLockStatusSub.subscribe( (value) => {
               if(value){
                 this.enableSaveLock();
