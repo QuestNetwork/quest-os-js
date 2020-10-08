@@ -115,6 +115,11 @@ export class ChannelManager {
  removeFromNameList(channelName){
   this.dolphin.setChannelNameList(this.dolphin.getChannelNameList().filter(e => e != channelName));
  }
+
+ isPeerOnline(channelPubKey){
+   return this.dolphin.isOnline(channelPubKey);
+ }
+
  remove(channel){
    //remove from channelNameList
 
