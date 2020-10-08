@@ -96,8 +96,9 @@ export class OperatingSystem {
 
       if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1)){
         try{
-          await this.ocean.create(config);
+          let configBounce = await this.ocean.create(config);
           config['dependencies']['dolphin'] = this.ocean.dolphin;
+          this.setIpfsConfig(configBounce['ipfs']);
 
           this.ocean.dolphin.commitNowSub.subscribe( (value) => {
             this.bee.config.commitNow();
