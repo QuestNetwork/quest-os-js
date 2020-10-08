@@ -31,7 +31,7 @@ export class OperatingSystem {
       this.crypto = new NativeCrypto();
       this.ui = new UiService();
       this.signedInSub = new Subject();
-      this.social = new QuestSocial()
+      this.social = new QuestSocial();
       this.signedIn = false;
       this.ipfsConfig = [];
       this.configCache = {};
@@ -98,13 +98,15 @@ export class OperatingSystem {
         try{
           await this.ocean.create(config);
           config['dependencies']['dolphin'] = this.ocean.dolphin;
+
           this.ocean.dolphin.commitNowSub.subscribe( (value) => {
             this.bee.config.commitNow();
           });
-
           this.ocean.dolphin.commitSub.subscribe( (value) => {
             this.bee.config.commit();
           });
+
+          config['dependencies']['coral'] = this.ocean.coral;
         }
         catch(e){
           console.log(e);
