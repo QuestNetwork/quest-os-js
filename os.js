@@ -262,11 +262,10 @@ export class OperatingSystem {
       }
       else if(this.utilities.engine.detect() == "browser"){
             try{
-                if(JSON.parse(window.localStorage.getItem('ipfs')) == null ||  window.localStorage.getItem('ipfs') == null ||  window.localStorage.getItem('ipfs') == '[object Object]'){
+                if(window.localStorage.getItem('ipfs') == 'undefined' || JSON.parse(window.localStorage.getItem('ipfs')) == null ||  window.localStorage.getItem('ipfs') == null ||  window.localStorage.getItem('ipfs') == '[object Object]'){
                   let ipfs = { Swarm: [], API: "", Gateway: ""};
                   this.bee.config.setIpfsConfig(ipfs);
-                  return ipfs;
-                }
+                  }
                 else{
                   this.bee.config.setIpfsConfig(JSON.parse(window.localStorage.getItem('ipfs')));
                   return JSON.parse(window.localStorage.getItem('ipfs'));
