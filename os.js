@@ -21,6 +21,7 @@ export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
+      this.dev = false;
       this.channel = new ChannelManager();
       this.request = new RequestManager();
       this.identity = new IdentityManager();
@@ -71,7 +72,7 @@ export class OperatingSystem {
         if(typeof config == 'object' && typeof config['version'] != 'undefined'){
           return true;
         }
-      }catch(e){console.log(e); return false;}
+      }catch(e){this.dev && console.log(e); return false;}
       return false;
     }
 
@@ -79,6 +80,9 @@ export class OperatingSystem {
     async boot(config){
       if(typeof config['dependencies'] == 'undefined'){
         config['dependencies'] = {};
+      }
+      if(typeof config['dev'] != 'undefined'){
+        this.dev = config['dev'];
       }
       config['dependencies']['electronService'] = new ElectronService();
       config['dependencies']['saveAs'] = saveAs;
@@ -91,7 +95,7 @@ export class OperatingSystem {
       try{
         config['ipfs'] = this.getIpfsConfig();
       }
-      catch(e){console.log(e);}
+      catch(e){this.dev && console.log(e);}
 
 
       if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1)){
@@ -109,7 +113,7 @@ export class OperatingSystem {
 
         }
         catch(e){
-          console.log(e);
+          this.dev && console.log(e);
           if(e == 'Transport (WebRTCStar) could not listen on any available address'){
             throw(e);
           }
@@ -228,7 +232,7 @@ export class OperatingSystem {
           let configPath = this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
           configPath = configPath + "/ipfs.config";
           let fileIpfsConfig = fs.readFileSync(configPath).toString('utf8');
-          console.log('OS:',fileIpfsConfig);
+          this.dev && console.log('OS:',fileIpfsConfig);
           let diskIpfsConfig;
           if(typeof fileIpfsConfig == 'string'){
             diskIpfsConfig = JSON.parse(fileIpfsConfig);
@@ -239,7 +243,7 @@ export class OperatingSystem {
           this.bee.config.setIpfsConfig(diskIpfsConfig);
           return diskIpfsConfig;
 
-        }catch(e){console.log(e);}
+        }catch(e){this.dev && console.log(e);}
       }
       else if(this.isNodeJS()){
         try{
@@ -247,7 +251,7 @@ export class OperatingSystem {
           let configPath = 'config'
           configPath = configPath + "/ipfs.config";
           let fileIpfsConfig = fs.readFileSync(configPath).toString('utf8');
-          console.log('OS:',fileIpfsConfig);
+          this.dev && console.log('OS:',fileIpfsConfig);
           let diskIpfsConfig;
           if(typeof fileIpfsConfig == 'string'){
             diskIpfsConfig = JSON.parse(fileIpfsConfig);
@@ -258,7 +262,7 @@ export class OperatingSystem {
           this.bee.config.setIpfsConfig(diskIpfsConfig);
           return diskIpfsConfig;
 
-        }catch(e){console.log(e);}
+        }catch(e){this.dev && console.log(e);}
       }
       else if(this.utilities.engine.detect() == "browser"){
             try{
@@ -270,13 +274,13 @@ export class OperatingSystem {
                   this.bee.config.setIpfsConfig(JSON.parse(window.localStorage.getItem('ipfs')));
                   return JSON.parse(window.localStorage.getItem('ipfs'));
                 }
-          }catch(e){console.log(e)}
+          }catch(e){this.dev && console.log(e)}
       }
 console.log(this.utilities.engine.detect());
       let ipfsConfig = this.ipfsConfig;
       //try to load from file
       let ipfsConfigAfterStart = this.bee.config.getIpfsConfig();
-      console.log(ipfsConfigAfterStart);
+      this.dev && console.log(ipfsConfigAfterStart);
       if(typeof ipfsConfigAfterStart != 'undefined' && ipfsConfigAfterStart.length > 0){
         ipfsConfig = ipfsConfigAfterStart;
       }
@@ -359,7 +363,7 @@ console.log(this.utilities.engine.detect());
 
 
     setStorageLocation(v){
-      console.log(v);
+      this.dev && console.log(v);
       this.bee.config.setStorageLocation(v);
     }
     getStorageLocation(){
