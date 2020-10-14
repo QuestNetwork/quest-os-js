@@ -1,6 +1,6 @@
 ![Completion](https://img.shields.io/badge/completion-12%25-orange) ![Help Wanted](https://img.shields.io/badge/%20-help--wanted-%23159818) ![Version 0.9.3](https://img.shields.io/badge/version-v0.9.3-green) ![Version 0.9.3](https://img.shields.io/badge/version-v0.9.4-blue) ![Sponsors](https://img.shields.io/badge/sponsors-0-red)
 
-# Quest OS JS 
+# Quest OS JS
 
 ## Lead Maintainer
 
@@ -13,7 +13,7 @@ Main strategy is to create a Quest Network / IPFS / Ethereum interface that even
 
 Check out our [QD Messages Module](https://github.com/QuestNetwork/qd-messages-ts) and the [Awesome Quest Network](https://github.com/QuestNetwork/awesome) list for more examples.
 
-## Security 
+## Security
 
 ![Completion 1.0.0](https://img.shields.io/badge/OAEP-4096%20Bit-green) ![EC](https://img.shields.io/badge/EC-P&#8208;521-green) ![AES](https://img.shields.io/badge/AES-256%20Bit-yellow)
 
@@ -134,7 +134,7 @@ if(<os>.utilities.engine.detect() == 'node'){
 };
 ```
 
-### enableSaveLock() 
+### enableSaveLock()
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Locks the system from saving any changes
@@ -142,7 +142,7 @@ Locks the system from saving any changes
 <os>.enableSaveLock();
 ```
 
-### disableSaveLock() 
+### disableSaveLock()
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Unlocks the system from saving changes and saves changes normally
@@ -297,65 +297,6 @@ Gets all invites for a channel
 let invites = <os>.channel.invite.get('propaganda----1234');
 ```
 
-### social.togglePrivacy(profilePubKey = 'NoProfileSelected')
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
-
-Toggles your profile's visibility between private and public, not giving a pubKey will automatically select your first profile. 
-In private mode you have to manually share your profile with everyone you want to see your details. In Public mode all the members of the channels you're in can see your profile.
-
-```
-<os>.social.togglePrivacy();
-```
-
-### social.isPublic(socialPubKey = 'NoProfileSelected')
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
-
-Checks if a profile has public visibility, not giving a pubKey will automatically select your first profile. 
-
-```
-if(<os>.social.isPublic(socialPubKey)){
-  console.log("Hello Universe");
-};
-```
-
-### social.isFavorite(socialPubKey)
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
-
-Checks if a profile is in our favorites, returns boolean true or false.
-
-```
-if(<os>.social.isFavorite(socialPubKey)){
-  console.log("Hello Universe");
-};
-```
-
-### social.isRequestedFavorite(socialPubKey)
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js) 
-
-Checks if a profile is a requested favorite, returns boolean true or false.
-
-```
-if(<os>.social.isRequestedFavorite(socialPubKey)){
-  console.log("Hello Universe");
-};
-```
-
-
-### social.search(searchPhrase)
-[![Social](https://img.shields.io/badge/process-Social-green)](https://github.com/QuestNetwork/quest-social-js) [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)  
-
-Will automatically search for all social profiles in the peers network where alias, full name or about text match the phrase.
-This version of the methos is case sensitive by default, future versions will allow a config object.
-
-Returns an array with the search results and adds the following fields:
-```
-isFavorite: boolean
-isRequestedFavorite: boolean
-```
-
-```
-let results = <os>.social.search('Bob');
-```
 
 **Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
 
@@ -386,7 +327,7 @@ Change Peer Configuration in browser, Electron and on NodeJS
 
 **0.9.4**
 - Democratically block or mute peers
-- Faux requests. Send request in channel, wait for response, deliver response as if it was an http request. 
+- Faux requests. Send request in channel, wait for response, deliver response as if it was an http request.
 
 ## Support Us
 Please consider supporting us, so that we can build a non-profit for this project (ツ)

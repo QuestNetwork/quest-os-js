@@ -32,6 +32,8 @@ export class OperatingSystem {
       this.crypto = new NativeCrypto();
       this.ui = new UiService();
       this.signedInSub = new Subject();
+      this.bootMessageSub = new Subject();
+
       this.social = new QuestSocial();
       this.signedIn = false;
       this.ipfsConfig = [];
@@ -52,6 +54,14 @@ export class OperatingSystem {
 
     }
 
+    onBootMessage(){
+      return this.bootMessageSub;
+    }
+
+    sendBootMessage(m){
+      this.bootMessageSub.next(m);
+    }
+
     delay(t, val = "") {
        return new Promise(function(resolve) {
            setTimeout(function() {
@@ -68,8 +78,8 @@ export class OperatingSystem {
     }
     hasLocalStorage(){
       try{
-        let config = JSON.parse(window.localStorage.getItem('user-qcprofile'));
-        if(typeof config == 'object' && typeof config['version'] != 'undefined'){
+        let config = window.localStorage.getItem('user-qcprofile');
+        if(typeof config == 'string'){
           return true;
         }
       }catch(e){this.dev && console.log(e); return false;}
@@ -78,6 +88,8 @@ export class OperatingSystem {
 
 
     async boot(config){
+      this.sendBootMessage('Booting OS...');
+
       if(typeof config['dependencies'] == 'undefined'){
         config['dependencies'] = {};
       }
@@ -369,6 +381,15 @@ console.log(this.utilities.engine.detect());
     getStorageLocation(){
       return this.bee.config.getStorageLocation();
     }
+
+
+        hasPassword(){
+          return this.bee.config.hasPassword();
+        }
+
+        async setPassword(oldPassword,newPassword){
+          return await this.bee.config.setPassword(oldPassword,newPassword);
+        }
 
 
 
