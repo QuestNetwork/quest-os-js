@@ -202,11 +202,9 @@ export class OperatingSystem {
         this.configCache['dependencies']['electronService'].remote.getCurrentWindow().close();
       }
       else{
-  
-        let locArr = window.location.href.split('/');
-        locArr.pop();
-        locArr.pop();
-        window.location.href = locArr.join('/');
+
+        let locArr = window.location.href.split('#');
+        window.location.href = locArr[0];
       }
     }
 
