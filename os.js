@@ -202,7 +202,9 @@ export class OperatingSystem {
         this.configCache['dependencies']['electronService'].remote.getCurrentWindow().close();
       }
       else{
+  
         let locArr = window.location.href.split('/');
+        locArr.pop();
         locArr.pop();
         window.location.href = locArr.join('/');
       }
@@ -356,7 +358,10 @@ console.log(this.utilities.engine.detect());
       catch(e){}
 
       this.signedIn = false;
-      this.reboot();
+
+      setTimeout( () => {
+        this.reboot();
+      }, 2000);
 
     }
     onSignIn(){
@@ -371,6 +376,10 @@ console.log(this.utilities.engine.detect());
 
     isElectron(){
       return this.isElectronFlag;
+    }
+
+    setPwd(pwd){
+      return this.bee.config.setPwd(pwd);
     }
 
 
