@@ -12,6 +12,11 @@ export class ChannelManager {
 
   }
 
+  sayHi(channel){
+    this.dolphin.sayHi(channel);
+    return true;
+  }
+
   load(config){
     this.invite = new InviteManager(config['dependencies']['bee'],config['dependencies']['dolphin']);
     this.challenge = new ChallengeManager(config['dependencies']['dolphin']);
