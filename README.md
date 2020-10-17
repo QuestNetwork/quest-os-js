@@ -27,7 +27,7 @@ Quest OS offers encrypted channels, persistent storage, peer management, timelin
 **OR**  
 
 ```
-git clone https://github.com/QuestNetwork/quest-os-js && cd quest-os-js && git checkout 0.9.3 && cd ..
+git clone https://github.com/QuestNetwork/quest-os-js && cd quest-os-js && git checkout 0.9.4 && cd ..
 ```
 
 ## API
