@@ -125,15 +125,6 @@ Reboots the entire system
 <os>.reboot();
 ```
 
-### utilities.engine.detect()
-Returns a string 'node', 'electron' or 'browser'
-
-```
-if(<os>.utilities.engine.detect() == 'node'){
-  console.log("Hello Universe");
-};
-```
-
 ### enableSaveLock()
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
