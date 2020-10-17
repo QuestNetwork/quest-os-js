@@ -29,7 +29,7 @@
     "file-saver": "^2.0.2",
     "fs": "0.0.1-security",
     "ngx-electron": "^2.2.0",
-    "rxjs": "6.6.3",
+    "rxjs": "6.5.5",
     "uuid": "8.3.0"
   },
   "devDependencies": {

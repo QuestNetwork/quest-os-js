@@ -205,7 +205,9 @@ if(<os>.isSignedIn()){
 };
 ```
 
-### async channel.create(dirtyChannelName, parentFolderId = "")
+### channel
+
+#### async channel.create(dirtyChannelName, parentFolderId = "")
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns the clean channel name
@@ -213,7 +215,7 @@ Returns the clean channel name
 let claenChannelName = await <os>.channel.create('propaganda');
 ```
 
-### channel.remove(cleanChannelName)
+#### channel.remove(cleanChannelName)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Removes a channel
@@ -221,7 +223,7 @@ Removes a channel
 <os>.channel.remove('propaganda----1234');
 ```
 
-### channel.listen(cleanChannelName)
+#### channel.listen(cleanChannelName)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns a Subject that forwards non-system channel messages.
@@ -231,7 +233,7 @@ Returns a Subject that forwards non-system channel messages.
 }
 ```
 
-### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE')
+#### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE')
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Returns a Subject that forwards non-system channel messages.
@@ -239,7 +241,9 @@ Returns a Subject that forwards non-system channel messages.
 await <os>.channel.publish('propaganda----1234',"Hello Universe");
 ```
 
-### channel.challenge.enable(cleanChannelName)  
+### channel.challenge
+
+#### channel.challenge.enable(cleanChannelName)  
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Opens the channel to everyone who can solve the Captcha provided by [Quest Image Captcha JS](https://github.com/QuestNetwork/quest-image-captcha-js)
@@ -247,7 +251,7 @@ Opens the channel to everyone who can solve the Captcha provided by [Quest Image
 <os>.channel.challenge.enable('propaganda----1234');
 ```
 
-### channel.challenge.disable(cleanChannelName)
+#### channel.challenge.disable(cleanChannelName)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Closes the channel to invite only participation
@@ -255,7 +259,7 @@ Closes the channel to invite only participation
 <os>.channel.challenge.disable('propaganda----1234');
 ```
 
-### channel.challenge.isEnabled(cleanChannelName)  
+#### channel.challenge.isEnabled(cleanChannelName)  
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 ```
@@ -264,7 +268,9 @@ if(<os>.isEnabled()){
 };
 ```
 
-### channel.invite.create(cleanChannelName,newInviteCodeMax, exportFolders = false)  
+### channel.invite
+
+#### channel.invite.create(cleanChannelName,newInviteCodeMax, exportFolders = false)  
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure.
@@ -272,7 +278,7 @@ Creates a new channel invite, specify max uses of this invite code and whether o
 <os>.channel.invite.create('propaganda----1234',5,true);
 ```
 
-### channel.invite.remove(cleanChannelName,link)
+#### channel.invite.remove(cleanChannelName,link)
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Removes a channel invite
@@ -280,7 +286,7 @@ Removes a channel invite
 <os>.channel.invite.remove('propaganda----1234',"5448495320495320414e2045585452454d454c59204c4f4e4720414e4420494e56414c494420494e5649544520434f4445");
 ```
 
-### channel.invite.get(channel)
+#### channel.invite.get(channel)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Gets all invites for a channel
@@ -289,7 +295,7 @@ let invites = <os>.channel.invite.get('propaganda----1234');
 ```
 
 
-### channel.invite.get(channel)
+#### channel.invite.get(channel)
 [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
 
 Gets all invites for a channel
