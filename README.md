@@ -11,7 +11,7 @@ Unified API for the QuestNetwork dStack. Use with our example app: [qDesk](https
 
 Main strategy is to create a Quest Network / IPFS / Ethereum interface that even kids can easily understand.
 
-Quest OS offers encrypted channels, persistent storage, peer management, timelines, posts and more. It it used to load add-on modules, like [quest-coral-js](https://github.com/QuestNetwork/quest-coral-js) to use [IPFS DAGs](https://docs.ipfs.io/concepts/merkle-dag/), or [quest-dolphin-js](https://github.com/QuestNetwork/quest-dolphin-js) to use [IPFS GossipSub](https://blog.ipfs.io/2020-05-20-gossipsub-v1.1/).
+Quest OS offers encrypted channels, persistent storage, peer management, timelines, posts and more. It is used to load add-on modules, like [quest-coral-js](https://github.com/QuestNetwork/quest-coral-js) to use [IPFS DAGs](https://docs.ipfs.io/concepts/merkle-dag/), or [quest-dolphin-js](https://github.com/QuestNetwork/quest-dolphin-js) to use [IPFS GossipSub](https://blog.ipfs.io/2020-05-20-gossipsub-v1.1/).
 
 ## Security
 
@@ -318,7 +318,8 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 - Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
 
 **0.9.4**
-Change Peer Configuration in browser, Electron and on NodeJS
+- Change Peer Configuration in browser, Electron and on NodeJS
+- Module Upgrades
 
 ## Roadmap
 
