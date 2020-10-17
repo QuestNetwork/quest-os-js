@@ -12,6 +12,11 @@ export class ChannelManager {
 
   }
 
+  sayHi(channel){
+    this.dolphin.sayHi(channel);
+    return true;
+  }
+
   load(config){
     this.invite = new InviteManager(config['dependencies']['bee'],config['dependencies']['dolphin']);
     this.challenge = new ChallengeManager(config['dependencies']['dolphin']);
@@ -115,6 +120,11 @@ export class ChannelManager {
  removeFromNameList(channelName){
   this.dolphin.setChannelNameList(this.dolphin.getChannelNameList().filter(e => e != channelName));
  }
+
+ isPeerOnline(channelPubKey){
+   return this.dolphin.isOnline(channelPubKey);
+ }
+
  remove(channel){
    //remove from channelNameList
 

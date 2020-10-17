@@ -9,36 +9,57 @@ import { QuestSocial }  from '@questnetwork/quest-social-js';
 import { ElectronService } from 'ngx-electron';
 import { saveAs } from  'file-saver';
 
-import { Utilities }  from './utilities/utilities.js';
 import { ChannelManager }  from './channel/channelManager.js';
-import { NativeCrypto }  from '../quest-crypto-js';
+import { RequestManager }  from './request/requestManager.js';
+import { IdentityManager }  from './identity/identityManager.js';
+
+import { NativeCrypto }  from '@questnetwork/quest-crypto-js';
+import { UtilitiesInstance} from '@questnetwork/quest-utilities-js';
 
 
 export class OperatingSystem {
     constructor() {
       let uVar;
       this.ocean = Ocean;
+      this.dev = false;
       this.channel = new ChannelManager();
+      this.request = new RequestManager();
+      this.identity = new IdentityManager();
+
       this.ready = false;
-      this.utilities = new Utilities();
       this.isReadySub = new Subject();
       this.bee = new BeeSwarmInstance();
       this.crypto = new NativeCrypto();
       this.ui = new UiService();
       this.signedInSub = new Subject();
-      this.social = new QuestSocial()
+      this.bootMessageSub = new Subject();
+
+      this.social = new QuestSocial();
       this.signedIn = false;
-      this.ipfsBootstrapPeersFromConfig = [];
+      this.ipfsConfig = [];
       this.configCache = {};
-      var userAgent = navigator.userAgent.toLowerCase();
-      if (userAgent.indexOf(' electron/') > -1) {
+      this.isNodeJSFlag = false;
+      this.utilities = new UtilitiesInstance();
+      this.isElectronFlag = false;
+      this.isNodeJSFlag = false;
+
+      if(this.utilities.engine.detect() == 'electron'){
         this.isElectronFlag = true;
       }
-      else{
-        this.isElectronFlag = false;
+      else if(this.utilities.engine.detect() == 'node'){
+        this.isNodeJSFlag = true;
       }
+
       this.saveLockStatusSub = new Subject();
 
+    }
+
+    onBootMessage(){
+      return this.bootMessageSub;
+    }
+
+    sendBootMessage(m){
+      this.bootMessageSub.next(m);
     }
 
     delay(t, val = "") {
@@ -57,46 +78,54 @@ export class OperatingSystem {
     }
     hasLocalStorage(){
       try{
-        let config = JSON.parse(window.localStorage.getItem('user-qcprofile'));
-        if(typeof config == 'object' && typeof config['version'] != 'undefined'){
+        let config = window.localStorage.getItem('user-qcprofile');
+        if(typeof config == 'string'){
           return true;
         }
-      }catch(e){console.log(e); return false;}
+      }catch(e){this.dev && console.log(e); return false;}
       return false;
     }
 
 
     async boot(config){
+      this.sendBootMessage('Booting OS...');
+
       if(typeof config['dependencies'] == 'undefined'){
         config['dependencies'] = {};
+      }
+      if(typeof config['dev'] != 'undefined'){
+        this.dev = config['dev'];
       }
       config['dependencies']['electronService'] = new ElectronService();
       config['dependencies']['saveAs'] = saveAs;
 
       this.configCache = config;
-      if(typeof config['ipfs']['swarm'] != 'undefined'){
-        this.ipfsBootstrapPeersFromConfig = config['ipfs']['swarm'];
+      if(typeof config['ipfs'] != 'undefined'){
+        this.ipfsConfig = config['ipfs'];
       }
 
       try{
-        config['ipfs']['swarm'] = this.getIpfsBootstrapPeers();
+        config['ipfs'] = this.getIpfsConfig();
       }
-      catch(e){console.log(e);}
+      catch(e){this.dev && console.log(e);}
+
 
       if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1)){
         try{
-          await this.ocean.create(config);
+          let configBounce = await this.ocean.create(config);
           config['dependencies']['dolphin'] = this.ocean.dolphin;
+          this.setIpfsConfig(configBounce['ipfs']);
+
           this.ocean.dolphin.commitNowSub.subscribe( (value) => {
             this.bee.config.commitNow();
           });
-
           this.ocean.dolphin.commitSub.subscribe( (value) => {
             this.bee.config.commit();
           });
+
         }
         catch(e){
-          console.log(e);
+          this.dev && console.log(e);
           if(e == 'Transport (WebRTCStar) could not listen on any available address'){
             throw(e);
           }
@@ -107,6 +136,8 @@ export class OperatingSystem {
           try{
             await this.bee.start(config);
             config['dependencies']['bee'] = this.bee;
+            this.ocean.coral.start(config);
+            config['dependencies']['coral'] = this.ocean.coral;
             this.bee.config.saveLockStatusSub.subscribe( (value) => {
               if(value){
                 this.enableSaveLock();
@@ -124,6 +155,10 @@ export class OperatingSystem {
 
       if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1 && config['boot']['processes'].indexOf('bee') > -1)){
         this.channel.load(config);
+        config['dependencies']['channel'] = this.channel;
+
+        this.identity.load(config);
+        config['dependencies']['identity'] = this.identity;
       }
 
       if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('qd-ui') > -1)){
@@ -135,6 +170,11 @@ export class OperatingSystem {
       }
 
 
+      if(typeof config['boot'] == 'undefined' ||  typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('ocean') > -1 && config['boot']['processes'].indexOf('bee') > -1)){
+        this.request.load(config);
+        config['dependencies']['request'] = this.request;
+      }
+
       if(typeof config['boot'] == 'undefined' || typeof config['boot']['processes'] == 'undefined' || (typeof config['boot']['processes'] != 'undefined' && config['boot']['processes'].indexOf('social') > -1)){
           try{
             await this.social.start(config);
@@ -142,6 +182,8 @@ export class OperatingSystem {
             throw(e);
           }
       }
+
+
 
 
       this.ready = true;
@@ -160,54 +202,102 @@ export class OperatingSystem {
         this.configCache['dependencies']['electronService'].remote.getCurrentWindow().close();
       }
       else{
-        window.location.reload();
+
+        let locArr = window.location.href.split('#');
+        window.location.href = locArr[0];
       }
     }
 
-    setIpfsBootstrapPeers(peers){
-      console.log('OS: Setting Peers',peers);
+    isNodeJS(){
+      return this.isNodeJSFlag;
+    }
+
+    setIpfsConfig(ipfsConfig){
+      console.log('OS: Setting ipfs config',ipfsConfig);
       if(this.isElectron()){
         let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
         let configPath =  this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
-        configPath = configPath + "/swarm.peers";
+        configPath = configPath + "/ipfs.config";
         try{
-          fs.writeFileSync(configPath, JSON.stringify({ swarm: peers}),{encoding:'utf8',flag:'w'})
+          fs.writeFileSync(configPath, JSON.stringify(ipfsConfig),{encoding:'utf8',flag:'w'})
         }catch(e){console.log(e);}
       }
-       this.bee.config.setIpfsBootstrapPeers(peers);
+      else if(this.isNodeJS()){
+        let fs =  require('fs');
+        let configPath = 'config';
+        configPath = configPath + "/ipfs.config";
+        try{
+          fs.writeFileSync(configPath, JSON.stringify(ipfsConfig),{encoding:'utf8',flag:'w'})
+        }catch(e){console.log(e);}
+      }
+      else if(this.utilities.engine.detect() == "browser"){
+        window.localStorage.setItem('ipfs',JSON.stringify(ipfsConfig));
+      }
+
+      this.bee.config.setIpfsConfig(ipfsConfig);
     }
-    getIpfsBootstrapPeers(){
+    getIpfsConfig(){
       //check swarm peer list
       if(this.isElectron()){
         try{
           let fs =   this.configCache['dependencies']['electronService'].remote.require('fs');
           let configPath = this.configCache['dependencies']['electronService'].remote.app.getPath('userData');
-          configPath = configPath + "/swarm.peers";
-          let filePeers = fs.readFileSync(configPath).toString('utf8');
-          console.log('OS:',filePeers);
-          let diskPeers;
-          if(typeof filePeers == 'string'){
-            diskPeers = JSON.parse(filePeers);
+          configPath = configPath + "/ipfs.config";
+          let fileIpfsConfig = fs.readFileSync(configPath).toString('utf8');
+          this.dev && console.log('OS:',fileIpfsConfig);
+          let diskIpfsConfig;
+          if(typeof fileIpfsConfig == 'string'){
+            diskIpfsConfig = JSON.parse(fileIpfsConfig);
           }
           else{
-            diskPeers = filePeers;
+            diskIpfsConfig = fileIpfsConfig;
           }
-          this.bee.config.setIpfsBootstrapPeers(diskPeers['swarm']);
-          return diskPeers['swarm'];
+          this.bee.config.setIpfsConfig(diskIpfsConfig);
+          return diskIpfsConfig;
 
-        }catch(e){console.log(e);}
+        }catch(e){this.dev && console.log(e);}
       }
+      else if(this.isNodeJS()){
+        try{
+          let fs =  require('fs');
+          let configPath = 'config'
+          configPath = configPath + "/ipfs.config";
+          let fileIpfsConfig = fs.readFileSync(configPath).toString('utf8');
+          this.dev && console.log('OS:',fileIpfsConfig);
+          let diskIpfsConfig;
+          if(typeof fileIpfsConfig == 'string'){
+            diskIpfsConfig = JSON.parse(fileIpfsConfig);
+          }
+          else{
+            diskIpfsConfig = fileIpfsConfig;
+          }
+          this.bee.config.setIpfsConfig(diskIpfsConfig);
+          return diskIpfsConfig;
 
-      let peers = this.ipfsBootstrapPeersFromConfig;
-      console.log(peers);
+        }catch(e){this.dev && console.log(e);}
+      }
+      else if(this.utilities.engine.detect() == "browser"){
+            try{
+                if(window.localStorage.getItem('ipfs') == 'undefined' || JSON.parse(window.localStorage.getItem('ipfs')) == null ||  window.localStorage.getItem('ipfs') == null ||  window.localStorage.getItem('ipfs') == '[object Object]'){
+                  let ipfs = { Swarm: [], API: "", Gateway: ""};
+                  this.bee.config.setIpfsConfig(ipfs);
+                  }
+                else{
+                  this.bee.config.setIpfsConfig(JSON.parse(window.localStorage.getItem('ipfs')));
+                  return JSON.parse(window.localStorage.getItem('ipfs'));
+                }
+          }catch(e){this.dev && console.log(e)}
+      }
+console.log(this.utilities.engine.detect());
+      let ipfsConfig = this.ipfsConfig;
       //try to load from file
-      let peersAfterStart = this.bee.config.getIpfsBootstrapPeers();
-      console.log(peersAfterStart);
-      if(typeof peersAfterStart != 'undefined' && peersAfterStart.length > 0){
-        peers = peersAfterStart;
+      let ipfsConfigAfterStart = this.bee.config.getIpfsConfig();
+      this.dev && console.log(ipfsConfigAfterStart);
+      if(typeof ipfsConfigAfterStart != 'undefined' && ipfsConfigAfterStart.length > 0){
+        ipfsConfig = ipfsConfigAfterStart;
       }
       //check additional peers added from loaded config data
-      return peers;
+      return ipfsConfig;
     }
 
     commit(){
@@ -266,15 +356,10 @@ export class OperatingSystem {
       catch(e){}
 
       this.signedIn = false;
-      if(this.isElectron()){
-      let a = this.bee.config.electron.remote.getCurrentWindow();
-      a.close();
-      }
-      else{
-        let locArr = window.location.href.split('/');
-        locArr.pop();
-        window.location.href = locArr.join('/');
-      }
+
+      setTimeout( () => {
+        this.reboot();
+      }, 2000);
 
     }
     onSignIn(){
@@ -291,14 +376,27 @@ export class OperatingSystem {
       return this.isElectronFlag;
     }
 
+    setPwd(pwd){
+      return this.bee.config.setPwd(pwd);
+    }
+
 
     setStorageLocation(v){
-      console.log(v);
+      this.dev && console.log(v);
       this.bee.config.setStorageLocation(v);
     }
     getStorageLocation(){
       return this.bee.config.getStorageLocation();
     }
+
+
+        hasPassword(){
+          return this.bee.config.hasPassword();
+        }
+
+        async setPassword(oldPassword,newPassword){
+          return await this.bee.config.setPassword(oldPassword,newPassword);
+        }
 
 
 

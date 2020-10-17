@@ -38,7 +38,7 @@ export class InviteManager {
       }
 
       get(channel){
-        this.q.os.ocean.dolphin.getInviteCodes(this.selectedChannel)['items'];
+        this.dolphin.getInviteCodes(this.selectedChannel)['items'];
       }
 
 
