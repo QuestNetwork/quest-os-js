@@ -323,7 +323,7 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 
 ## Roadmap
 
-**0.9.4**
+**0.9.5**
 - Democratically block or mute peers
 - Faux requests. Send request in channel, wait for response, deliver response as if it was an http request.
 
