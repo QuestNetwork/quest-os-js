@@ -161,6 +161,26 @@ Returns a string with the current storage location
 <os>.getStorageLocation();
 ```
 
+
+### setPwd(pwd)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Sets the password to be used with the next signIn attempt.
+
+```
+<os>.setPwd(pwd);
+```
+
+### setPassword(old,new)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Sets the password to be used for encryption. 
+When you don't set this before sign in all data is encrypted with a random password.
+
+```
+<os>.setPassword('','first-password');
+```
+
 ### signIn(config = {})
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
