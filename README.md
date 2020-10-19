@@ -1,351 +1,90 @@
-![Completion](https://img.shields.io/badge/completion-14%25-orange) ![Help Wanted](https://img.shields.io/badge/%20-help--wanted-%23159818) ![Version 0.9.4](https://img.shields.io/badge/version-v0.9.4-green) ![Version 0.9.5](https://img.shields.io/badge/version-v0.9.5-blue) ![Sponsors](https://img.shields.io/badge/sponsors-0-red)
+![Completion](https://img.shields.io/badge/completion-19%25-orange) ![Help Wanted](https://img.shields.io/badge/%20-help--wanted-%23159818) ![Version 0.9.3](https://img.shields.io/badge/stable-v0.9.4-green) ![Version 0.9.3](https://img.shields.io/badge/dev-v0.9.5-blue) ![Sponsors](https://img.shields.io/badge/sponsors-1-orange)
 
-# Quest OS JS
+## qDesk
+> Cross-Platform Trustless Social Network
 
-## Lead Maintainer
+![Screenshot](https://github.com/QuestNetwork/qd-messages-ts/raw/0.9.3/doc/images/0.9.3.png?raw=true)
 
-[StationedInTheField](https://github.com/StationedInTheField)
+>In case you are experiencing connectivity issues, on the app you can try using different [star node configurations](#troubleshooting) in Settings > IPFS.
 
 ## Description
-Unified API for the QuestNetwork dStack. Use with our example app: [qDesk](https://github.com/QuestNetwork/qDesk).
+qDesk is an example app for our JavaScript p2p library [qOS](https://github.com/QuestNetwork/quest-os-js) with cool open source modules such as [qD Messages](https://github.com/QuestNetwork/qd-messages-ts) and [qD Social](https://github.com/QuestNetwork/qd-social-ts) and the upcoming  [qD Vibes](https://github.com/QuestNetwork/qd-vibes-ts), [qD Markets](https://github.com/QuestNetwork/qd-market-ts), [qD News](https://github.com/QuestNetwork/qd-news-ts), [qD Apps](qd-apps-ts), [qD Games](https://github.com/QuestNetwork/qd-games-ts) and [qD Calendar](https://github.com/QuestNetwork/qd-calendar-ts).
 
-Main strategy is to create a Quest Network / IPFS / Ethereum interface that even kids can easily understand.
+qDesk makes it possible to build custom, secure and decentralized social networks in less than 20 days.
 
-Quest OS offers encrypted channels, persistent storage, peer management, timelines, posts and more. It is used to load add-on modules, like [quest-coral-js](https://github.com/QuestNetwork/quest-coral-js) to use [IPFS DAGs](https://docs.ipfs.io/concepts/merkle-dag/), or [quest-dolphin-js](https://github.com/QuestNetwork/quest-dolphin-js) to use [IPFS GossipSub](https://blog.ipfs.io/2020-05-20-gossipsub-v1.1/).
+Our quest network aims to allow the creation and (distributed) completion of quests supported by a feature rich decentralized social network.
+
+0.9.5+ allow to connect qDesk Social profiles to Twitter without sharing information with Twitter as an additional layer of verification. It is planned to add passive verification for a custom list of external networks to verify the peer identities.
+
+1.0.0+ complies with privacy regulations and can be used for confidential information as a production social network worldwide. 
+
+We have chosen Angular/Electron as an example environment because we believe it offers the best accessibility for developers coming from any other language/framework. The Quest Network is already being used in Python on PyQt5 and we aim to provide the underlying library in Go and wherever possible in Rust as well.
+
+This app is built on [qOS](https://github.com/QuestNetwork/quest-os-js) which makes use of the [Interplanetary Filesystem](https://ipfs.io), [IPFS GossipSub](https://blog.ipfs.io/2020-05-20-gossipsub-v1.1/) and [IPFS DAGs](https://docs.ipfs.io/concepts/merkle-dag/).
+
+Look what other people have built with qDesk: [Awesome Quest Network dApps](https://github.com/QuestNetwork/awesome/blob/master/README.md)!
+
+qDesk allows to lazy load modules.
 
 ## Security
 
 ![Completion 1.0.0](https://img.shields.io/badge/OAEP-4096%20Bit-green) ![EC](https://img.shields.io/badge/EC-P&#8208;521-green) ![AES](https://img.shields.io/badge/AES-256%20Bit-yellow)
 
-[Quest OS](https://github.com/QuestNetwork/quest-os-js) uses [4096 Bit RSA-OAEP](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Operation) encryption, [256 Bit AES-CBC](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) encryption and [NIST P-521 EC](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography#Fast_reduction_(NIST_curves)) signatures.
+[qOS](https://github.com/QuestNetwork/quest-os-js) uses [4096 Bit RSA-OAEP](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Operation) encryption, [256 Bit AES-CBC](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) encryption and [NIST P-521 EC](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography#Fast_reduction_(NIST_curves)) signatures.
 
 
-## Installation & Usage
+## Download
 
-``npm install @questnetwork/quest-os-js@0.9.4``
+| Version | Linux | Mac | Windows |
+|---------:|------------------------------|------------------------------|------------------------------|
+| 0.9.4 | [qDesk-0.9.4.AppImage](https://github.com/QuestNetwork/qDesk/releases/download/0.9.4/qDesk-0.9.4.AppImage) | [qDesk-0.9.4.dmg](https://github.com/QuestNetwork/qDesk/releases/download/0.9.4/qDesk-0.9.4.dmg) | No Official Build |
+| 0.9.3-rc1 | [q-desk-0.9.3.AppImage](https://github.com/QuestNetwork/qDesk/releases/download/0.9.3-rc1/q-desk-0.9.3.AppImage)  |  [q-desk-0.9.3.dmg](https://github.com/QuestNetwork/qDesk/releases/download/0.9.3-rc1/q-desk-0.9.3.dmg) | No Official Build |
+| 0.9.2 | [quest-messenger-0.9.2.AppImage](https://github.com/QuestNetwork/qd-messages-ts/releases/download/0.9.2/quest-messenger-0.9.2.AppImage) | [quest-messenger-0.9.2.dmg](https://github.com/QuestNetwork/qd-messages-ts/releases/download/0.9.2/quest-messenger-0.9.2.dmg) | No Official Build |
+| 0.9.1 | [quest-messenger-0.9.1.AppImage](https://github.com/QuestNetwork/qd-messages-ts/releases/download/0.9.1/quest-messenger-0.9.1.AppImage) | [quest-messenger-0.9.1.dmg](https://github.com/QuestNetwork/qd-messages-ts/releases/download/0.9.1/quest-messenger-0.9.1.dmg) | No Official Build |
 
-**OR**  
+If you want anything else, you'll have to build from sources and probably fix some stuff.
 
-```
-git clone https://github.com/QuestNetwork/quest-os-js && cd quest-os-js && git checkout 0.9.4 && cd ..
-```
+**WARNING:** 3rd party dependencies not audited. We recommend to use the downloaded app in a virtual machine until version 1.0.0.
 
-## API
-
-
-### async boot(config)
-
-Boots the operating system. The GitHub branches master/0.9.2/0.9.3+ boot with:
-
-JavaScript/NodeJS
-```
-import { qOS } from '@questnetwork/quest-os-js'
-// configure with a bootstrap swarm peer, for testing you can use:
-let config = {
-  ipfs: {
-        Swarm: [<swarm star peer ip>,<swarm star peer ip>],
-        API: '',
-        Gateway: ''
-  },
-  version: <version>
-  dev: <true/false>
-};
-// boot the operating system
-qOS.boot().then( () => {
-  //the operating system is online, build the future
-})
-```
-
-TypeScript/Angular Service
-```
-import { Injectable } from '@angular/core';
-import { qOS }  from '@questnetwork/quest-os-js';
-import * as swarmJson from '../swarm.json';
-import  packageJson from '../../../package.json';
-const version = packageJson.version;
-
-@Injectable({
-  providedIn: 'root'
-})
-export class QuestOSService {
-  public os;
-  ready = false;
-  config;
-  constructor() {
-    this.config = {
-      ipfs: {
-        Swarm: swarmJson['ipfs']['Swarm'],
-        API: '',
-        Gateway: ''
-      },
-      version: version,
-      dev: swarmJson['dev']
-    };
-    this.os = qOS;
-  }
-  async boot(){
-      try{
-        await this.os.boot(this.config);
-        this.ready = true;
-      }
-      catch(e){
-        throw(e);
-      }
-  }
-}
-```
-
-### isReady()
-
-Returns true once boot is complete, otherwise returns false.
-
-```
-if(<os>.isReady()){
-  console.log("Ready To Sign In");
-};
-```
-
-
-### onReady()
-
-Returns a Subject that pushes next when boot is complete
-
-```
-if(<os>.onReady().subsribe( () => {
-  console.log("Ready To Sign In");
-});
-```
-
-
-### reboot()
-
-Reboots the entire system
-
-```
-<os>.reboot();
-```
-
-### enableSaveLock()
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Locks the system from saving any changes
-```
-<os>.enableSaveLock();
-```
-
-### disableSaveLock()
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Unlocks the system from saving changes and saves changes normally
-```
-<os>.disableSaveLock();
-```
-
-
-### setStorageLocation(location)
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Sets the storage location for the app. Normally Quest OS does this automatically and you do not need to call this function.
-Possible locations are: `"Download"`,`"LocalStorage"` or `"ConfigFile"`
-
-```
-<os>.setStorageLocation("LocalStorage");
-```
-
-### getStorageLocation(location)
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Returns a string with the current storage location
-
-```
-<os>.getStorageLocation();
-```
-
-
-### setPwd(pwd)
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Sets the password to be used with the next signIn attempt.
-
-```
-<os>.setPwd(pwd);
-```
-
-### setPassword(old,new)
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Sets the password to be used for encryption. 
-When you don't set this before sign in all data is encrypted with a random password.
-
-```
-<os>.setPassword('','first-password');
-```
-
-### signIn(config = {})
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Activates Accounts. Empty config creates a new account
-```
-<os>.signIn({});
-```
-### signOut()
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Deactivates Accounts And Restarts The Interface On The Web, Closes The Current Window In Electron
-```
-<os>.signOut();
-```
-
-### onSignIn()
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Returns a subscribable Subject that fires when the account is signed in.
-```
-<os>.onSignIn().subscribe( () => {
-  console.log("Hello Universe");
-});
-```
-
-### isSignedIn()
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
-
-Returns a boolean true or false
-```
-if(<os>.isSignedIn()){
-  console.log("Hello Universe");
-};
-```
-
-### channel
-
-#### async channel.create(dirtyChannelName, parentFolderId = "")
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Returns the clean channel name
-```
-let claenChannelName = await <os>.channel.create('propaganda');
-```
-
-#### channel.remove(cleanChannelName)
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Removes a channel
-```
-<os>.channel.remove('propaganda----1234');
-```
-
-#### channel.listen(cleanChannelName)
-[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Returns a Subject that forwards non-system channel messages.
-```
-<os>.channel.listen('propaganda----1234').subscribe( msg ){
-  console.log(msg);
-}
-```
-
-#### async channel.publish(cleanChannelName, message, type = 'CHANNEL_MESSAGE')
-[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Returns a Subject that forwards non-system channel messages.
-```
-await <os>.channel.publish('propaganda----1234',"Hello Universe");
-```
-
-### channel.challenge
-
-#### channel.challenge.enable(cleanChannelName)  
-[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Opens the channel to everyone who can solve the Captcha provided by [Quest Image Captcha JS](https://github.com/QuestNetwork/quest-image-captcha-js)
-```
-<os>.channel.challenge.enable('propaganda----1234');
-```
-
-#### channel.challenge.disable(cleanChannelName)
-[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Closes the channel to invite only participation
-```
-<os>.channel.challenge.disable('propaganda----1234');
-```
-
-#### channel.challenge.isEnabled(cleanChannelName)  
-[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-```
-if(<os>.isEnabled()){
-  console.log("Hello Universe");
-};
-```
-
-### channel.invite
-
-#### channel.invite.create(cleanChannelName,newInviteCodeMax, exportFolders = false)  
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Creates a new channel invite, specify max uses of this invite code and whether or not to include your folder structure.
-```
-<os>.channel.invite.create('propaganda----1234',5,true);
-```
-
-#### channel.invite.remove(cleanChannelName,link)
-[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js) [![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Removes a channel invite
-```
-<os>.channel.invite.remove('propaganda----1234',"5448495320495320414e2045585452454d454c59204c4f4e4720414e4420494e56414c494420494e5649544520434f4445");
-```
-
-#### channel.invite.get(channel)
-[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Gets all invites for a channel
-```
-let invites = <os>.channel.invite.get('propaganda----1234');
-```
-
-
-#### channel.invite.get(channel)
-[![Ocean](https://img.shields.io/badge/process-Ocean-blue)](https://github.com/QuestNetwork/quest-ocean-js)
-
-Gets all invites for a channel
-```
-let invites = <os>.channel.invite.get('propaganda----1234');
-```
-
-
-**Unfortunately nobody is working on a detailed API documentation yet, until then check out the source in [qDesk Messages](https://github.com/QuestNetwork/quest-messenger-js) 0.9.3+ to see how to use the OS.**
-
-We recommend to use our [quest-cli](https://github.com/QuestNetwork/quest-cli) to test and build the package. It allows you to bootstrap your Quest Network apps with the same peers and settings.
-
-Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/to/quest-cli/index.js` from any folder on your system. It's much nicer!
-
-## Features
-
-**0.9.2**
-- Encrypted P2P Channels
-- API for high level IPFS functionality
-- Saves Config
-- [Quest Ocean JS](https://github.com/QuestNetwork/quest-ocean-js)
-- [Quest Bee JS](https://github.com/QuestNetwork/quest-bee-js)
-
-
-**0.9.3**
-- [Quest Social JS](https://github.com/QuestNetwork/quest-social-js)
-- Documentation Extended
-- Easier Access
-- Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
+## Web Demo
 
 **0.9.4**
-- Change Peer Configuration in browser, Electron and on NodeJS
-- Module Upgrades
 
-## Roadmap
+Try our example application live in your browser. We recommend Chrome & Firefox.
 
-**0.9.5**
-- Democratically block or mute peers
-- Faux requests. Send request in channel, wait for response, deliver response as if it was an http request.
+<img src='https://github.com/QuestNetwork/qd-messages-ts/raw/0.9.4/doc/images/pinatalink.png?raw=true' width=25%> <img src='https://github.com/QuestNetwork/qd-messages-ts/raw/0.9.4/doc/images/cloudflarelink.png?raw=true' width=25%> <img src='https://github.com/QuestNetwork/qd-messages-ts/raw/0.9.4/doc/images/ipfsiolink.png?raw=true' width=25%>
+
+https://gateway.pinata.cloud/ipfs/QmZNvMbTPCEW1vebsEc5L2dx18PeYCKgwP5oMCVREkmr3p/
+
+https://cloudflare-ipfs.com/ipfs/QmZNvMbTPCEW1vebsEc5L2dx18PeYCKgwP5oMCVREkmr3p/
+
+https://ipfs.eternum.io/ipfs/QmZNvMbTPCEW1vebsEc5L2dx18PeYCKgwP5oMCVREkmr3p/
+
+https://ipfs.io/ipfs/QmZNvMbTPCEW1vebsEc5L2dx18PeYCKgwP5oMCVREkmr3p/
+
+http://ipfs.infura.io/ipfs/QmZNvMbTPCEW1vebsEc5L2dx18PeYCKgwP5oMCVREkmr3p/
+
+**0.9.3-rc1**
+
+<img src='https://github.com/QuestNetwork/qDesk/raw/0.9.3-rc1/doc/images/pinatalink.png?raw=true' width=25%> <img src='https://github.com/QuestNetwork/qDesk/raw/0.9.3-rc1/doc/images/cloudflarelink.png?raw=true' width=25%> <img src='https://github.com/QuestNetwork/qDesk/raw/0.9.3-rc1/doc/images/ipfsiolink.png?raw=true' width=25%>
+
+https://gateway.pinata.cloud/ipfs/QmTSuYWm2LXyYndEq2W62raSpjjUioSoSW3otSJRFQ1wra/
+
+https://cloudflare-ipfs.com/ipfs/QmTSuYWm2LXyYndEq2W62raSpjjUioSoSW3otSJRFQ1wra/
+
+https://ipfs.eternum.io/ipfs/QmTSuYWm2LXyYndEq2W62raSpjjUioSoSW3otSJRFQ1wra/
+
+https://ipfs.io/ipfs/QmTSuYWm2LXyYndEq2W62raSpjjUioSoSW3otSJRFQ1wra/
+
+http://ipfs.infura.io/ipfs/QmTSuYWm2LXyYndEq2W62raSpjjUioSoSW3otSJRFQ1wra/
+
+## Manual & Documentation
+
+See our automated documentation for more information: https://questnetwork.github.io/docs
+
+## Lead Maintainer
+
+[StationedInTheField](https://github.com/StationedInTheField)
 
 ## Support Us
 Please consider supporting us, so that we can build a non-profit for this project (ツ)
@@ -353,8 +92,192 @@ Please consider supporting us, so that we can build a non-profit for this projec
 | Ethereum| Bitcoin |
 |---|---|
 | `0xBC2A050E7B87610Bc29657e7e7901DdBA6f2D34E` | `bc1qujrqa3s34r5h0exgmmcuf8ejhyydm8wwja4fmq`   |
-|  <img src="doc/images/eth-qr.png" >   | <img src="doc/images/btc-qr.png" > |
+|  <img src="https://github.com/QuestNetwork/qDesk/raw/master/doc/images/eth-qr.png" >   | <img src="https://github.com/QuestNetwork/qDesk/raw/master/doc/images/btc-qr.png" > |
+
+## Development
+
+### Planning 
+
+See our [Kanban](https://github.com/orgs/QuestNetwork/projects/1) for the development of 0.9.5, feel free to add or pick up features!
+
+### Prerequisites
+
+1.) 
+
+Clone & Checkout essential repositories:
+```
+git clone https://github.com/QuestNetwork/qd-social-ts && git clone https://github.com/QuestNetwork/qd-messages-ts && git clone https://github.com/QuestNetwork/qDesk && cd qd-social-ts   && git checkout 0.9.4 && cd ..  &&  cd qd-messages-ts   && git checkout 0.9.4 && cd ..  &&  cd qDesk   && git checkout 0.9.4 && cd ..
+```
+
+OR 
+
+Clone & Checkout all repositories on the latest dev branch:
+``` 
+git clone https://github.com/QuestNetwork/qDesk && cd qDesk && git checkout 0.9.5-dev && npm run q-dev && cd ..
+````
+
+2.) Install Dependencies & Enter qDesk Repository:
+```
+cd quest-utilities-js && npm install && cd .. && cd quest-crypto-js && npm install && cd .. && cd quest-os-js && npm install && cd .. && cd qd-social-ts && npm run inst && cd .. && cd qd-messages-ts && npm run inst && cd .. && cd qDesk && npm run inst
+```
+
+### Commands
+
+**Prepare Package**
+
+To The same directory you're cloning this repository to.
+
+``npm run inst`` Removes `package-lock.json` and runs ``npm install``
+
+**Build For Linux**
+
+``npm run linux`` Builds Linux AppImage and Snap files to `dist/`
+
+**Build For Mac**
+```
+sed -i 's/"@questnetwork\/q-desk"/"q-desk"/g' package.json
+&& npm run mac && 
+sed -i  's/"q-desk"/"@questnetwork\/q-desk"/g'  package.json
+```
+Builds MacOS DMG and .app files to ``dist/`` and ``dist/mac``
+
+**Build For IPFS**
+
+``ipfs daemon & npm run ipfs``  Creates the bundled application for the web with dynamic base path to ```dist/web```
+
+**Build For Web**
+
+``npm run web`` Creates the bundled application for the web with static base path ```/```  to ```dist/web```
+
+**Serve For Web**
+
+``npm run serve`` Serves the bundled application on ```localhost:4200``` from ```dist/web```
+
+**Serve For Web JIT**
+
+``ng serve`` Serves a just in time compilation of the messenger on ```localhost:4200```
+
+**Rest `node_modules` And Build For Web JIT**
+
+``npm run serve-fresh`` Runs ``rm -rf node_modules && npm run inst && ng serve``
+
+**Clear Watchlist**
+
+``watch-reset`` Cleans the watch list, in case of ```System Limit``` error
+
+
+**IPFS Deploy**
+
+System Requirements: **Memory** 3.75GB **Storage** 6GB **NodeJS** 14 **NPM** 6 **IPFS** 0.6
+
+`ipfs daemon & npm run ipfs`
+
+`ipfs pin add <CID>`
+
+If you have trouble getting the directory discovered by gateways, you can try ```./ipfs-propagate.sh``` from the root of this repository.
+Keep in mind that the bundled web application is >14MB alone without assets, please be patient until we have a preloader.
+
+
+
+
+We added an example ```swarm.json``` to the ```src/app``` folder with an example node to make reproduction easier, but we strongly recommend to use our [Quest CLI](https://github.com/QuestNetwork/quest-cli) to test and build the app.
+
+Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/to/quest-cli/index.js` from any folder on your system. It's much nicer!
+
+## Features
+
+**0.9.3**
+- Does not depend on the internet
+- Does not depend on centralized servers
+- No static external address or port forwarding necessary
+- Dark Mode
+- AutoSave For Settings
+- Auto SignIn, if signed in
+- Enhanced Mobile UI, Centered Snackbar, New Fonts, Icons & Buttons
+- Included All Fonts And Icons In The Bundle
+- Export Settings
+- SignOut
+- Enable Write Lock To Keep All Processes From Writing
+- Disable AutoSave
+- Change AutoSave Interval
+- Dynamic Swarm Peer List On Desktop (add and remove bootstrap peers)
+- App is now modular, makes building add-ons easy
+- Drive Lock Fixed
+- Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
+- [qD Messages \[Beta\]](https://github.com/QuestNetwork/qd-messages-ts)
+- [qD Social \[Beta\]](https://github.com/QuestNetwork/qd-social-js)
+
+**0.9.4**
+- Encrypt Account
+- Change Swarm Peers In The Browser
+- [Quest Coral Module](https://github.com/QuestNetwork/quest-coral-js)
+- Additional Peering, option to pull from GitHub.
+- Module Upgrades
+
+## Roadmap
+
+**0.9.5**
+- [Quest Quorum Module](https://github.com/QuestNetwork/quest-quorum-js)
+- [qD Games \[Beta\]](https://github.com/QuestNetwork/qd-games-ts) (for free items)
+- [qD Apps \[Beta\]](https://github.com/QuestNetwork/qd-apps-ts) (for free items)
+- More Message Types And Inline Previews
+- Native Audio/Video
+
+**0.9.6**
+- [qD Apps \[Beta\]](https://github.com/QuestNetwork/qd-apps-ts) (for paid items)
+- [qD Games \[Beta\]](https://github.com/QuestNetwork/qd-games-ts) (for paid items)
+- [qD Market \[Beta\]](https://github.com/QuestNetwork/qd-market-ts)
+- Ethereum Payment Integration Beta
+
+**0.9.7**
+- [qDesk News \[Beta\]](https://github.com/QuestNetwork/qd-news-ts)
+- Add Custom Themes By Pasting CSS Into The Built-In Theme Editor
+- Import/Export Themes
+- Light Mode
+- Unlimited Custom Emojis
+
+**0.9.8**
+- Badges For Notifications
+- Desktop Notifications
+
+**0.9.9**
+- Additional Patch
+- [qD Vibes \[Beta\]](https://github.com/QuestNetwork/qd-vibes-ts) 
+
+**1.0.0**
+- [qD Quests \[Beta\]](https://github.com/QuestNetwork/qd-quest-ts)
+- [qD Calendar \[Beta\]](https://github.com/QuestNetwork/qd-calendar-ts) personal & shared calendars. Add events from other modules on qDesk.
+- [qD Messages \[Stable\]](https://github.com/QuestNetwork/qd-messages-ts)
+- [qD Social \[Stable\]](https://github.com/QuestNetwork/qd-social-js)
+- [qD Apps \[Stable\]](https://github.com/QuestNetwork/qd-apps-ts)
+- Fork into [Vibenarium](https://github.com/Vibenarium/vibenarium-platform)
+- Third Party Dependencies Audited, Security Issues Fixed
+- Complies with global privacy laws
+
+**2.0.0**
+- [qD Calendar \[Stable\]](https://github.com/QuestNetwork/qd-calendar-ts)
+- [qD Market \[Stable\]](https://github.com/QuestNetwork/qd-market-ts)
+- [qD Vibes \[Stable\]](https://github.com/QuestNetwork/qd-vibes-ts) 
+- Ethereum Payment Integration Finalized
+
+**3.0.0**
+- [qD Quests \[Stable\]](https://github.com/QuestNetwork/qd-quest-ts)
+- [qD Games \[Stable\]](https://github.com/QuestNetwork/qd-games-ts)
+
+**4.0.0**
+- [OpenAI GPT3](https://en.wikipedia.org/wiki/GPT-3) Integration For Suggestions, AutoRespond And Completion
+
+**5.0.0**
+- Modular Crypto Currency Integration (presets for Bitcoin, Monero and Chainlink)
+
+
+# Troubleshooting
+**:warning: Messages are not being delivered || Participants won't update || Can't join channels**<br>
+>Solution: qDesk ``^0.9.4`` go to ``Settings > IPFS`` and either download an example swarm peer list from GitHub (https://github.com/QuestNetwork/qDesk/blob/0.9.4/src/app/swarm.json) or enter your own.
+
+If your problem is not solved here, please file an [issue](https://github.com/QuestNetwork/qDesk/issues/new) on GitHub.
 
 
 ## License
+
 GNU Affero GPLv3
