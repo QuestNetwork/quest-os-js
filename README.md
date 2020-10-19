@@ -163,6 +163,7 @@ Returns a string with the current storage location
 
 
 ### setPwd(pwd)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Sets the password to be used with the next signIn attempt.
 
@@ -171,6 +172,7 @@ Sets the password to be used with the next signIn attempt.
 ```
 
 ### setPassword(old,new)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
 Sets the password to be used for encryption. 
 When you don't set this before sign in all data is encrypted with a random password.
