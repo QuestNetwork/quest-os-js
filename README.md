@@ -11,7 +11,7 @@ Unified API for the QuestNetwork dStack. Use with our example app: [qDesk](https
 
 Main strategy is to create a Quest Network / IPFS / Ethereum interface that even kids can easily understand.
 
-Quest OS offers encrypted channels, persistent storage, peer management, timelines, posts and more. It it used to load add-on modules, like [quest-coral-js](https://github.com/QuestNetwork/quest-coral-js) to use [IPFS DAGs](https://docs.ipfs.io/concepts/merkle-dag/), or [quest-dolphin-js](https://github.com/QuestNetwork/quest-dolphin-js) to use [IPFS GossipSub](https://blog.ipfs.io/2020-05-20-gossipsub-v1.1/).
+Quest OS offers encrypted channels, persistent storage, peer management, timelines, posts and more. It is used to load add-on modules, like [quest-coral-js](https://github.com/QuestNetwork/quest-coral-js) to use [IPFS DAGs](https://docs.ipfs.io/concepts/merkle-dag/), or [quest-dolphin-js](https://github.com/QuestNetwork/quest-dolphin-js) to use [IPFS GossipSub](https://blog.ipfs.io/2020-05-20-gossipsub-v1.1/).
 
 ## Security
 
@@ -125,15 +125,6 @@ Reboots the entire system
 <os>.reboot();
 ```
 
-### utilities.engine.detect()
-Returns a string 'node', 'electron' or 'browser'
-
-```
-if(<os>.utilities.engine.detect() == 'node'){
-  console.log("Hello Universe");
-};
-```
-
 ### enableSaveLock()
 [![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
 
@@ -168,6 +159,26 @@ Returns a string with the current storage location
 
 ```
 <os>.getStorageLocation();
+```
+
+
+### setPwd(pwd)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Sets the password to be used with the next signIn attempt.
+
+```
+<os>.setPwd(pwd);
+```
+
+### setPassword(old,new)
+[![Bee](https://img.shields.io/badge/process-Bee-yellow)](https://github.com/QuestNetwork/quest-bee-js)
+
+Sets the password to be used for encryption. 
+When you don't set this before sign in all data is encrypted with a random password.
+
+```
+<os>.setPassword('','first-password');
 ```
 
 ### signIn(config = {})
@@ -327,11 +338,12 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 - Offer "LocalStorage" As A Storage Container On The Web To Stay Signed In
 
 **0.9.4**
-Change Peer Configuration in browser, Electron and on NodeJS
+- Change Peer Configuration in browser, Electron and on NodeJS
+- Module Upgrades
 
 ## Roadmap
 
-**0.9.4**
+**0.9.5**
 - Democratically block or mute peers
 - Faux requests. Send request in channel, wait for response, deliver response as if it was an http request.
 
