@@ -384,8 +384,8 @@ console.log(this.utilities.engine.detect());
       return this.bee.config.getUsername();
     }
 
-    setUsername(name){
-      return this.bee.config.setUsername(name);
+    setUsername(name, flag){
+      return this.bee.config.setUsername(name, flag);
     }
 
     setStorageLocation(v){
