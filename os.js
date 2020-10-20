@@ -380,12 +380,12 @@ console.log(this.utilities.engine.detect());
       return this.bee.config.setPwd(pwd);
     }
 
-    getUsername(){
-      return this.bee.config.getUsername();
+    getAccName(){
+      return this.bee.config.getAccName();
     }
 
-    setUsername(name, flag){
-      return this.bee.config.setUsername(name, flag);
+    setAccName(name, flag){
+      return this.bee.config.setAccName(name, flag);
     }
 
     setStorageLocation(v){
