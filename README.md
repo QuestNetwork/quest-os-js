@@ -340,6 +340,10 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 **0.9.4**
 - Change Peer Configuration in browser, Electron and on NodeJS
 - Module Upgrades
+- Password
+
+**0.9.5**
+- Account Name
 
 ## Roadmap
 
