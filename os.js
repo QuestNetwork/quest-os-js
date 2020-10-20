@@ -42,6 +42,7 @@ export class OperatingSystem {
       this.utilities = new UtilitiesInstance();
       this.isElectronFlag = false;
       this.isNodeJSFlag = false;
+      this.lastLocation = "";
 
       if(this.utilities.engine.detect() == 'electron'){
         this.isElectronFlag = true;
@@ -189,6 +190,14 @@ export class OperatingSystem {
       this.ready = true;
       this.isReadySub.next(true);
       return true;
+    }
+
+    setLastLocation(v){
+      this.lastLocation = v;
+    }
+
+    getLastLocation(){
+      return this.lastLocation;
     }
 
     isReady(){
