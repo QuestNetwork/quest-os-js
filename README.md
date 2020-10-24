@@ -352,6 +352,12 @@ Pro Tip: Put a file in your `/bin` that runs the quest-cli like so `node /path/t
 - Democratically block or mute peers
 - Faux requests. Send request in channel, wait for response, deliver response as if it was an http request.
 
+**0.9.6**
+- Ethereum Payment Integration Beta
+
+**0.9.7**
+- Quest Worker To Render `.blend` Files And Earn Rewards
+
 ## Support Us
 Please consider supporting us, so that we can build a non-profit for this project (ツ)
 
