@@ -1,6 +1,6 @@
 
 import { qOS }  from './index.js';
-import * as swarmJson from '../qDesk/src/app/swarm.json';
+import * as swarmJson from '../qD/src/app/swarm.json';
 import  packageJson from './package.json';
 const version = packageJson.version;
 
