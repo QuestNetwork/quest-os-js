@@ -1,4 +1,4 @@
-![Completion](https://img.shields.io/badge/completion-14%25-orange) ![Help Wanted](https://img.shields.io/badge/%20-help--wanted-%23159818) ![Version 0.9.4](https://img.shields.io/badge/version-v0.9.4-green) ![Version 0.9.5](https://img.shields.io/badge/version-v0.9.5-blue) ![Sponsors](https://img.shields.io/badge/sponsors-0-red)
+![Completion](https://img.shields.io/badge/completion-14%25-orange) ![Help Wanted](https://img.shields.io/badge/%20-help--wanted-%23159818) ![Version 0.9.4](https://img.shields.io/badge/version-v0.9.4-green) ![Version 0.9.5](https://img.shields.io/badge/version-v0.9.5-blue) ![Sponsors](https://img.shields.io/badge/sponsors-0-red) [![Join the chat at https://gitter.im/QuestNetwork/qOS](https://badges.gitter.im/QuestNetwork/qOS.svg)](https://gitter.im/QuestNetwork/qOS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # qOS
 
